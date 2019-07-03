@@ -1,5 +1,6 @@
 package de.gruschtelapps.fh_maa_refuelpair.views.fragment.charts;
 
+
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -34,6 +35,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.helper.SharedPreferencesManager;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.JsonModel;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.add.RefuelModel;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.add.ServiceModel;
+import timber.log.Timber;
 
 /*
  * Create by Alea Sauer
@@ -46,13 +48,9 @@ public class PieChartFrag extends SimpleFragment {
         return new PieChartFrag();
     }
 
-    @SuppressWarnings("FieldCanBeLocal")
+
     private PieChart chart;
-
-    int startYear;
-    int endYear;
-
-    private LoadDataAsyncTask loadDataAsyncTask;
+    private  LoadDataAsyncTask loadDataAsyncTask;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,14 +75,11 @@ public class PieChartFrag extends SimpleFragment {
         loadDataAsyncTask = new LoadDataAsyncTask();
         loadDataAsyncTask.execute((Void) null);
 
-        loadDataAsyncTask = new LoadDataAsyncTask();
-        loadDataAsyncTask.execute((Void) null);
-
         return v;
     }
 
     private SpannableString generateCenterText() {
-        SpannableString s = new SpannableString(getContext().getResources().getString(R.string.msg_charts_piiTotal));
+        SpannableString s = new SpannableString(Objects.requireNonNull(getContext()).getResources().getString(R.string.msg_charts_piiTotal));
         s.setSpan(new RelativeSizeSpan(2f), 0, 8, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 8, s.length(), 0);
         return s;
@@ -104,33 +99,56 @@ public class PieChartFrag extends SimpleFragment {
             // Load Data
             SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getContext()));
             long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
-            if (id != ConstError.ERROR_LONG && pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
-                DBHelper dbHelper = new DBHelper(getContext());
-                addModels = dbHelper.getGet().selectAllAdds(id);
-            } else {
-                return false;
-            }
+            DBHelper dbHelper = new DBHelper(getContext());
+            addModels = dbHelper.getGet().selectAllAdds(id);
+
 
             if (addModels.size() <= 0) {
                 return false;
             }
-            startYear = 0;
-            endYear = 0;
+            int startYear = 0;
+            int endYear = 0;
 
             Calendar cStart = Calendar.getInstance();
             Calendar cEnde = Calendar.getInstance();
-            long timeStart = 0;
-            long timeEnde = 0;
+            Calendar testTime = Calendar.getInstance();
 
-            if (addModels.get(addModels.size() - 1) instanceof RefuelModel)
-                timeStart = ((RefuelModel) addModels.get(addModels.size() - 1)).getDate();
-            if (addModels.get(addModels.size() - 1) instanceof ServiceModel)
-                timeStart = ((ServiceModel) addModels.get(addModels.size() - 1)).getDate();
+            long timeStart = cStart.getTimeInMillis();
+            long timeEnde = cStart.getTimeInMillis();
 
-            if (addModels.get(0) instanceof RefuelModel)
-                timeEnde = ((RefuelModel) addModels.get(0)).getDate();
-            if (addModels.get(0) instanceof ServiceModel)
-                timeEnde = ((ServiceModel) addModels.get(0)).getDate();
+            for (int i = 0; i < addModels.size(); i++) {
+                if (addModels.get(i) instanceof RefuelModel) {
+                    testTime.setTimeInMillis(((RefuelModel) addModels.get(i)).getDate());
+                    //
+                    Timber.d("RefuelModel: %s", String.valueOf(testTime.getTimeInMillis()));
+                    Timber.d(timeEnde + " > " + testTime.getTimeInMillis());
+                    //
+                    if (timeEnde <= testTime.getTimeInMillis()) {
+                        timeEnde = testTime.getTimeInMillis();
+                    }
+                    //
+                    Timber.d(timeStart + " < " + testTime.getTimeInMillis());
+                    if (timeStart > testTime.getTimeInMillis()) {
+                        timeStart = testTime.getTimeInMillis();
+                    }
+                }
+
+                if (addModels.get(i) instanceof ServiceModel) {
+                    testTime.setTimeInMillis(((ServiceModel) addModels.get(i)).getDate());
+                    //
+                    Timber.d("ServiceModel: %s", String.valueOf(testTime.getTimeInMillis()));
+                    Timber.d(timeEnde + " > " + testTime.getTimeInMillis());
+                    //
+                    if (timeEnde <= testTime.getTimeInMillis()) {
+                        timeEnde = testTime.getTimeInMillis();
+                    }
+                    //
+                    Timber.d(timeStart + " < " + testTime.getTimeInMillis());
+                    if (timeStart > testTime.getTimeInMillis()) {
+                        timeStart = testTime.getTimeInMillis();
+                    }
+                }
+            }
 
             cStart.setTimeInMillis(timeStart);
             cEnde.setTimeInMillis(timeEnde);
@@ -138,12 +156,12 @@ public class PieChartFrag extends SimpleFragment {
             startYear = cStart.get(Calendar.YEAR);
             endYear = cEnde.get(Calendar.YEAR);
 
-            int count = endYear - startYear;
             entries1 = new ArrayList<>();
             Calendar cDate = Calendar.getInstance();
+            Timber.d(startYear + " - " + endYear);
             for (int a = startYear; a <= endYear; a++) {
-                float cost1;
-                cost1 = 0f;
+                Timber.d("Durchlauf Jahr: %s", a);
+                float cost1 = 0f;
 
                 for (int i = 0; i < addModels.size(); i++) {
                     if (addModels.get(i) instanceof RefuelModel) {
@@ -156,10 +174,26 @@ public class PieChartFrag extends SimpleFragment {
                             cost1 += Float.valueOf(String.valueOf(((ServiceModel) addModels.get(i)).getTotalCost()));
                     }
                 }
-                if (cost1 > 0)
+                if (cost1 > 0) {
                     entries1.add(new PieEntry(cost1, "Quarter " + a));
+                    onProgressUpdate(entries1);
+                }
+
             }
+
             return true;
+        }
+
+        private void onProgressUpdate(ArrayList<PieEntry> i) {
+            PieDataSet ds1 = new PieDataSet(i, getContext().getResources().getString(R.string.msg_charts_piiTotal));
+            ds1.setColors(ColorTemplate.JOYFUL_COLORS);
+            ds1.setSliceSpace(2f);
+            ds1.setValueTextColor(Color.WHITE);
+            ds1.setValueTextSize(12f);
+
+            PieData d = new PieData(ds1);
+
+            chart.setData(d);
         }
 
         @Override
@@ -168,6 +202,7 @@ public class PieChartFrag extends SimpleFragment {
                 Toast.makeText(getContext(), getContext().getResources().getString(R.string.error_BarChart), Toast.LENGTH_SHORT).show();
                 return;
             }
+
             PieDataSet ds1 = new PieDataSet(entries1, getContext().getResources().getString(R.string.msg_charts_piiTotal));
             ds1.setColors(ColorTemplate.JOYFUL_COLORS);
             ds1.setSliceSpace(2f);
@@ -177,6 +212,8 @@ public class PieChartFrag extends SimpleFragment {
             PieData d = new PieData(ds1);
 
             chart.setData(d);
+            // https://github.com/PhilJay/MPAndroidChart/issues/3326
+            chart.invalidate();
         }
 
         @Override

@@ -18,18 +18,22 @@
     <!-- Round Icons Items-->
     <style name="IconRound.Background.Reminder">
         <item name="android:backgroundTint">@color/colorRedLight</item>
+        <item name="android:background">@drawable/shape_round_red</item>
     </style>
 
     <style name="IconRound.Background.Maintenance">
         <item name="android:backgroundTint">@color/colorBlueLight</item>
+        <item name="android:background">@drawable/shape_round_blue</item>
     </style>
 
     <style name="IconRound.Background.Refuel">
         <item name="android:backgroundTint">@color/colorGreenLight</item>
+        <item name="android:background">@drawable/shape_round_green</item>
     </style>
 
     <style name="IconRound.Background.Crash">
         <item name="android:backgroundTint">@color/colorPurpleLight</item>
+        <item name="android:background">@drawable/shape_round_purple</item>
     </style>
 
     <style name="IconRound.Background.Add">

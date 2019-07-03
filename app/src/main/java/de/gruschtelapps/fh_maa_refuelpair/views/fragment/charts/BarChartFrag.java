@@ -39,6 +39,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.helper.SharedPreferencesManager;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.JsonModel;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.add.RefuelModel;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.add.ServiceModel;
+import timber.log.Timber;
 
 /*
  * Create by Eric Werner
@@ -138,7 +139,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
         if (addModels.size() <= 0) {
             seekBarX.setVisibility(View.GONE);
             return;
-        }else {
+        } else {
             seekBarX.setVisibility(View.VISIBLE);
         }
 
@@ -246,7 +247,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
             if (addModels.size() <= 0) {
                 seekBarX.setVisibility(View.GONE);
                 return false;
-            }else {
+            } else {
                 seekBarX.setVisibility(View.VISIBLE);
             }
             groupCount = 0;
@@ -255,18 +256,44 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
 
             Calendar cStart = Calendar.getInstance();
             Calendar cEnde = Calendar.getInstance();
-            long timeStart = 0;
-            long timeEnde = 0;
+            Calendar testTime = Calendar.getInstance();
 
-            if (addModels.get(addModels.size() - 1) instanceof RefuelModel)
-                timeStart = ((RefuelModel) addModels.get(addModels.size() - 1)).getDate();
-            if (addModels.get(addModels.size() - 1) instanceof ServiceModel)
-                timeStart = ((ServiceModel) addModels.get(addModels.size() - 1)).getDate();
+            long timeStart = cStart.getTimeInMillis();
+            long timeEnde = cStart.getTimeInMillis();
 
-            if (addModels.get(0) instanceof RefuelModel)
-                timeEnde = ((RefuelModel) addModels.get(0)).getDate();
-            if (addModels.get(0) instanceof ServiceModel)
-                timeEnde = ((ServiceModel) addModels.get(0)).getDate();
+            for (int i = 0; i < addModels.size(); i++) {
+                if (addModels.get(i) instanceof RefuelModel) {
+                    testTime.setTimeInMillis(((RefuelModel) addModels.get(i)).getDate());
+                    //
+                    Timber.d("RefuelModel: %s", String.valueOf(testTime.getTimeInMillis()));
+                    Timber.d(timeEnde + " > " + testTime.getTimeInMillis());
+                    //
+                    if (timeEnde <= testTime.getTimeInMillis()) {
+                        timeEnde = testTime.getTimeInMillis();
+                    }
+                    //
+                    Timber.d(timeStart + " < " + testTime.getTimeInMillis());
+                    if (timeStart > testTime.getTimeInMillis()) {
+                        timeStart = testTime.getTimeInMillis();
+                    }
+                }
+
+                if (addModels.get(i) instanceof ServiceModel) {
+                    testTime.setTimeInMillis(((ServiceModel) addModels.get(i)).getDate());
+                    //
+                    Timber.d("ServiceModel: %s", String.valueOf(testTime.getTimeInMillis()));
+                    Timber.d(timeEnde + " > " + testTime.getTimeInMillis());
+                    //
+                    if (timeEnde <= testTime.getTimeInMillis()) {
+                        timeEnde = testTime.getTimeInMillis();
+                    }
+                    //
+                    Timber.d(timeStart + " < " + testTime.getTimeInMillis());
+                    if (timeStart > testTime.getTimeInMillis()) {
+                        timeStart = testTime.getTimeInMillis();
+                    }
+                }
+            }
 
             cStart.setTimeInMillis(timeStart);
             cEnde.setTimeInMillis(timeEnde);
@@ -277,7 +304,6 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
             groupCount = seekBarX.getProgress() + 1;
             startYear = cStart.get(Calendar.YEAR);
             endYear = cEnde.get(Calendar.YEAR);
-
 
             return true;
         }
