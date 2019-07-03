@@ -1,0 +1,53 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ContentsMarginAll">
+        <item name="android:paddingStart">@dimen/content_vertical_spacing</item>
+        <item name="android:paddingEnd">@dimen/content_vertical_spacing</item>
+        <item name="android:paddingTop">@dimen/content_top_spacing</item>
+        <item name="android:paddingBottom">@dimen/content_vertical_spacing</item>
+    </style>
+
+    <style name="ContentsMargin">
+        <item name="android:paddingEnd">@dimen/content_vertical_spacing</item>
+        <item name="android:paddingStart">@dimen/content_vertical_spacing</item>
+
+    </style>
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- UI Elements -->
+    <style name="DotsInactiv">
+        <item name="android:color">@color/colorWhiteA20</item>
+    </style>
+
+    <style name="DotsActiv">
+        <item name="android:color">@color/colorSecondary</item>
+    </style>
+
+    <!-- UI Elements -->
+    <style name="Progressbar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:background">@color/colorSecondaryDark</item>
+    </style>
+
+    <style name="TabLayout" parent="Widget.Design.TabLayout">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+</resources>

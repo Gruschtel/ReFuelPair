@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="de.gruschtelapps.fh_maa_refuelpair.views.activities.MainActivity"
+    tools:showIn="@layout/fragment_history">
+
+
+    <TextView
+        android:id="@+id/text_history_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_history_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_history_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_history_RecyclerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--
+        app:reverseLayout="true"
+        app:stackFromEnd="true"
+        -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_history_recycler"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="ifContentScrolls"
+            android:scrollbars="none"
+            android:visibility="visible"
+            tools:listitem="@layout/custom_adapter_item_image" />
+    </LinearLayout>
+
+
+    <!-- Background -->
+    <RelativeLayout
+        android:id="@+id/container_history_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorBlackA54"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menue"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_white_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu_colorNormal="@color/colorSecondaryDark"
+        app:menu_colorPressed="@color/colorSecondaryDark"
+        app:menu_labels_ellipsize="end"
+        app:menu_labels_position="left"
+        app:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_crash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_crash_car_white_24dp"
+            app:fab_colorNormal="@color/colorPurpleLight"
+            app:fab_colorPressed="@color/colorPurpleLight"
+            app:fab_label="@string/title_crash"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_services_white_24dp"
+            app:fab_colorNormal="@color/colorBlueLight"
+            app:fab_colorPressed="@color/colorBlueLight"
+            app:fab_label="@string/title_service"
+            app:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_refuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:src="@drawable/ic_refuel_white_24dp"
+            app:fab_colorNormal="@color/colorGreenLight"
+            app:fab_colorPressed="@color/colorGreenLight"
+            app:fab_label="@string/title_refuel"
+            app:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+</android.support.constraint.ConstraintLayout>

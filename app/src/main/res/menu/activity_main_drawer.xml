@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <!-- -->
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menue_navDrawerMain_vehicleData"
+            android:icon="@drawable/ic_insurance_policy_black_24dp"
+            android:title="@string/nav_main_information" />
+        <item
+            android:id="@+id/menue_navDrawerMain_history"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="@string/nav_main_history" />
+        <item
+            android:id="@+id/menue_navDrawerMain_reports"
+            android:icon="@drawable/ic_reports_black_24dp"
+            android:title="@string/nav_main_reports" />
+    </group>
+    <!-- -->
+
+    <!-- -->
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menue_navDrawerMain_fuelComparison"
+            android:icon="@drawable/ic_price_comparison_black_24dp"
+            android:title="@string/nav_main_comparison" />
+        <item
+            android:id="@+id/menue_navDrawerMain_firstAidTips"
+            android:icon="@drawable/ic_fist_aid_tips_black_24dp"
+            android:title="@string/nav_main_aidTips" />
+    </group>
+    <!-- -->
+
+    <!-- -->
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/menue_navDrawerMain_legalDetails"
+            android:icon="@drawable/ic_legal_details_black_24dp"
+            android:title="@string/nav_main_legal_details" />
+        <item
+            android:id="@+id/menue_navDrawerMain_privacyStatement"
+            android:icon="@drawable/ic_privacy_statement_black_24dp"
+            android:title="@string/nav_main_privacy"
+            android:visible="false"/>
+    </group>
+
+</menu>

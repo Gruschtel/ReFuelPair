@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="de.gruschtelapps.fh_maa_refuelpair">
+    <!-- Dangerous Permissions -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.network" />
+    <uses-feature android:name="android.hardware.location.gps" /> <!-- Safe Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launch"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <!-- MainActivity -->
+        <activity
+            android:name=".views.activities.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- NEW -->
+        <activity
+            android:name=".views.activities.add.NewCarActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".views.activities.add.NewRefuelActivity"
+            android:label="@string/title_new_refuel"
+            android:parentActivityName=".views.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.gruschtelapps.fh_maa_refuelpair.views.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.activities.add.NewServiceActivity"
+            android:label="@string/title_new_service"
+            android:parentActivityName=".views.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.gruschtelapps.fh_maa_refuelpair.views.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".views.activities.add.NewCrashActivity"
+            android:label="@string/title_new_crash"
+            android:parentActivityName=".views.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.gruschtelapps.fh_maa_refuelpair.views.activities.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".views.activities.add.NewKontaktActivity"
+            android:label="@string/NewKontaktActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <!-- SelectListActivity_old -->
+        <activity
+            android:name=".views.activities.SelectListActivity"
+            android:label="@string/title_activity_select_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- FuelSettingActivity -->
+        <activity
+            android:name=".views.activities.FuelSettingActivity"
+            android:label="@string/title_fuel_setting"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

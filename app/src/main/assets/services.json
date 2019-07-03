@@ -1,0 +1,306 @@
+[
+  {
+    "language": "de",
+    "type": [
+      {
+        "id": 0,
+        "name": "Klimaanlage"
+      },
+      {
+        "id": 1,
+        "name": "Luftfilter"
+      },
+      {
+        "id": 2,
+        "name": "Batterie"
+      },
+      {
+        "id": 3,
+        "name": "Keilriemen"
+      },
+      {
+        "id": 4,
+        "name": "Karosserie/Fahrwerk"
+      },
+      {
+        "id": 5,
+        "name": "Bremsflüssigkeit"
+      },
+      {
+        "id": 6,
+        "name": "Bremsbeläge"
+      },
+      {
+        "id": "7",
+        "name": "Bremsenaustausch"
+      },
+      {
+        "id": "8",
+        "name": "Kabinenluftfilter"
+      },
+      {
+        "id": "9",
+        "name": "Kupplungsflüssigkeit"
+      },
+      {
+        "id": "10",
+        "name": "Kupplung"
+      },
+      {
+        "id": "11",
+        "name": "Kühlanlage"
+      },
+      {
+        "id": "12",
+        "name": "Motor"
+      },
+      {
+        "id": "13",
+        "name": "Abgasanlage"
+      },
+      {
+        "id": "14",
+        "name": "Kraftstoff-Filter"
+      },
+      {
+        "id": "15",
+        "name": "Treibstoffpumpe"
+      },
+      {
+        "id": "16",
+        "name": "Scheiben/Gläser"
+      },
+      {
+        "id": "17",
+        "name": "Heizung"
+      },
+      {
+        "id": "18",
+        "name": "Autohupe"
+      },
+      {
+        "id": "19",
+        "name": "Inspektion"
+      },
+      {
+        "id": "20",
+        "name": "Arbeitskosten"
+      },
+      {
+        "id": "21",
+        "name": "Lichter"
+      },
+      {
+        "id": "22",
+        "name": "Reifen neu"
+      },
+      {
+        "id": "23",
+        "name": "Ölwechsel"
+      },
+      {
+        "id": "24",
+        "name": "Ölfilter"
+      },
+      {
+        "id": "25",
+        "name": "Radiator"
+      },
+      {
+        "id": "26",
+        "name": "Reifen wechsel"
+      },
+      {
+        "id": "27",
+        "name": "Sicherheitsgurte"
+      },
+      {
+        "id": "28",
+        "name": "Zündkerzen"
+      },
+      {
+        "id": "29",
+        "name": "Steuerungssystem"
+      },
+      {
+        "id": "30",
+        "name": "Radaufhängung"
+      },
+      {
+        "id": "31",
+        "name": "Technische Kontrolle"
+      },
+      {
+        "id": "32",
+        "name": "Reifenluftdruck"
+      },
+      {
+        "id": "33",
+        "name": "Getriebeöl"
+      },
+      {
+        "id": "34",
+        "name": "Radachsen"
+      },
+      {
+        "id": "35",
+        "name": "Windschutzscheibe"
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "type": [
+      {
+        "id": "0",
+        "name": "Air Conditioning"
+      },
+      {
+        "id": "1",
+        "name": "Air Filter"
+      },
+      {
+        "id": "2",
+        "name": "Battery"
+      },
+      {
+        "id": "3",
+        "name": "Belts"
+      },
+      {
+        "id": "4",
+        "name": "Body/Chassis"
+      },
+      {
+        "id": "5",
+        "name": "Brake Fluid"
+      },
+      {
+        "id": "6",
+        "name": "Brake Pad"
+      },
+      {
+        "id": "7",
+        "name": "Brake Replacement"
+      },
+      {
+        "id": "8",
+        "name": "Cabin Air Filter"
+      },
+      {
+        "id": "9",
+        "name": "Clutch Fluid"
+      },
+      {
+        "id": "10",
+        "name": "Clutch System"
+      },
+      {
+        "id": "11",
+        "name": "Cooling System"
+      },
+      {
+        "id": "12",
+        "name": "Engine Repair"
+      },
+      {
+        "id": "13",
+        "name": "Exhaust System"
+      },
+      {
+        "id": "14",
+        "name": "Fuel Filter"
+      },
+      {
+        "id": "15",
+        "name": "Fuel Pump"
+      },
+      {
+        "id": "16",
+        "name": "Glass/Mirrors"
+      },
+      {
+        "id": "17",
+        "name": "Heating System"
+      },
+      {
+        "id": "18",
+        "name": "Horn"
+      },
+      {
+        "id": "19",
+        "name": "Inspection"
+      },
+      {
+        "id": "20",
+        "name": "Labor Cost"
+      },
+      {
+        "id": "21",
+        "name": "Lights"
+      },
+      {
+        "id": "22",
+        "name": "New Tires"
+      },
+      {
+        "id": "23",
+        "name": "Oil Change"
+      },
+      {
+        "id": "24",
+        "name": "Oil Filter"
+      },
+      {
+        "id": "25",
+        "name": "Radiator"
+      },
+      {
+        "id": "26",
+        "name": "Rotate Tires"
+      },
+      {
+        "id": "27",
+        "name": "Seat Belt"
+      },
+      {
+        "id": "28",
+        "name": "Spark Plugs"
+      },
+      {
+        "id": "29",
+        "name": "Steering System"
+      },
+      {
+        "id": "30",
+        "name": "Suspension System"
+      },
+      {
+        "id": "31",
+        "name": "echnical Control"
+      },
+      {
+        "id": "32",
+        "name": "ire pressure"
+      },
+      {
+        "id": "33",
+        "name": "Transmission Fluid"
+      },
+      {
+        "id": "34",
+        "name": "Whee Alignment"
+      },
+      {
+        "id": "35",
+        "name": "Windshield Wispers"
+      }
+    ]
+  },
+  {
+    "language": "user",
+    "service": [
+      {}
+    ]
+  }
+]

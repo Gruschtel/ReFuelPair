@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/text_customInformation_title"
+        style="@style/TextBackgroundLight.HistoryLargeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/title_service"
+        tools:ignore="MissingConstraints" />
+
+    <!-- Informations -->
+    <!-- Date -->
+    <TextView
+        android:id="@+id/text_customInformation_date"
+        style="@style/TextBackgroundLight.HistoryInformationText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/fuell_date"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/text_customInformation_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_customInformation_title" />
+
+    <!-- Cost -->
+    <ImageView
+        android:id="@+id/image_customInformation_cost"
+        style="@style/IconNavigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/desc_cost"
+        android:src="@drawable/ic_banknotes_black_24dp"
+        android:text="@string/fuell_days_left"
+        app:layout_constraintBottom_toBottomOf="@+id/text_customInformation_local"
+        app:layout_constraintEnd_toStartOf="@+id/text_customInformation_costValue"
+        app:layout_constraintTop_toTopOf="@+id/text_customInformation_local" />
+
+
+    <TextView
+        android:id="@+id/text_customInformation_costValue"
+        style="@style/TextBackgroundLight.HistoryInformationText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/value_money"
+        android:textAlignment="textEnd"
+        app:layout_constraintBottom_toBottomOf="@+id/image_customInformation_cost"
+        app:layout_constraintEnd_toEndOf="@+id/text_customInformation_date"
+        app:layout_constraintTop_toTopOf="@+id/image_customInformation_cost" />
+
+    <!-- Local -->
+    <ImageView
+        android:id="@+id/image_customInformation_local"
+        style="@style/IconNavigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/desc_local"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_customInformation_title"
+        app:srcCompat="@drawable/ic_pin_black_24dp" />
+
+    <TextView
+        android:id="@+id/text_customInformation_local"
+        style="@style/TextBackgroundLight.HistoryItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/fuell_localService"
+        app:layout_constraintBottom_toBottomOf="@+id/image_customInformation_local"
+        app:layout_constraintStart_toEndOf="@+id/image_customInformation_local"
+        app:layout_constraintTop_toTopOf="@+id/image_customInformation_local" />
+
+    <!-- Odometer -->
+    <ImageView
+        android:id="@+id/image_customInformation_odometer"
+        style="@style/IconNavigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/desc_odometer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_customInformation_local"
+        app:srcCompat="@drawable/ic_road_black_24dp" />
+
+    <TextView
+        android:id="@+id/text_customInformation_odometer"
+        style="@style/TextBackgroundLight.HistoryItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/fuell_odometer"
+        app:layout_constraintBottom_toBottomOf="@+id/image_customInformation_odometer"
+        app:layout_constraintStart_toEndOf="@+id/image_customInformation_odometer"
+        app:layout_constraintTop_toTopOf="@+id/image_customInformation_odometer" />
+
+    <TextView
+        android:id="@+id/text_customInformation_odometerValue"
+        style="@style/TextBackgroundLight.HistoryItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:text="@string/value_odometerKM"
+        app:layout_constraintBottom_toBottomOf="@+id/text_customInformation_odometer"
+        app:layout_constraintStart_toEndOf="@+id/text_customInformation_odometer" />
+
+    <!-- Refuel -->
+    <ImageView
+        android:id="@+id/image_customInformation_fuelLiter"
+        style="@style/IconNavigationDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/desc_odometer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_customInformation_odometer"
+        app:srcCompat="@drawable/ic_services_black_24dp" />
+
+    <TextView
+        android:id="@+id/text_customInformation_fuelLiter"
+        style="@style/TextBackgroundLight.HistoryItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/fuell_services"
+        app:layout_constraintStart_toEndOf="@+id/image_customInformation_fuelLiter"
+        app:layout_constraintTop_toTopOf="@+id/image_customInformation_fuelLiter" />
+
+    <!-- long line -->
+    <View
+        android:id="@+id/view_customInformation_longLine"
+        style="@style/ListItemSeperator"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/shape_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_customInformation_fuelLiter" />
+</android.support.constraint.ConstraintLayout>

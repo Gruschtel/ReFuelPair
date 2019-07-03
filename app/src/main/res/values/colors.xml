@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary -->
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimaryLight">#484848</color>
+    <color name="colorAccent">@color/colorSecondaryDark</color>
+
+    <!-- Secondary -->
+    <color name="colorSecondary">#D4AF37</color>
+    <color name="colorSecondaryDark">#9F8000</color>
+    <color name="colorSecondaryLight">#FFE168</color>
+
+    <!-- grayscale -->
+    <color name="colorGrayE6">#E6E6E6</color>
+    <color name="colorGrayC">#CCCCCC</color>
+    <color name="colorGray8">#888888</color>
+
+    <!-- Whitescale -->
+    <color name="colorWhiteA12">#1FFFFFFF</color>
+    <color name="colorWhiteA20">#33FFFFFF</color>
+    <color name="colorWhiteA70">#B3FFFFFF</color>
+    <color name="colorWhiteA100">#FFFFFF</color>
+
+    <!-- Blackscale -->
+    <color name="colorBlackA21">#36212121</color>
+    <color name="colorBlackA54">#8A000000</color>
+    <color name="colorBlackA70">#B3000000</color>
+    <color name="colorBlackA87">#DE000000</color>
+    <color name="colorBlackA100">#000000</color>
+
+    <!-- basic colors -->
+    <color name="colorNoFocus">#888888</color>
+    <color name="colorPurpleDark">#6C03BD</color>
+    <color name="colorPurpleLight">#8C2BD8</color>
+    <color name="colorGreenDark">#0C6130</color>
+    <color name="colorGreenLight">#219653</color>
+    <color name="colorBlueDark">#015180</color>
+    <color name="colorBlueLight">#0685CF</color>
+    <color name="colorRedDark">#E23333</color>
+    <color name="colorRedLight">#EB5757</color>
+
+</resources>

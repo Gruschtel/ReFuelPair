@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/navigation_drawer_background_gold"
+        tools:ignore="ContentDescription" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlackA54" />
+
+    <ImageView
+        android:id="@+id/image_navHeaderMain_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/nav_header_desc"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/text_navHeaderMain_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:text="@string/nav_header_title"
+        android:textColor="@color/colorWhiteA100"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/text_navHeaderMain_subtitle"
+        app:layout_constraintStart_toStartOf="@+id/image_navHeaderMain_icon"
+        app:layout_constraintTop_toBottomOf="@+id/image_navHeaderMain_icon" />
+
+    <TextView
+        android:id="@+id/text_navHeaderMain_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="@string/nav_header_subtitle"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/text_navHeaderMain_title"
+        app:layout_constraintTop_toBottomOf="@+id/text_navHeaderMain_title" />
+
+    <ImageView
+        android:id="@+id/image_navHeaderMain_dropDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:contentDescription="@string/desc_dropDown_addCar"
+        android:onClick="onClick"
+        android:tint="@color/colorWhiteA100"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/text_navHeaderMain_subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_navHeaderMain_subtitle"
+        app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+
+    <ImageView
+        android:id="@+id/image_navHeaderMain_editCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/desc_edit_car"
+        android:onClick="onClick"
+        android:visibility="gone"
+        android:tint="@color/colorWhiteA100"
+        app:layout_constraintBottom_toBottomOf="@+id/image_navHeaderMain_icon"
+        app:layout_constraintEnd_toEndOf="@+id/image_navHeaderMain_dropDown"
+        app:layout_constraintStart_toStartOf="@+id/image_navHeaderMain_dropDown"
+        app:layout_constraintTop_toTopOf="@+id/image_navHeaderMain_icon"
+        app:srcCompat="@drawable/ic_edit_black_24dp" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+
+<resources>
+    <!--                -->
+    <!--    Texte   -->
+    <!--                -->
+    <!-- Basic Text -->
+    <style name="TextBackgroundLight">
+        <item name="android:textColor">@color/colorBlackA87</item>
+    </style>
+
+    <style name="TextBackgroundDark">
+        <item name="android:textColor">@color/colorWhiteA100</item>
+    </style>
+
+    <!-- Text Size -->
+    <style name="TextBackgroundLight.TextLarge">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="TextBackgroundLight.TextButton">
+        <item name="android:textSize">@dimen/material_text_button</item>
+    </style>
+
+    <!-- Spacing -->
+    <style name="TextBackgroundLight.TextLarge.SpacingLarge">
+        <item name="android:layout_marginTop">@dimen/spacing_small</item>
+    </style>
+
+
+    <!-- History -->
+    <!-- Title -->
+    <style name="TextBackgroundLight.HistoryLargeText">
+        <item name="android:textSize">@dimen/material_text_title</item>
+    </style>
+
+    <!-- Item Date & Cost -->
+    <style name="TextBackgroundLight.HistoryInformationText">
+        <item name="android:textSize">@dimen/material_text_body2</item>
+    </style>
+
+    <!--    Item        -->
+    <style name="TextBackgroundLight.HistoryItemText">
+        <item name="android:textSize">@dimen/material_text_caption</item>
+    </style>
+
+
+    <!--                -->
+    <!--    TextViews   -->
+    <!--                -->
+    <style name="TextView">
+        <item name="android:textSize">@dimen/font_normal</item>
+    </style>
+
+    <style name="TextView.SingleLine">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="TextView.SingleLine.NonInput">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="TextView.ErrorMessage">
+        <item name="android:textSize">@dimen/material_text_display1</item>
+    </style>
+
+    <style name="TextView.Important">
+        <item name="android:textSize">@dimen/material_text_headline</item>
+    </style>
+
+    <style name="SingleLine">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="SingleLine.NonInput">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="SingleLine.NonInput.Extra">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">false</item>
+        <item name="met_textColorHint">@color/colorSecondaryDark</item>
+        <item name="met_textColor">@color/colorSecondaryDark</item>
+    </style>
+
+
+    <style name="Multiline">
+        <item name="android:singleLine">false</item>
+    </style>
+
+
+    <!--    Dialog TextView   -->
+    <style name="Dialog">
+        <item name="android:layout_marginTop">@dimen/spacing_large</item>
+        <item name="android:layout_marginStart">@dimen/spacing_large</item>
+    </style>
+
+
+
+</resources>

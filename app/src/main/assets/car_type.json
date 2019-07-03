@@ -1,0 +1,42 @@
+[
+  {
+    "language": "de",
+    "type": [
+      {
+        "id": "0",
+        "name": "PKW",
+        "image": "ic_car_black_24dp"
+      },
+      {
+        "id": "1",
+        "name": "LKW",
+        "image": "ic_truck_black_24dp"
+      },
+      {
+        "id": "2",
+        "name": "Zweirrad",
+        "image": "ic_bike_black_24dp"
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "type": [
+      {
+        "id": "0",
+        "name": "Car",
+        "image": "ic_car_black_24dp"
+      },
+      {
+        "id": "1",
+        "name": "Truck",
+        "image": "ic_truck_black_24dp"
+      },
+      {
+        "id": "2",
+        "name": "Motorcycle",
+        "image": "ic_bike_black_24dp"
+      }
+    ]
+  }
+]

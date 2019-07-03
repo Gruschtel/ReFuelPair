@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+
+<resources>
+
+    <style name="ListItemSeperator">
+        <item name="android:background">@color/colorBlackA21</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+
+    <style name="TextView.ListItem">
+        <item name="android:textSize">@dimen/material_text_subhead</item>
+    </style>
+
+    <style name="TextView.ListItemHeadline">
+        <item name="android:textSize">@dimen/material_text_title</item>
+        <item name="android:textColor">@color/colorBlackA100</item>
+    </style>
+
+    <style name="TextView.ListItemHighDetail">
+        <item name="android:textSize">@dimen/material_text_subhead</item>
+        <item name="android:textColor">@color/colorBlackA100</item>
+    </style>
+
+    <style name="TextView.ListItemLowDetail">
+        <item name="android:textSize">@dimen/material_text_caption</item>
+    </style>
+
+    <style name="ItemSpacing">
+        <item name="android:paddingTop">@dimen/spacing_large</item>
+        <item name="android:paddingBottom">@dimen/spacing_small</item>
+    </style>
+</resources>

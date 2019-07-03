@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="de.gruschtelapps.fh_maa_refuelpair.views.activities.add.NewServiceActivity"
+    tools:showIn="@layout/activity_new_service">
+    <!-- Date & Time -->
+    <ImageView
+        android:id="@+id/image_newService_Date"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_calender_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/conatiner_newService_DateTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/conatiner_newService_DateTime"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:id="@+id/conatiner_newService_DateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_newService_Date"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_newService_Date"
+            style="@style/SingleLine.NonInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc_date"
+            android:hint="@string/edit_hint_date"
+            android:onClick="onClick"
+            android:inputType="date"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_date"
+            tools:ignore="Autofill,ContentDescription" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_newService_Date2"
+            style="@style/SingleLine.NonInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/desc_time"
+            android:hint="@string/edit_hint_time"
+            android:onClick="onClick"
+            android:inputType="none"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_time"
+            tools:ignore="Autofill,ContentDescription" />
+    </LinearLayout>
+
+    <!-- Odometer -->
+    <ImageView
+        android:id="@+id/image_newService_odometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_odometer_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_newService_odometer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_newService_odometer"
+        tools:ignore="ContentDescription" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/text_newService_odometer"
+        style="@style/SingleLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/desc_hint_odometer"
+        android:hint="@string/edit_hint_odometer_no_requier"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/text_newService_odometerValue"
+        app:layout_constraintStart_toEndOf="@+id/image_newService_odometer"
+        app:layout_constraintTop_toBottomOf="@+id/conatiner_newService_DateTime"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="@string/edit_hint_odometer_no_requier"
+        tools:ignore="Autofill,ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_newService_odometerValue"
+        style="@style/SingleLine.NonInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/value_odometerKM"
+        app:layout_constraintBottom_toBottomOf="@+id/text_newService_odometer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_newService_odometer"
+        tools:ignore="Autofill,ContentDescription" />
+
+    <!-- Local -->
+    <ImageView
+        android:id="@+id/image_newService_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/ic_pin_black_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_newService_local"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_newService_local"
+        tools:ignore="ContentDescription" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/text_newService_local"
+        style="@style/SingleLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/desc_hint_local"
+        android:hint="@string/edit_hint_local"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_newService_local"
+        app:layout_constraintTop_toBottomOf="@+id/text_newService_odometer"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="@string/edit_hint_local"
+        tools:ignore="Autofill,ContentDescription" />
+
+    <!-- Service -->
+    <ImageView
+        android:id="@+id/image_newService_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_services_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_newService_service"
+        tools:ignore="ContentDescription" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/text_newService_service"
+        style="@style/Multiline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/desc_service"
+        android:hint="@string/edit_hint_service"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toStartOf="@+id/text_newService_serviceCost"
+        app:layout_constraintStart_toEndOf="@+id/image_newService_service"
+        app:layout_constraintTop_toBottomOf="@+id/text_newService_local"
+        app:met_floatingLabel="normal"
+        app:met_floatingLabelText="@string/edit_hint_service"
+        tools:ignore="Autofill,ContentDescription" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/text_newService_serviceCost"
+        style="@style/SingleLine"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/desc_cost"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_newService_service"
+        app:met_floatingLabel="normal"
+        android:hint="@string/edit_hint_totalCost"
+        app:met_floatingLabelText="@string/edit_hint_service"
+        tools:ignore="Autofill,ContentDescription" />
+
+    <Button
+        android:id="@+id/text_newService_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        style="@style/Suppose"
+        android:text="@string/action_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_newService_service" />
+
+
+</android.support.constraint.ConstraintLayout>

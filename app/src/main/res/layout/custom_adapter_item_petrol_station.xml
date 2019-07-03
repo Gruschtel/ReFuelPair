@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/text_petrolStation_price"
+        style="@style/TextView.ListItemHeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/fuell_cost"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_petrolStation_stationName" />
+
+
+    <TextView
+        android:id="@+id/text_petrolStation_stationName"
+        style="@style/TextView.ListItemHeadline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/fuell_stationName"
+        app:layout_constraintEnd_toStartOf="@+id/text_petrolStation_odometerValue"
+        app:layout_constraintStart_toEndOf="@+id/text_petrolStation_price"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_petrolStation_street"
+        style="@style/TextView.ListItemLowDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fuell_cost"
+        app:layout_constraintStart_toStartOf="@+id/text_petrolStation_stationName"
+        app:layout_constraintTop_toBottomOf="@+id/text_petrolStation_stationName" />
+
+
+    <TextView
+        android:id="@+id/text_petrolStation_place"
+        style="@style/TextView.ListItemLowDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/fuell_cost"
+        app:layout_constraintStart_toStartOf="@+id/text_petrolStation_street"
+        app:layout_constraintTop_toBottomOf="@+id/text_petrolStation_street" />
+
+    <TextView
+        android:id="@+id/text_petrolStation_odometer"
+        style="@style/TextView.ListItemHighDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/value_odometerKM"
+        app:layout_constraintBottom_toBottomOf="@+id/text_petrolStation_odometerValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_petrolStation_odometerValue" />
+
+    <TextView
+        android:id="@+id/text_petrolStation_odometerValue"
+        style="@style/TextView.ListItemHighDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:text="@string/fuell_odometer"
+        app:layout_constraintEnd_toStartOf="@+id/text_petrolStation_odometer"
+        app:layout_constraintTop_toTopOf="@+id/text_petrolStation_stationName" />
+
+    <!-- long line -->
+    <View
+        android:id="@+id/view_customInformation_longLine"
+        style="@style/ListItemSeperator"
+        android:src="@drawable/shape_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

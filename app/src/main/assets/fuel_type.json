@@ -1,0 +1,98 @@
+[
+  {
+    "language": "de",
+    "type": [
+      {
+        "id": "0",
+        "name": "CNG (Erdgas)",
+        "image": "ic_gas_black_24dp"
+      },
+      {
+        "id": "1",
+        "name": "Diesel",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "2",
+        "name": "Elektrisch",
+        "image": "ic_empty_batterie_black_24dp"
+      },
+      {
+        "id": "3",
+        "name": "Etanol",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "4",
+        "name": "Super",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "5",
+        "name": "Super Plus",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "6",
+        "name": "LPG (Autogas)",
+        "image": "ic_gas_black_24dp"
+      },
+      {
+        "id": "7",
+        "name": "Benzin",
+        "image": "ic_liquid_black_24dp"
+      }
+    ]
+  },
+  {
+    "language": "en",
+    "type": [
+      {
+        "id": "0",
+        "name": "CNG",
+        "image": "ic_gas_black_24dp"
+      },
+      {
+        "id": "1",
+        "name": "Diesel",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "2",
+        "name": "Electric",
+        "image": "ic_empty_batterie_black_24dp"
+      },
+      {
+        "id": "3",
+        "name": "Ethanol",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "4",
+        "name": "Gas Midgrade",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "5",
+        "name": "Gas Premium",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "6",
+        "name": "Gasoline",
+        "image": "ic_liquid_black_24dp"
+      },
+      {
+        "id": "7",
+        "name": "LPG",
+        "image": "ic_gas_black_24dp"
+      }
+    ]
+  },
+  {
+    "language": "user",
+    "fuel": [
+      {}
+    ]
+  }
+]

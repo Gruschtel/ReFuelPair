@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="de.gruschtelapps.fh_maa_refuelpair.views.activities.FuelSettingActivity"
+    tools:showIn="@layout/activity_fuel_setting">
+
+    <TextView
+        android:id="@+id/text_fuellSetting_spritsorte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/spritsorte"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar_fuellSetting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <Spinner
+        android:id="@+id/spinner_fuellSetting_spritsorte"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/text_fuellSetting_spritsorte"
+        app:layout_constraintTop_toBottomOf="@+id/text_fuellSetting_spritsorte" />
+
+    <TextView
+        android:id="@+id/text_fullSetting_radius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/suchradius_in_km_max_25km"
+        app:layout_constraintStart_toStartOf="@+id/spinner_fuellSetting_spritsorte"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_fuellSetting_sortierung" />
+
+    <TextView
+        android:id="@+id/text_fuellSetting_sortierung"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/sortierung"
+        app:layout_constraintStart_toStartOf="@id/text_fuellSetting_spritsorte"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_fuellSetting_spritsorte" />
+
+    <Spinner
+        android:id="@+id/spinner_fuellSetting_sortierung"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/spinner_fuellSetting_spritsorte"
+        app:layout_constraintStart_toStartOf="@+id/text_fuellSetting_sortierung"
+        app:layout_constraintTop_toBottomOf="@+id/text_fuellSetting_sortierung" />
+
+    <TextView
+        android:id="@+id/text_seekerbar_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/textview"
+        app:layout_constraintBottom_toBottomOf="@+id/text_fullSetting_radius"
+        app:layout_constraintStart_toEndOf="@+id/text_fullSetting_radius"
+        app:layout_constraintTop_toTopOf="@+id/text_fullSetting_radius" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="1"
+        app:layout_constraintStart_toStartOf="@+id/text_fullSetting_radius"
+        app:layout_constraintTop_toBottomOf="@+id/text_fullSetting_radius"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="25"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar_fuellSetting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar_fuellSetting"
+        tools:ignore="HardcodedText" />
+</android.support.constraint.ConstraintLayout>

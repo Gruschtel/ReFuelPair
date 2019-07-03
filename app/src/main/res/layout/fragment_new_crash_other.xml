@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:scrollbars="none"
+    tools:context="de.gruschtelapps.fh_maa_refuelpair.views.fragment.add.NewInsurancePolicyFragment">
+
+    <android.support.constraint.ConstraintLayout
+        style="@style/ContentsMarginAll"
+        android:paddingTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Vehicle Type -->
+        <ImageView
+            android:id="@+id/image_addCrash_carDriver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_car_driver_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_addCrash_carDriver"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_addCrash_carDriver"
+            tools:ignore="ContentDescription" />
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_addCrash_carDriver"
+            style="@style/SingleLine.NonInput.Extra"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/desc_driverName"
+            android:hint="@string/edit_hint_driverName"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_addCrash_carDriver"
+            app:layout_constraintTop_toTopOf="parent"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_driverName2"
+            tools:ignore="Autofill,ContentDescription" />
+
+        <!-- Vehicle Type -->
+        <ImageView
+            android:id="@+id/image_addCrash_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_contacs_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_addCrash_owner"
+            app:layout_constraintStart_toStartOf="@+id/image_addCrash_carDriver"
+            app:layout_constraintTop_toTopOf="@+id/text_addCrash_owner"
+            tools:ignore="ContentDescription" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_addCrash_owner"
+            style="@style/SingleLine.NonInput.Extra"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/desc_carOwner"
+            android:hint="@string/edit_carOwner"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_addCrash_carDriver"
+            app:layout_constraintTop_toBottomOf="@+id/text_addCrash_carDriver"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_carOwner2"
+            tools:ignore="Autofill,ContentDescription" />
+
+
+        <!-- Manufacture -->
+        <ImageView
+            android:id="@+id/image_addCrash_vehicleManufacture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_factory_black_24dp"
+            app:layout_constraintBottom_toTopOf="@+id/text_addCrash_vehicleModel"
+            app:layout_constraintEnd_toEndOf="@+id/image_addCrash_type"
+            app:layout_constraintStart_toStartOf="@+id/image_addCrash_type"
+            app:layout_constraintTop_toTopOf="@+id/text_addCrash_vehicleManufacture"
+            tools:ignore="ContentDescription" />
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_addCrash_vehicleManufacture"
+            style="@style/SingleLine.NonInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/desc_hint_vehicleManufacture"
+            android:hint="@string/edit_hint_manufacture"
+            android:inputType="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_addCrash_owner"
+            app:layout_constraintTop_toBottomOf="@+id/text_addCrash_owner"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_manufacture"
+            tools:ignore="Autofill,ContentDescription" />
+        <!-- Model -->
+        <ImageView
+            android:id="@+id/image_addCrash_vehicleModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_car_model_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_addCrash_vehicleModel"
+            app:layout_constraintEnd_toEndOf="@+id/image_addCrash_vehicleManufacutre"
+            app:layout_constraintStart_toStartOf="@+id/image_addCrash_vehicleManufacutre"
+            app:layout_constraintTop_toTopOf="@+id/text_addCrash_vehicleModel"
+            tools:ignore="ContentDescription" />
+
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_addCrash_vehicleModel"
+            style="@style/SingleLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/desc_hint_vehicleModel"
+            android:hint="@string/edit_hint_vehicleModel"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_addCrash_vehicleManufacture"
+            app:layout_constraintTop_toBottomOf="@+id/text_addCrash_vehicleManufacture"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_vehicleModel"
+            tools:ignore="Autofill,ContentDescription" />
+
+        <!-- Insuracne Policy Name -->
+        <ImageView
+            android:id="@+id/image_addCrash_policyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_car_insurance_policy_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/text_addCrash_policyName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_addCrash_policyName"
+            tools:ignore="ContentDescription" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_addCrash_policyName"
+            style="@style/SingleLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/desc_policyName"
+            android:hint="@string/edit_hint_policyName"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_addCrash_policyName"
+            app:layout_constraintTop_toBottomOf="@+id/text_addCrash_vehicleModel"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_policyName"
+            tools:ignore="Autofill,ContentDescription" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_addCrash_policyNumber"
+            style="@style/SingleLine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/desc_policyNumber"
+            android:hint="@string/edit_hint_policyNumber"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_addCrash_policyName"
+            app:layout_constraintTop_toBottomOf="@+id/text_addCrash_policyName"
+            app:met_floatingLabel="normal"
+            app:met_floatingLabelText="@string/edit_hint_policyNumber"
+            tools:ignore="Autofill,ContentDescription" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>

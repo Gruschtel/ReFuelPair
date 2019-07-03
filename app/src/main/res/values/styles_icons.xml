@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+<resources>
+    <!-- Round Icons Items-->
+    <style name="IconRound">
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:tint">@color/colorWhiteA100</item>
+    </style>
+    <!-- Round Icons Background -->
+    <style name="IconRound.Background">
+        <item name="android:background">@drawable/shape_round</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+
+    </style>
+    <!-- Round Icons Items-->
+    <style name="IconRound.Background.Reminder">
+        <item name="android:backgroundTint">@color/colorRedLight</item>
+    </style>
+
+    <style name="IconRound.Background.Maintenance">
+        <item name="android:backgroundTint">@color/colorBlueLight</item>
+    </style>
+
+    <style name="IconRound.Background.Refuel">
+        <item name="android:backgroundTint">@color/colorGreenLight</item>
+    </style>
+
+    <style name="IconRound.Background.Crash">
+        <item name="android:backgroundTint">@color/colorPurpleLight</item>
+    </style>
+
+    <style name="IconRound.Background.Add">
+        <item name="android:background">@drawable/shape_round</item>
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+        <item name="android:tint">@color/colorBlackA100</item>
+    </style>
+
+    <!-- Navigation Drawer Icons -->
+    <style name="IconNavigationDrawer">
+        <item name="android:tint">@color/colorGray8</item>
+    </style>
+
+    <!-- FloatingActionButton Icons -->
+    <style name="IconFloatingActionButton">
+        <item name="android:tint">@color/colorWhiteA100</item>
+    </style>
+
+</resources>

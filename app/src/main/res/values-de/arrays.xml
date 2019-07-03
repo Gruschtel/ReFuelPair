@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ 17.05.2019
+ -->
+<resources>
+    <string-array name="takephoto" >
+        <item>@string/action_takePhotoNew</item>
+        <item>@string/action_choosePhotoNew</item>
+    </string-array>
+
+    <string-array name="changephoto" >
+        <item>@string/action_removePhoto</item>
+        <item>@string/action_takePhoto</item>
+        <item>@string/action_choosePhoto</item>
+    </string-array>
+    <string-array name="message_backDialog">Would you like to cancel the process?</string-array>
+
+
+
+    <string-array name="fuel_array">
+        <item>Diesel</item>
+        <item>e5</item>
+        <item>e10</item>
+    </string-array>
+
+    <string-array name="sort_array">
+        <item>Entfernung</item>
+        <item>Preis</item>
+    </string-array>
+
+
+
+    <string-array name="comparison_array">
+        <item>Auf Karte anzeigen</item>
+    </string-array>
+
+</resources>

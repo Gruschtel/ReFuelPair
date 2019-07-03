@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+<resources>
+    <!-- Button Dismiss -->
+    <style name="Dismiss">
+        <item name="android:backgroundTint">@color/colorGrayE6</item>
+    </style>
+
+    <style name="Dismiss.Left">
+        <item name="android:background">@drawable/shape_half_round_left</item>
+    </style>
+
+    <style name="Dismiss.Right">
+        <item name="android:background">@drawable/shape_half_round_right</item>
+    </style>
+
+    <!-- Button Suppose -->
+    <style name="Suppose">
+        <item name="android:backgroundTint">@color/colorSecondary</item>
+    </style>
+
+    <style name="Suppose.HalfRound.Left">
+        <item name="android:background">@drawable/shape_half_round_left</item>
+
+    </style>
+
+    <style name="Suppose.HalfRound.Right">
+        <item name="android:background">@drawable/shape_half_round_right</item>
+    </style>
+
+    <style name="Suppose.HalfRound">
+        <item name="android:background">@drawable/shape_half_round</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+
+    <!-- FloatingActionButton -->
+    <style name="FloatingActionButton">
+        <item name="android:background">@color/colorSecondary</item>
+    </style>
+
+
+    <style name="FloatingActionButton.White">
+        <item name="android:tint">@color/colorWhiteA100</item>
+    </style>
+
+
+    <!-- Switch Buttons -->
+    <style name="SwitchButton" parent="TextAppearance.AppCompat.Widget.Switch" />
+</resources>

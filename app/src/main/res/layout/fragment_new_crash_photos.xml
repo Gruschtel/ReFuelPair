@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="de.gruschtelapps.fh_maa_refuelpair.views.fragment.add.NewCrashPhotosFragment">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_addCrash_photos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ContentsMarginAll"
+        android:scrollbars="vertical" />
+</ScrollView>

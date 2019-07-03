@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="de.gruschtelapps.fh_maa_refuelpair.views.fragment.information.InsurancePolicyFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <android.support.constraint.ConstraintLayout
+            style="@style/ContentsMarginAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Vehicle Type -->
+            <ImageView
+                android:id="@+id/image_insuranceData_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_contacs_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_insuranceData_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_insuranceData_name"
+                tools:ignore="ContentDescription" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_name"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/desc_contactName"
+                android:hint="@string/edit_hint_contactName"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_contact"
+                app:layout_constraintTop_toTopOf="parent"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_contactName"
+                tools:ignore="Autofill,ContentDescription" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_surename"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/desc_contactSurename"
+                android:hint="@string/edit_hint_contactSurename"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_contact"
+                app:layout_constraintTop_toBottomOf="@+id/text_insuranceData_name"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_contactSurename"
+                tools:ignore="Autofill,ContentDescription" />
+
+
+            <!-- Telephone -->
+            <ImageView
+                android:id="@+id/image_insuranceData_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_phone_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_insuranceData_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_insuranceData_phone"
+                tools:ignore="ContentDescription" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_phone"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/desc_phone"
+                android:hint="@string/edit_hint_phone"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_phone"
+                app:layout_constraintTop_toBottomOf="@+id/text_insuranceData_surename"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_phone"
+                tools:ignore="Autofill,ContentDescription" />
+
+            <!-- E-Mail -->
+            <ImageView
+                android:id="@+id/image_insuranceData_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_email_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_insuranceData_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_insuranceData_email"
+                tools:ignore="ContentDescription" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_email"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/desc_email"
+                android:hint="@string/edit_hint_email"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_email"
+                app:layout_constraintTop_toBottomOf="@+id/text_insuranceData_phone"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_email"
+                tools:ignore="Autofill,ContentDescription" />
+
+            <!-- Adresse -->
+            <ImageView
+                android:id="@+id/image_insuranceData_adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_pin_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_insuranceData_adress"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_insuranceData_adress"
+                tools:ignore="ContentDescription" />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_adress"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/desc_adress"
+                android:hint="@string/edit_hint_adress"
+                android:inputType="textPostalAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_adress"
+                app:layout_constraintTop_toBottomOf="@+id/text_insuranceData_email"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_adress"
+                tools:ignore="Autofill,ContentDescription" />
+
+            <!-- Insuracne Policy Name -->
+            <ImageView
+                android:id="@+id/image_insuranceData_policyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/ic_car_insurance_policy_black_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_insuranceData_policyName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/text_insuranceData_policyName"
+                tools:ignore="ContentDescription" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_policyName"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/desc_policyName"
+                android:hint="@string/edit_hint_policyName"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_policyName"
+                app:layout_constraintTop_toBottomOf="@+id/text_insuranceData_adress"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_policyName"
+                tools:ignore="Autofill,ContentDescription" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/text_insuranceData_policyNumber"
+                style="@style/SingleLine.NonInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:contentDescription="@string/desc_policyNumber"
+                android:hint="@string/edit_hint_policyNumber"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_insuranceData_policyName"
+                app:layout_constraintTop_toBottomOf="@+id/text_insuranceData_policyName"
+                app:met_floatingLabel="normal"
+                app:met_floatingLabelText="@string/edit_hint_policyNumber"
+                tools:ignore="Autofill,ContentDescription" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/FloatingActionButton.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_edit_black_24dp" />
+</android.support.constraint.ConstraintLayout>

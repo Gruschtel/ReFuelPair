@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+<resources>
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+
+    <!-- Values -->
+    <string name="value_odometerKM" translatable="false">Km</string>
+    <string name="value_liter" translatable="false">L</string>
+
+
+    <!-- Fülltext -->
+    <string name="fuell_text" translatable="false">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        \n\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+    </string>
+
+    <string name="fuell_date" translatable="false"> 00.00.0000</string>
+    <string name="fuell_days_left" translatable="false">000 Days left</string>
+    <string name="fuell_localReminder" translatable="false">Werkstatt Mustermann</string>
+    <string name="fuell_localService" translatable="false">Werkstatt Mustermann</string>
+    <string name="fuell_localRefuel" translatable="false">Tankstelle Mustermann</string>
+    <string name="fuell_localCrash" translatable="false">N46°14\'06.70\ E008°00\'55.60\'</string>
+    <string name="fuell_services" translatable="false">-Batterie\n-Bremsen</string>
+    <string name="fuell_cost" translatable="false">0.00</string>
+    <string name="fuell_odometer" translatable="false">0.0000</string>
+    <string name="fuell_fuel" translatable="false">0.000</string>
+    <string name="fuell_time" translatable="false">00:00</string>
+    <string name="fuell_inProgress" translatable="false">In progress</string>
+    <string name="fuel_Item" translatable="false">ItemValue</string>
+    <string name="fuell_stationName" translatable="false">Petrolt Station</string>
+    <string name="fuell_header" translatable="false">FILL HEADER</string>
+
+</resources>

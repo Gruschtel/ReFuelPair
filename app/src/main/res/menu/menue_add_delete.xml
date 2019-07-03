@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Eric Werner -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/menue_add_delete"
+        android:icon="@drawable/ic_delete_red_dp24"
+        android:title="@string/action_finish"
+        app:showAsAction="always"
+        tools:targetApi="o" />
+    <item
+        android:id="@+id/menue_add_finish"
+        android:icon="@drawable/ic_checkmark_lightgreen_24dp"
+        android:title="@string/action_finish"
+        app:showAsAction="always"
+        tools:targetApi="o" />
+</menu>

@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Create by Alea Sauer -->
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <ScrollView
+        android:id="@+id/scrollbar_vehicleData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/container_vehicleData2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!-- Wenn ein Foto hinzugefügt wurde visible=false, sonst =true -->
+            <!-- Photo -->
+            <FrameLayout
+                android:id="@+id/container_vehicleData_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image_vehicleData_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/image_vehicleData_addPhotoHaveImage"
+                    style="@style/IconRound.Background.Add"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/desc_addPhoto"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_add_a_photo_black_24dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+            </FrameLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/container_vehicleData"
+                style="@style/ContentsMarginAll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/container_vehicleData_images">
+                <!-- Wenn ein Foto hinzugefügt wurde visible=false, sonst =true -->
+                <!-- Photo -->
+                <ImageButton
+                    android:id="@+id/image_vehicleData_addPhoto"
+                    style="@style/IconRound.Background.Add"
+                    android:layout_width="64dp"
+                    android:visibility="gone"
+                    android:layout_height="64dp"
+                    android:contentDescription="@string/desc_addPhoto"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_add_a_photo_black_24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <!-- Vehicle Type -->
+                <ImageView
+                    android:id="@+id/image_vehicleData_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_car_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_type"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_type"
+                    tools:ignore="ContentDescription" />
+
+                <!-- https://github.com/rengwuxian/MaterialEditText/wiki -->
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_type"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:contentDescription="@string/edit_hint_vehicleType"
+                    android:hint="@string/edit_hint_vehicleType"
+                    android:inputType="none"
+                    android:text="@string/edit_carType"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image_vehicleData_type"
+                    app:layout_constraintTop_toBottomOf="@+id/image_vehicleData_addPhoto"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/edit_hint_vehicleType"
+                    tools:ignore="Autofill,ContentDescription" />
+
+                <!-- Vehicle Name -->
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_name"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/desc_hint_vehicleName"
+                    android:hint="@string/edit_vehicleName"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_type"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_type"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/edit_vehicleName"
+                    app:met_maxCharacters="40"
+                    app:met_minCharacters="0"
+                    tools:ignore="Autofill,ContentDescription" />
+                <!-- Manufacture -->
+                <ImageView
+                    android:id="@+id/image_vehicleData_vehicleManufacutre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_factory_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_vehicleManufacture"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleManufacture"
+                    tools:ignore="ContentDescription" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_vehicleManufacture"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/desc_hint_vehicleManufacture"
+                    android:hint="@string/edit_hint_manufacture"
+                    android:inputType="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_name"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/edit_hint_manufacture"
+                    tools:ignore="Autofill,ContentDescription" />
+                <!-- Model -->
+                <ImageView
+                    android:id="@+id/image_vehicleData_vehicleModel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/ic_car_model_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_vehicleModel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleModel"
+                    tools:ignore="ContentDescription" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_vehicleModel"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/desc_hint_vehicleModel"
+                    android:hint="@string/edit_hint_vehicleModel"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_vehicleManufacture"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_vehicleManufacture"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/edit_hint_vehicleModel"
+                    tools:ignore="Autofill,ContentDescription" />
+
+                <!-- Odometer -->
+                <ImageView
+                    android:id="@+id/image_vehicleData_odometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_car_badge_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_odometer"
+                    app:layout_constraintEnd_toEndOf="@+id/image_addCar_vehicleModel"
+                    app:layout_constraintStart_toStartOf="@+id/image_vehicleData_type"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_odometer"
+                    tools:ignore="ContentDescription" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_odometer"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/desc_hint_odometer"
+                    android:hint="@string/edit_hint_odometer_no_requier"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toStartOf="@+id/text_vehicleData_odometerValue"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_vehicleModel"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_vehicleModel"
+                    app:met_floatingLabel="normal"
+                    app:met_helperTextAlwaysShown="true"
+                    tools:ignore="Autofill,ContentDescription" />
+
+
+                <TextView
+                    android:id="@+id/text_vehicleData_odometerValue"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/value_odometerKM"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_odometer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_odometer"
+                    tools:ignore="Autofill,ContentDescription" />
+
+                <!-- Chassis number -->
+                <ImageView
+                    android:id="@+id/image_vehicleData_vehicleChassisNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_car_badge_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_vehicleChassisNumber"
+                    app:layout_constraintEnd_toEndOf="@+id/image_vehicleData_vehicleModel"
+                    app:layout_constraintStart_toStartOf="@+id/image_vehicleData_vehicleModel"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleChassisNumber"
+                    tools:ignore="ContentDescription" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_vehicleChassisNumber"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/desc_hint_vehicleChassisNumber"
+                    android:hint="@string/edit_hint_vehicleChassisNumber"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_odometer"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_odometer"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/edit_hint_vehicleChassisNumber"
+                    tools:ignore="Autofill,ContentDescription" />
+
+                <!-- License Plate -->
+                <ImageView
+                    android:id="@+id/image_vehicleData_vehicleLicensePlate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:src="@drawable/ic_licence_plate_black_24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_vehicleLicensePlate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleLicensePlate"
+                    tools:ignore="ContentDescription" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/text_vehicleData_vehicleLicensePlate"
+                    style="@style/SingleLine.NonInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/desc_hint_vehicleLicensePlate"
+                    android:hint="@string/edit_hint_vehicleLicensePlate"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_vehicleChassisNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_vehicleChassisNumber"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="@string/edit_hint_vehicleLicensePlate"
+                    tools:ignore="Autofill,ContentDescription" />
+
+                <!-- Tank Button -->
+                <LinearLayout
+                    android:id="@+id/container_vehicleData_tankButtons"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@+id/text_vehicleData_vehicleLicensePlate"
+                    app:layout_constraintStart_toStartOf="@+id/text_vehicleData_vehicleLicensePlate"
+                    app:layout_constraintTop_toBottomOf="@+id/text_vehicleData_vehicleLicensePlate">
+
+                    <Button
+                        android:id="@+id/button_vehicleData_oneTank"
+                        style="@style/Suppose.HalfRound.Left"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/action_vehicleData_oneTank" />
+
+                    <Button
+                        android:id="@+id/button_vehicleData_twoTank"
+                        style="@style/Dismiss.Right"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/action_vehicleData_twoTank" />
+                </LinearLayout>
+
+                <!-- Tank one -->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/container_vehicleData_tank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintEnd_toEndOf="@+id/container_vehicleData_tankButtons"
+                    app:layout_constraintStart_toStartOf="@+id/image_vehicleData_vehicleLicensePlate"
+                    app:layout_constraintTop_toBottomOf="@+id/container_vehicleData_tankButtons">
+
+                    <ImageView
+                        android:id="@+id/image_vehicleData_vehicleTankOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/ic_petrol_black_24dp"
+                        app:layout_constraintBottom_toTopOf="@+id/container_vehicleData_tankTwo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/container_vehicleData_tankOne"
+                        tools:ignore="ContentDescription" />
+
+                    <LinearLayout
+                        android:id="@+id/container_vehicleData_tankOne"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/image_vehicleData_vehicleTankOne"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/text_vehicleData_vehicleTankOne"
+                            style="@style/SingleLine.NonInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/desc_hint_vehicleTank"
+                            android:hint="@string/edit_hint_vehicleTank"
+                            android:inputType="none"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelText="@string/edit_hint_vehicleTank"
+                            tools:ignore="Autofill,ContentDescription" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/text_vehicleData_vehicleTankOneCapacity"
+                            style="@style/SingleLine.NonInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1.6"
+                            android:contentDescription="@string/desc_hint_vehicleTankCapacity"
+                            android:hint="@string/edit_vehicleTankCapacity"
+                            android:inputType="numberDecimal"
+                            app:met_floatingLabel="normal"
+                            app:met_helperTextAlwaysShown="true"
+                            app:met_floatingLabelText="@string/edit_vehicleTankCapacity"
+                            tools:ignore="Autofill,ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/text_vehicleData_vehicleTankOneCapacityValue"
+                            style="@style/SingleLine.NonInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/value_liter"
+                            android:text="@string/value_liter"
+                            app:met_floatingLabel="none"
+                            tools:ignore="Autofill,ContentDescription" />
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/image_vehicleData_vehicleTankTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/ic_petrol_black_24dp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/container_vehicleData_tankTwo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/container_vehicleData_tankTwo"
+                        tools:ignore="ContentDescription" />
+
+                    <!-- Tank two -->
+                    <LinearLayout
+                        android:id="@+id/container_vehicleData_tankTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="@+id/container_vehicleData_tankOne"
+                        app:layout_constraintStart_toStartOf="@+id/container_vehicleData_tankOne"
+                        app:layout_constraintTop_toBottomOf="@+id/container_vehicleData_tankOne">
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/text_vehicleData_vehicleTankTwo"
+                            style="@style/SingleLine.NonInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:contentDescription="@string/desc_hint_vehicleTank"
+                            android:hint="@string/edit_hint_vehicleTank"
+                            android:inputType="none"
+                            app:met_floatingLabel="normal"
+                            app:met_helperTextAlwaysShown="true"
+                            tools:ignore="Autofill,ContentDescription" />
+
+                        <com.rengwuxian.materialedittext.MaterialEditText
+                            android:id="@+id/text_vehicleData_vehicleTankTwoCapacity"
+                            style="@style/SingleLine.NonInput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1.6"
+                            android:contentDescription="@string/desc_hint_vehicleTankCapacity"
+                            android:hint="@string/edit_vehicleTankCapacity"
+                            android:inputType="numberDecimal"
+                            app:met_floatingLabel="normal"
+                            app:met_floatingLabelText="@string/edit_vehicleTankCapacity"
+                            tools:ignore="Autofill,ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/text_vehicleData_vehicleTankTwoCapacityValue"
+                            style="@style/SingleLine.NonInput"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/value_liter"
+                            android:text="@string/value_liter"
+                            app:met_floatingLabel="none"
+                            tools:ignore="Autofill,ContentDescription" />
+                    </LinearLayout>
+                    <!-- Notification -->
+                </android.support.constraint.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/image_vehicleData_vehicleNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_vehicleNotification"
+                    app:layout_constraintStart_toStartOf="@+id/image_vehicleData_vehicleLicensePlate"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleNotification"
+                    app:srcCompat="@drawable/ic_add_reminder_black_24dp"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/text_vehicleData_vehicleNotification"
+                    style="@style/TextBackgroundLight.TextLarge.SpacingLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/title_notification"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toStartOf="@+id/switch1"
+                    app:layout_constraintStart_toStartOf="@+id/container_vehicleData_tankButtons"
+                    app:layout_constraintTop_toBottomOf="@+id/container_vehicleData_tank" />
+
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:checked="true"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_vehicleData_vehicleNotification"
+                    app:layout_constraintEnd_toEndOf="@+id/container_vehicleData_tankButtons"
+                    app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleNotification" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+</ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/FloatingActionButton.White"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_edit_black_24dp" />
+</android.support.constraint.ConstraintLayout>
