@@ -227,12 +227,12 @@
     <string name="action_sortPrice">Preis</string>
     <string name="action_emptyString" />
     <string name="error_comparison_showMap">Leider konnte die Karte nicht geöffnet werden</string>
-    <string name="edit_hint_odometer_no_requier">Odometer</string>
+    <string name="edit_hint_odometer_no_requier">KM-Zähler</string>
     <string name="title_Bar">Bar Chart</string>
     <string name="title_pie">Pie Chart</string>
     <string name="dash">-</string>
-    <string name="error_BarChart">No data available yet</string>
-    <string name="action_delete">Delete</string>
+    <string name="error_BarChart">Noch keine Daten verfügbar</string>
+    <string name="action_delete">Löschen</string>
 
     <string name="title_button_delete">Delete item?</string>
     <string name="msg_button_delete">Are you sure you want to delete this item?</string>
@@ -260,27 +260,25 @@
         nur noch den Kopf überstrecken, den Mund öffnen sowie die Hände nah an den Körper des Betroffenen legen. </string>
 
     <string name="title_safelife">Damit rettest du leben!</string>
-    <string name="edit_carOwner">+Add Car Owner</string>
-    <string name="desc_carOwner">Add Car Owner</string>
-    <string name="desc_driverName">Add Driver</string>
-    <string name="edit_hint_driverName">+Add Driver</string>
-    <string name="edit_hint_description">Description of the acident</string>
-    <string name="edit_damageOther">Damage to the other partys vehicle</string>
-    <string name="edit_damageOwn">Damage to your own vehicle</string>
-    <string name="title_crashOther">Other Party</string>
-    <string name="title_crashDetails">Crash Details</string>
-    <string name="title_crashPhotos">Crash Photos</string>
-    <string name="edit_hint_driverName2">Add driver</string>
-    <string name="edit_carOwner2">Add Owner</string>
+    <string name="edit_carOwner">+Fahrzeugbesitzer hinzufügen</string>
+    <string name="desc_carOwner">Fahrzeugbesitzer hinzufügen</string>
+    <string name="desc_driverName">Fahrzeugführer hinzufügen</string>
+    <string name="edit_hint_driverName">+Fahrzeugführer hinzufügen</string>
+    <string name="edit_hint_description">Beschreibung des Unfalls</string>
+    <string name="edit_damageOther">Schäden am Fahrzeug der anderen Partei</string>
+    <string name="edit_damageOwn">Schäden am eigenen Fahrzeug</string>
+    <string name="title_crashOther">Beteiligter</string>
+    <string name="title_crashDetails">Unfall Details</string>
+    <string name="title_crashPhotos">Unfallfotos</string>
+    <string name="edit_hint_driverName2">Fahrzeugführer hinzufügenr</string>
+    <string name="edit_carOwner2">ahrzeugbesitzer hinzufügen</string>
     <string name="msg_exitNewCrash">Es wurde bis jetzt kein neuer Unfall hinzugefügt, durch den Abbruch dieser Aufgabe wird kein Unfall hinzugefügt. Bist du sicher?</string>
     <string name="msg_exitEditCrash">Möchten Sie wirklich die Bearbeitung beenden? Es werden keine Änderungen gespeichert!</string>
     <string name="msg_exitNewService">Es wurde bis jetzt kein neuer Service hinzugefügt, durch den Abbruch dieser Aufgabe wird kein Service hinzugefügt. Bist du sicher?</string>
     <string name="msg_exitEditService">Möchten Sie wirklich die Bearbeitung beenden? Es werden keine Änderungen gespeichert!</string>
     <string name="msg_exitNewRefuel">Es wurde bis jetzt kein neuer Tankbericht hinzugefügt, durch den Abbruch dieser Aufgabe wird kein Tankbericht hinzugefügt. Bist du sicher?</string>
     <string name="msg_exitEditRefule">Möchten Sie wirklich die Bearbeitung beenden? Es werden keine Änderungen gespeichert!</string>
-    <string name="edit_vehicleName">Vehicle Name</string>
-    <string name="edit_vehicleTankCapacity">Capacity</string>
-    <string name="NewKontaktActivity">Add new Kontakt</string>
-
-
+    <string name="edit_vehicleName">Fahrzeugname</string>
+    <string name="edit_vehicleTankCapacity">Liter</string>
+    <string name="NewKontaktActivity">Neuen Kontakt hinzufügen</string>
 </resources>
