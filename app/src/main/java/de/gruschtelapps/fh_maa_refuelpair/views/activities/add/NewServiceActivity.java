@@ -252,6 +252,8 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
                     long mValueOdometer = 0;
                     if (String.valueOf(mTextOdometer.getText()).isEmpty()) {
                         mValueOdometer = ConstError.ERROR_LONG;
+                    }else {
+                        mValueOdometer = Long.parseLong(String.valueOf(mTextOdometer.getText()));
                     }
 
 

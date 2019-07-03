@@ -20,6 +20,7 @@
     <color name="colorWhiteA12">#1FFFFFFF</color>
     <color name="colorWhiteA20">#33FFFFFF</color>
     <color name="colorWhiteA70">#B3FFFFFF</color>
+    <color name="colorWhiteA80">#CCFFFFFF</color>
     <color name="colorWhiteA100">#FFFFFF</color>
 
     <!-- Blackscale -->

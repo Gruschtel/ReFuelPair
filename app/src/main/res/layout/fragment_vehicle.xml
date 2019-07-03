@@ -308,7 +308,7 @@
 
                     <Button
                         android:id="@+id/button_vehicleData_oneTank"
-                        style="@style/Suppose.HalfRound.Left"
+                        style="@style/Suppose.Halfround.Left"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -316,7 +316,7 @@
 
                     <Button
                         android:id="@+id/button_vehicleData_twoTank"
-                        style="@style/Dismiss.Right"
+                        style="@style/Dismiss.Halfround.Right"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

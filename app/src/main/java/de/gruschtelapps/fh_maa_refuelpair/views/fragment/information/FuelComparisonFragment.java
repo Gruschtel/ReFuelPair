@@ -341,19 +341,24 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
 
                 // Loading Prefs
                 // Get URL
-                if (mSort.equals("dist")) {
-                    url = ConstUrl.URL_TANKERKOENIG +
-                            ConstUrl.URL_TANKERKOENIG_ACTION_RADIUS_SEARCH +
-                            String.format(ConstUrl.URL_TANKERKOENIG_SEARCH_RADIUS, lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mDistance, "dist", "all", BuildConfig.TANKERKOENIG_API);
-                } else {
-                    url = ConstUrl.URL_TANKERKOENIG +
-                            ConstUrl.URL_TANKERKOENIG_ACTION_RADIUS_SEARCH +
-                            String.format(ConstUrl.URL_TANKERKOENIG_SEARCH_PRICE, lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mDistance, "price", mType, BuildConfig.TANKERKOENIG_API);
+                try {
+                    if (mSort.equals("dist")) {
+                        url = ConstUrl.URL_TANKERKOENIG +
+                                ConstUrl.URL_TANKERKOENIG_ACTION_RADIUS_SEARCH +
+                                String.format(ConstUrl.URL_TANKERKOENIG_SEARCH_RADIUS, lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mDistance, "dist", "all", BuildConfig.TANKERKOENIG_API);
+                    } else {
+                        url = ConstUrl.URL_TANKERKOENIG +
+                                ConstUrl.URL_TANKERKOENIG_ACTION_RADIUS_SEARCH +
+                                String.format(ConstUrl.URL_TANKERKOENIG_SEARCH_PRICE, lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), mDistance, "price", mType, BuildConfig.TANKERKOENIG_API);
+                    }
+                    httpDataAsyncTask = new HttpAsyncTask(url, "");
+                    httpDataAsyncTask.execute((Void) null);
+
+                } catch (Exception e) {
+                    Timber.d(e);
+                    mErrorLoading.setVisibility(View.VISIBLE);
+                    mProgressBar.setVisibility(View.GONE);
                 }
-
-                httpDataAsyncTask = new HttpAsyncTask(url, "");
-                httpDataAsyncTask.execute((Void) null);
-
                 break;
         }
     }
@@ -454,6 +459,8 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                 mContainerEnableGPS.setVisibility(View.GONE);
             if (mButtonGetPrice != null)
                 mButtonGetPrice.setVisibility(View.VISIBLE);
+            if (mRecyclerView != null)
+                mRecyclerView.setVisibility(View.VISIBLE);
         } else {
             gpsEnabled = false;
             if (mContainerEnableGPS != null) {
@@ -462,6 +469,8 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
             }
             if (mButtonGetPrice != null)
                 mButtonGetPrice.setVisibility(View.GONE);
+            if (mRecyclerView != null)
+                mRecyclerView.setVisibility(View.GONE);
         }
     }
 
@@ -506,15 +515,19 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
             }
         };
         // Register the listener with the Location Manager to receive location updates
-        if (permissionGranted) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-            if (mContainerPermissionGPS != null)
-                mContainerPermissionGPS.setVisibility(View.GONE);
-        } else {
-            if (mContainerPermissionGPS != null) {
-                mContainerPermissionGPS.setVisibility(View.VISIBLE);
-                mErrorLoading.setVisibility(View.GONE);
+        try {
+            if (permissionGranted) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+                if (mContainerPermissionGPS != null)
+                    mContainerPermissionGPS.setVisibility(View.GONE);
+            } else {
+                if (mContainerPermissionGPS != null) {
+                    mContainerPermissionGPS.setVisibility(View.VISIBLE);
+                    mErrorLoading.setVisibility(View.GONE);
+                }
             }
+        } catch (Exception e) {
+            Timber.e(e);
         }
     }
 
@@ -561,7 +574,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
         switch (item) {
             case R.array.comparison_array:
                 if (pos == 0) {
-                    Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?saddr=" + mClickModel.getLat() + "," + mClickModel.getLng());
+                    Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?daddr=" + mClickModel.getLat() + "," + mClickModel.getLng());
                     Timber.d(gmmIntentUri.toString());
                     Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
                     if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {

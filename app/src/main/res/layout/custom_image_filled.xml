@@ -10,7 +10,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="100dp"
         android:layout_height="130dp"
-        android:background="@drawable/shape_half_round"
+        android:background="@drawable/shape_round"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

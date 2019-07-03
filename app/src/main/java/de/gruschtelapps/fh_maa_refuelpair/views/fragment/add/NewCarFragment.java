@@ -329,7 +329,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
             case R.id.button_addCar_oneTank:
                 mLinearTankTwo.setVisibility(View.GONE);
                 mImageTankTwo.setVisibility(View.GONE);
-                mButtonTankOne.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorSecondaryDark));
+                mButtonTankOne.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorSecondary));
                 mButtonTankTwo.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorGrayE6));
                 break;
 
@@ -337,7 +337,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                 mLinearTankTwo.setVisibility(View.VISIBLE);
                 mImageTankTwo.setVisibility(View.VISIBLE);
                 mButtonTankOne.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorGrayE6));
-                mButtonTankTwo.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorSecondaryDark));
+                mButtonTankTwo.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorSecondary));
                 mScrollView.post(new Runnable() {
                     @Override
                     public void run() {

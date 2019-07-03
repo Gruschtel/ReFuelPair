@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Create by Alea Sauer -->
-<ScrollView
-    android:id="@+id/scrollbar_addCar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- Create by Alea Sauer -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollbar_addCar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
@@ -223,13 +221,13 @@
                 android:contentDescription="@string/desc_hint_odometer"
                 android:hint="@string/edit_hint_odometer"
                 android:inputType="number"
-                app:met_helperText="@string/edit_helper_required"
-                app:met_helperTextAlwaysShown="true"
                 app:layout_constraintEnd_toStartOf="@+id/text_addCar_odometerValue"
                 app:layout_constraintStart_toStartOf="@+id/text_addCar_vehicleModel"
                 app:layout_constraintTop_toBottomOf="@+id/text_addCar_vehicleModel"
                 app:met_floatingLabel="normal"
                 app:met_floatingLabelText="@string/edit_hint_odometer"
+                app:met_helperText="@string/edit_helper_required"
+                app:met_helperTextAlwaysShown="true"
                 tools:ignore="Autofill,ContentDescription" />
 
             <TextView
@@ -237,8 +235,8 @@
                 style="@style/SingleLine.NonInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/value_odometerKM"
                 app:layout_constraintBottom_toBottomOf="@+id/text_addCar_odometer"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -311,32 +309,39 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
                 android:focusable="false"
+                android:orientation="horizontal"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="@+id/text_addCar_vehicleLicensePlate"
                 app:layout_constraintStart_toStartOf="@+id/text_addCar_vehicleLicensePlate"
                 app:layout_constraintTop_toBottomOf="@+id/text_addCar_vehicleLicensePlate">
 
                 <Button
                     android:id="@+id/button_addCar_oneTank"
-                    style="@style/Suppose.HalfRound.Left"
-                    android:layout_width="0dp"
-                    android:focusable="false"
+                    style="@style/Suppose.Halfround.Left"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="0dp"
                     android:layout_weight="1"
+                    android:focusable="false"
+                    android:gravity="center"
                     android:text="@string/action_vehicleData_oneTank" />
 
                 <Button
                     android:id="@+id/button_addCar_twoTank"
-                    style="@style/Dismiss.Right"
-                    android:layout_width="0dp"
-                    android:focusable="false"
+                    style="@style/Dismiss.Halfround.Right"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:focusable="false"
+                    android:gravity="center"
                     android:text="@string/action_vehicleData_twoTank" />
             </LinearLayout>
 
             <!-- Tank one -->
+
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/container_addCar_tank"
                 android:layout_width="match_parent"
