@@ -47,6 +47,7 @@
         <activity
             android:name=".views.activities.add.NewRefuelActivity"
             android:label="@string/title_new_refuel"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -56,6 +57,7 @@
         <activity
             android:name=".views.activities.add.NewServiceActivity"
             android:label="@string/title_new_service"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -65,6 +67,7 @@
         <activity
             android:name=".views.activities.add.NewCrashActivity"
             android:label="@string/title_new_crash"
+            android:screenOrientation="portrait"
             android:parentActivityName=".views.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -75,6 +78,7 @@
         <activity
             android:name=".views.activities.add.NewKontaktActivity"
             android:label="@string/NewKontaktActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <!-- SelectListActivity_old -->
@@ -87,6 +91,7 @@
         <activity
             android:name=".views.activities.FuelSettingActivity"
             android:label="@string/title_fuel_setting"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
