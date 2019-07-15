@@ -5,7 +5,7 @@
 [androidmax-image]: https://img.shields.io/badge/Android%20max-API%2028-ff8a1c.svg
 [androidmax-url]: https://www.android.com/versions/pie-9-0/
 
-[androidmin-image]: https://img.shields.io/badge/Min.%20Android%20Version-05.0-ff8a1c.svg
+[androidmin-image]: https://img.shields.io/badge/Min.%20Android%20Version-5.0-ff8a1c.svg
 [androidmin-url]: https://www.android.com/versions/lollipop-5-0/
 
 <!-- shields -->
