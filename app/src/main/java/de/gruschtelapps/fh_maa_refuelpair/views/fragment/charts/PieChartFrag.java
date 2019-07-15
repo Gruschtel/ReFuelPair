@@ -175,7 +175,7 @@ public class PieChartFrag extends SimpleFragment {
                     }
                 }
                 if (cost1 > 0) {
-                    entries1.add(new PieEntry(cost1, "Quarter " + a));
+                    entries1.add(new PieEntry(cost1, "Jahr:  " + a));
                     onProgressUpdate(entries1);
                 }
 
