@@ -8,9 +8,11 @@
 [androidmin-image]: https://img.shields.io/badge/Min.%20Android%20Version-5.0-ff8a1c.svg
 [androidmin-url]: https://www.android.com/versions/lollipop-5-0/
 
+[version-image]: https://img.shields.io/badge/Version-1.0-blue.svg
+
 <!-- shields -->
 [![Application][application-image]][application-url]
-[![Min API][androidmin-image]][androidmin-url]
+![Version][version-image]
 
 # ReFuelPair
 The subject of this project is the development of a mobile application for Android devices. In the mobile application the user should have the possibility to collect different consumption data of his car and to keep a better overview of the total costs for his car. The user should be able to record fuel data quickly and easily, i.e. when was the vehicle refueled, how much was there, at what price and what mileage? It should also be possible to record other service costs for the car. In the event of an accident, the user is to be supported by the app, so that information such as pictures, time, location, accident participants and other relevant data about the accident can be recorded via the app. The name of the app is ReFuelPair, which consists of the English terms refuel and repair.
