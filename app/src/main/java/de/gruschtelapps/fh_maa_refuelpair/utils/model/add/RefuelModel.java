@@ -91,7 +91,6 @@ public class RefuelModel extends JsonModel implements JsonModel.ListModelInterfa
     }
 
 
-
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
@@ -158,7 +157,6 @@ public class RefuelModel extends JsonModel implements JsonModel.ListModelInterfa
             model.setTotalCost(Double.parseDouble(URLDecoder.decode(String.valueOf(jsonObject.getDouble(MODEL_LITER_TOTAL_COST)), MODEL_CHARSET.name())));
 
             model.setDate(Long.parseLong((URLDecoder.decode(String.valueOf(jsonObject.getLong(MODEL_DATE)), MODEL_CHARSET.name()))));
-            Timber.d(model.getLocal());
             model.setLocal(URLDecoder.decode(jsonObject.getString(MODEL_LOCAL), MODEL_CHARSET.name()));
 
             FuelTypeModel fuelTypeModel = (FuelTypeModel) new FuelTypeModel().loadModelByJson(context, URLDecoder.decode(jsonObject.getString(MODEL_FUEL_TYPE), MODEL_CHARSET.name()));

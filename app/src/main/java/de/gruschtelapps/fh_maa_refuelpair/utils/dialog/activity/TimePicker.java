@@ -12,6 +12,7 @@ import java.util.Objects;
 
 /**
  * Create by Eric Werner
+ * TimePicker for Activities
  */
 public class TimePicker extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {

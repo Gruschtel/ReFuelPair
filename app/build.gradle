@@ -6,6 +6,7 @@ apply plugin: 'com.android.application'
 // --> This way your credentials will be baked in your app but only on build time
 // Creates a variable called keystorePropertiesFile, and initializes it to the
 // keystore.properties file.
+
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 // Initializes a new Properties() object called keystoreProperties.
 def keystoreProperties = new Properties()
@@ -78,9 +79,10 @@ android {
                 buildConfigField "String", "TANKERKOENIG_API", keystoreProperties['TANKERKOENIG_API']
             } catch (Exception e) {
                 logger.error(e.getMessage())
-                buildConfigField "String", "TANKERKOENIG_API", "null"
+                buildConfigField "String", "TANKERKOENIG_API", "\"00000000-0000-0000-0000-000000000002\""
             }
         }
+
 
         debug_release {
             debuggable false
@@ -99,9 +101,10 @@ android {
                 buildConfigField "String", "TANKERKOENIG_API", keystoreProperties['TANKERKOENIG_API']
             } catch (Exception e) {
                 logger.error(e.getMessage())
-                buildConfigField "String", "TANKERKOENIG_API", "null"
+                buildConfigField "String", "TANKERKOENIG_API", "\"00000000-0000-0000-0000-000000000002\""
             }
         }
+
 
         release {
             debuggable false
@@ -119,7 +122,7 @@ android {
                 buildConfigField "String", "TANKERKOENIG_API", keystoreProperties['TANKERKOENIG_API']
             } catch (Exception e) {
                 logger.error(e.getMessage())
-                buildConfigField "String", "TANKERKOENIG_API", "null"
+                buildConfigField "String", "TANKERKOENIG_API", "\"00000000-0000-0000-0000-000000000002\""
             }
         }
     }

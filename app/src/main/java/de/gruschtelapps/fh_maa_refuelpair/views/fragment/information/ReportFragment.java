@@ -23,6 +23,7 @@ import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ReportFragment#newInstance} factory method to
@@ -41,14 +42,11 @@ public class ReportFragment extends Fragment {
     private LockableViewPager mViewPager;
     private DataPagerAdapter mSectionsPagerAdapter;
 
-
     // ===========================================================
     // Constructors
     // ===========================================================
+
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
      * @return A new instance of fragment ReportFragment.
      */
     public static ReportFragment newInstance() {
@@ -62,32 +60,31 @@ public class ReportFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // ...
-        Timber.tag(LOG_TAG);
         Timber.d("%s created", LOG_TAG);
     }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_report, container, false);
 
-
+        // Get UI
         mSectionsPagerAdapter = new DataPagerAdapter(getChildFragmentManager());
 
         mViewPager = view.findViewById(R.id.frame_report_viewPager);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setPagingEnabled(false);
 
+        TabLayout tabLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.tabs);
+
+        // set UI
         mSectionsPagerAdapter.addFragment(BarChartFrag.newInstance(), getResources().getString(R.string.title_Bar));
         mSectionsPagerAdapter.addFragment(PieChartFrag.newInstance(), getResources().getString(R.string.title_pie));
 
-        // set UI
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
         return view;
     }
 

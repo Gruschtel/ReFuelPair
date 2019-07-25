@@ -11,14 +11,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-
 import java.util.List;
 import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.R;
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
 import de.gruschtelapps.fh_maa_refuelpair.utils.helper.StorageImageManager;
-import de.gruschtelapps.fh_maa_refuelpair.utils.model.CrashPhotoModel;
 
 /**
  * Create by Eric Werner
@@ -27,6 +25,7 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public interface OnItemClickListener {
         void onItemClick(View view, String modelObjekt, int position);
     }
+
     // ===========================================================
     // Constants
     // ===========================================================
@@ -40,9 +39,6 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Activity mContext;
     private OnItemClickListener mListener;
 
-    // ===========================================================
-    // Constructors
-    // ===========================================================
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -62,9 +58,9 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        if(position == 0){
+        if (position == 0) {
             return VIEWTYPE_NEW;
-        }else {
+        } else {
             return VIEWTYPE_FILLED;
         }
     }
@@ -73,7 +69,7 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View v;
-        switch (viewType){
+        switch (viewType) {
             case VIEWTYPE_NEW:
                 v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_image_new, viewGroup, false);
                 return new NewItemViewHolder(v);
@@ -88,10 +84,10 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         final String vModel = mPhotoPath.get(position);
-        if(position > 0){
+        if (position > 0) {
             StorageImageManager storageImageManager = new StorageImageManager(Objects.requireNonNull(mContext));
             Bitmap mSaveBitmap = storageImageManager.getImage(vModel);
-            ((FilledItemViewHolder)viewHolder).imageView.setImageBitmap(mSaveBitmap);
+            ((FilledItemViewHolder) viewHolder).imageView.setImageBitmap(mSaveBitmap);
         }
     }
 
@@ -110,6 +106,10 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
+
+    /**
+     * Erzeugt ein leerer Photo-platz in Crash Photos (Ohne Bild)
+     */
     public class NewItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageButton imageButton;
 
@@ -131,8 +131,9 @@ public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-
-    // Filled
+    /**
+     * Erzeugt ein gefüllter Photo-platz in Crash Photos (mit Bild)
+     */
     public class FilledItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         RelativeLayout buttonDelete;
         ImageView imageView;

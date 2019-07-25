@@ -8,6 +8,7 @@
     tools:context="de.gruschtelapps.fh_maa_refuelpair.views.activities.add.NewKontaktActivity"
     tools:showIn="@layout/activity_new_kontakt"
     android:scrollbars="none">
+
     <android.support.constraint.ConstraintLayout
         style="@style/ContentsMarginAll"
         android:paddingTop="8dp"
@@ -150,7 +151,7 @@
             app:met_floatingLabel="normal"
             app:met_floatingLabelText="@string/edit_hint_adress"
             tools:ignore="Autofill,ContentDescription" />
-        
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

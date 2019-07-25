@@ -48,6 +48,7 @@ public class CarTypeModel extends JsonModel implements JsonModel.ListModelInterf
         mName = in.readString();
         mImageName = in.readString();
     }
+
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================

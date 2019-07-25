@@ -40,6 +40,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public interface OnItemClickListener {
         void onItemClick(View view, JsonModel object);
     }
+
     // ===========================================================
     // Fields
     // ===========================================================
@@ -90,7 +91,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case VIEWTYPE_SERVICES:
                 v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_adapter_history_service, viewGroup, false);
                 return new HistoryServiceItemViewHolder(v);
-                case VIEWTYPE_CRASH:
+            case VIEWTYPE_CRASH:
                 v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.custom_adapter_history_crash, viewGroup, false);
                 return new HistoryCrashItemViewHolder(v);
 
@@ -114,10 +115,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         //
         if (vModel instanceof RefuelModel) {
             ((HistoryRefuelItemViewHolder) viewHolder).textPlace.setText(((RefuelModel) vModel).getLocal());
-            if(((RefuelModel) vModel).getOdometer() == ConstError.ERROR_LONG){
+            if (((RefuelModel) vModel).getOdometer() == ConstError.ERROR_LONG) {
                 ((HistoryRefuelItemViewHolder) viewHolder).textOdometer.setText("");
                 ((HistoryRefuelItemViewHolder) viewHolder).text_customInformation_odometerValue.setVisibility(View.GONE);
-            }else {
+            } else {
                 ((HistoryRefuelItemViewHolder) viewHolder).textOdometer.setText(String.valueOf(((RefuelModel) vModel).getOdometer()));
             }
             ((HistoryRefuelItemViewHolder) viewHolder).textLiter.setText(String.valueOf(((RefuelModel) vModel).getLiter()));
@@ -149,10 +150,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (vModel instanceof ServiceModel) {
             ((HistoryServiceItemViewHolder) viewHolder).textPlace.setText(((ServiceModel) vModel).getLocal());
 
-            if(((ServiceModel) vModel).getOdometer() == ConstError.ERROR_LONG){
+            if (((ServiceModel) vModel).getOdometer() == ConstError.ERROR_LONG) {
                 ((HistoryServiceItemViewHolder) viewHolder).textOdometer.setText("");
                 ((HistoryServiceItemViewHolder) viewHolder).text_customInformation_odometerValue.setVisibility(View.GONE);
-            }else {
+            } else {
                 ((HistoryServiceItemViewHolder) viewHolder).textOdometer.setText(String.valueOf(((ServiceModel) vModel).getOdometer()));
             }
             ((HistoryServiceItemViewHolder) viewHolder).textService.setText(((ServiceModel) vModel).getService());

@@ -87,17 +87,20 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     private Boolean gpsEnabled = false;
     private LocationPermissionHelper permHelper;
 
+    // Model
     private StationModel stationModel;
-
-    private HttpAsyncTask httpDataAsyncTask;
-    private RecyclerView mRecyclerView;
-    private AddItemAdapter mAdapter;
+    private PetrolStationsModel mClickModel;
     private String mTypeText;
     private String mSort;
     private String mType;
     private float mDistance;
+
+    // Adapter, Internet
+    private HttpAsyncTask httpDataAsyncTask;
+    private RecyclerView mRecyclerView;
+    private AddItemAdapter mAdapter;
+
     private boolean isExit = false;
-    private PetrolStationsModel mClickModel;
 
     // ===========================================================
     // Constructors
@@ -107,9 +110,6 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
      * @return A new instance of fragment FuelComparisonFragment.
      */
     public static FuelComparisonFragment newInstance() {
@@ -131,30 +131,29 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
         // Inflate the layout for this fragment
         View v = super.onCreateView(inflater, container, savedInstanceState, R.layout.fragment_fuel_comparison);
 
+        // Get UI
         mContainerEnableGPS = v.findViewById(R.id.container_fuelComparison_enableGPS);
         mContainerPermissionGPS = v.findViewById(R.id.container_fuelComparison_permissionGPS);
         mErrorLoading = v.findViewById(R.id.container_fuelComparison_error);
         mButtonEnableGPS = v.findViewById(R.id.button_fuelComparison_enableGPS);
         mButtonPermissionGPS = v.findViewById(R.id.button_fuelComparison_permissionGPS);
         mErrorEmpty = v.findViewById(R.id.container_fuelComparison_empty);
-
         mButtonGetPrice = v.findViewById(R.id.button_fuelComparison_getStations);
-        mButtonGetPrice.setOnClickListener(this);
-
         mRecyclerView = v.findViewById(R.id.rv_fuelComparision);
-
-
         mProgressBar = v.findViewById(R.id.progress_fuelComparision);
-        mProgressBar.setVisibility(View.GONE);
 
         // ClickListener
+        mButtonGetPrice.setOnClickListener(this);
         mButtonPermissionGPS.setOnClickListener(this);
         mButtonEnableGPS.setOnClickListener(this);
 
-
+        // Set UI
+        mProgressBar.setVisibility(View.GONE);
         loadPrefs();
 
+        // Check Permission
         if (permissionGranted) {
+            // preprocessing gps
             initLocationManager();
             checkGPSenabled();
             mContainerPermissionGPS.setVisibility(View.GONE);
@@ -167,6 +166,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
             initLocationListener();
         }
 
+        // get location
         getLastPosition();
         return v;
     }
@@ -176,6 +176,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     // ===========================================================
     @Override
     public void onAttach(Context context) {
+        // when onAttach preprocessing gps again
         super.onAttach(context);
         checkPermission_onStart();
         isExit = false;
@@ -190,15 +191,19 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                 mErrorLoading.setVisibility(View.GONE);
             }
         }
+        if (permissionGranted && gpsEnabled) {
+            initLocationListener();
+        }
     }
 
     @Override
     public void onResume() {
+        // when onResume preprocessing gps again
         super.onResume();
         isExit = false;
         checkPermission();
         if (permissionGranted) {
-            initLocationManager();
+            //initLocationManager();
             checkGPSenabled();
             if (mContainerPermissionGPS != null)
                 mContainerPermissionGPS.setVisibility(View.GONE);
@@ -226,6 +231,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     @Override
     public void onStop() {
         super.onStop();
+        // Remove the listener you previously added
         if (locationListener != null)
             locationManager.removeUpdates(locationListener);
         isExit = true;
@@ -254,13 +260,16 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
         //Timber.d("data\t" + data.toString());
         if (data != null) {
             switch (requestCode) {
+
+                // from fuel comparison settings -> reload data (start searching)
                 case ConstRequest.REQUEST_FUEL_COMPARISON_SETTINGS:
                     loadPrefs();
                     View v = new View(getContext());
                     v.setId(R.id.button_fuelComparison_getStations);
                     onClick(v);
                     break;
-                //
+
+                // when enable gps -> start searching/hide gps_error_hint
                 case ConstRequest.REQUEST_FUEL_COMPARISON_ENABLE_GPS:
                     checkPermission();
                     if (permissionGranted) {
@@ -275,6 +284,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                         }
                     }
                     break;
+
                 //
                 case ConstRequest.REQUEST_FUEL_COMPARISON_PERMISSION_GPS:
                     break;
@@ -308,15 +318,17 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            // start gps settings
             case R.id.button_fuelComparison_enableGPS:
                 if (locationListener == null)
                     if (permissionGranted && gpsEnabled) {
                         initLocationListener();
                     }
-
                 startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), ConstRequest.REQUEST_FUEL_COMPARISON_ENABLE_GPS);
                 break;
 
+            // start refuelpair-app settings
             case R.id.button_fuelComparison_permissionGPS:
                 // disable permissions -> open settings
                 // https://stackoverflow.com/questions/32822101/how-to-programmatically-open-the-permission-screen-for-a-specific-app-on-android
@@ -330,6 +342,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                 startActivityForResult(i, ConstRequest.REQUEST_FUEL_COMPARISON_PERMISSION_GPS);
                 break;
 
+            // start searching for gas-stations
             case R.id.button_fuelComparison_getStations:
                 if (lastKnownLocation == null) {
                     getLastPosition();
@@ -355,7 +368,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                     httpDataAsyncTask.execute((Void) null);
 
                 } catch (Exception e) {
-                    Timber.d(e);
+                    //Timber.d(e);
                     mErrorLoading.setVisibility(View.VISIBLE);
                     mProgressBar.setVisibility(View.GONE);
                 }
@@ -366,20 +379,29 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * Load needed data from preferences for search
+     */
     private void loadPrefs() {
+        // init
         SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getActivity()));
         mDistance = pref.getPrefFloat(ConstPreferences.PREF_COMPARISON_DISTANC);
+
+        // get distance
         if (Float.compare(mDistance, ConstError.ERROR_FLOAT) == 0) {
             mDistance = 5f;
             pref.setPrefFloat(ConstPreferences.PREF_COMPARISON_DISTANC, mDistance);
         }
 
+        // get ordering
         mSort = pref.getPrefString(ConstPreferences.PREF_COMPARISON_SORT);
         if (mSort.equals(ConstError.ERROR_STRING)) {
             mSort = "dist";
             pref.setPrefString(ConstPreferences.PREF_COMPARISON_SORT, mSort);
         }
 
+        // get fuel type
         mType = pref.getPrefString(ConstPreferences.PREF_COMPARISON_TYPE);
         if (mType.equals(ConstError.ERROR_STRING)) {
             switch ((int) mVehicleModel.getTankOne().getId()) {
@@ -402,26 +424,39 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
             mTypeText = mType;
         }
 
+        // set ordering
         String sortierung;
         if (mSort.equals("dist")) {
             sortierung = getResources().getString(R.string.action_sortDist);
         } else {
             sortierung = getResources().getString(R.string.action_sortPrice);
         }
+
+        // set UI
         mButtonGetPrice.setText(String.format(Objects.requireNonNull(getContext()).getResources().getString(R.string.button_get_price), mTypeText, sortierung));
     }
 
 
+    /**
+     * Switches the visibility between list and search progress
+     * When searching, no list should be displayed, instead a search progress should be displayed.
+     */
     private void setVisibilitygetStation() {
         mProgressBar.setVisibility(mProgressBar.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         mRecyclerView.setVisibility(mRecyclerView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
     }
 
+    /**
+     * Check permission on start
+     */
     private void checkPermission_onStart() {
         permHelper = new LocationPermissionHelper(getActivity(), getContext());
         permissionGranted = permHelper.checkLocationPermission_onStart();
     }
 
+    /**
+     * Checks each time the gps coordinates are queried if the permission is still present
+     */
     public void checkPermission() {
         if (permHelper != null)
             permissionGranted = permHelper.checkLocationPermission();
@@ -438,10 +473,14 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
         // Log.d(LOGTAG, "permissionGranted " + permissionGranted);
     }
 
+
     public void setPermissionGranted() {
         permissionGranted = true;
     }
 
+    /**
+     * Check if gps is enable
+     */
     public void checkGPSenabled() {
         if (locationManager == null)
             return;
@@ -474,6 +513,9 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
         }
     }
 
+    /**
+     * Init Location Manager
+     */
     public void initLocationManager() {
         try {
             // Acquire a reference to the system Location Manager
@@ -484,6 +526,9 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
         }
     }
 
+    /**
+     * Init Location Listener
+     */
     public void initLocationListener() {
         // Configure update interval for GPS provider
         locationListener = new LocationListener() {
@@ -527,7 +572,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                 }
             }
         } catch (Exception e) {
-            Timber.e(e);
+            //Timber.e(e);
         }
     }
 
@@ -540,6 +585,9 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
     }
 
 
+    /**
+     * Check permission for internet & connection
+     */
     private void getNetworkAccess() {
         //noinspection StatementWithEmptyBody
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -575,7 +623,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
             case R.array.comparison_array:
                 if (pos == 0) {
                     Uri gmmIntentUri = Uri.parse("http://maps.google.com/maps?daddr=" + mClickModel.getLat() + "," + mClickModel.getLng());
-                    Timber.d(gmmIntentUri.toString());
+                    //Timber.d(gmmIntentUri.toString());
                     Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, gmmIntentUri);
                     if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
                         startActivity(mapIntent);
@@ -612,13 +660,12 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
 
         @Override
         protected Boolean doInBackground(Void... voids) {
+            // init + load data
             getNetworkAccess();
             HttpHelper httpHelper = new HttpHelper();
-            Timber.d(mUrl);
-            Timber.d(mToken);
             String request = httpHelper.httpGet(mUrl, mToken);
-            Timber.d(request);
 
+            // Get Data
             try {
                 JSONObject jsonObjectType = new JSONObject(request);
                 if (!Boolean.parseBoolean(URLDecoder.decode(jsonObjectType.getString(StationModel.JSON_OK), JsonModel.MODEL_CHARSET.name()))) {
@@ -633,6 +680,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
                     stationModel = (StationModel) new StationModel().loadPriceSearch(request);
                 }
 
+                // set data to adapter
                 mAdapter = new AddItemAdapter(getActivity(), stationModel.getStations(), new AddItemAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, Object object) {
@@ -657,7 +705,7 @@ public class FuelComparisonFragment extends BaseFragment implements View.OnClick
 
         @Override
         protected void onPostExecute(Boolean result) {
-            Timber.d("result: %s", result);
+            // show result
             if (result) {
                 if (stationModel.getStations().size() == 0) {
                     mErrorEmpty.setVisibility(View.VISIBLE);

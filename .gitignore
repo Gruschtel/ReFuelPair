@@ -63,7 +63,7 @@ proguard/
 *.apk
 *.ap_
 
-keystore.properties
+
 app/debug_release/output.json
 app/gradle.properties
 

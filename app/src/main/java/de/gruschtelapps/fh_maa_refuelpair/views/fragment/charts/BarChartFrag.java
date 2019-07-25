@@ -32,6 +32,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.R;
+import de.gruschtelapps.fh_maa_refuelpair.base.BaseChartFragment;
 import de.gruschtelapps.fh_maa_refuelpair.db.DBHelper;
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstPreferences;
@@ -44,7 +45,7 @@ import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
-public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarChangeListener,
+public class BarChartFrag extends BaseChartFragment implements SeekBar.OnSeekBarChangeListener,
         OnChartValueSelectedListener {
 
     private BarChart chart;
@@ -59,7 +60,6 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
     ArrayList<BarEntry> values1;
     ArrayList<BarEntry> values2;
 
-
     @NonNull
     public static Fragment newInstance() {
         return new BarChartFrag();
@@ -70,13 +70,14 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_simple_bar, container, false);
 
+        // get UI
         tvX = v.findViewById(R.id.tvXMax);
         tvX.setTextSize(10);
-
         seekBarX = v.findViewById(R.id.seekBar1);
-        seekBarX.setOnSeekBarChangeListener(this);
-
         chart = v.findViewById(R.id.chart1);
+
+        // set Listener
+        seekBarX.setOnSeekBarChangeListener(this);
         chart.setOnChartValueSelectedListener(this);
         chart.getDescription().setEnabled(false);
 
@@ -86,6 +87,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
         chart.setDrawBarShadow(false);
         chart.setDrawGridBackground(true);
 
+        // Set legend
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
@@ -96,6 +98,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
         l.setYEntrySpace(0f);
         l.setTextSize(8f);
 
+        // Set Axis
         YAxis leftAxis = chart.getAxisLeft();
         leftAxis.setValueFormatter(new LargeValueFormatter());
         leftAxis.setDrawGridLines(true);
@@ -146,6 +149,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
         values1 = new ArrayList<>();
         values2 = new ArrayList<>();
 
+        // Set Date & Get Values für einen Zeitraum
         Calendar cDate = Calendar.getInstance();
         for (int a = startYear; a <= endYear; a++) {
             float cost1, cost2;
@@ -254,6 +258,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
             startYear = 0;
             endYear = 0;
 
+            // get first year and latest year
             Calendar cStart = Calendar.getInstance();
             Calendar cEnde = Calendar.getInstance();
             Calendar testTime = Calendar.getInstance();
@@ -261,6 +266,7 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
             long timeStart = cStart.getTimeInMillis();
             long timeEnde = cStart.getTimeInMillis();
 
+            // Load Data
             for (int i = 0; i < addModels.size(); i++) {
                 if (addModels.get(i) instanceof RefuelModel) {
                     testTime.setTimeInMillis(((RefuelModel) addModels.get(i)).getDate());
@@ -295,9 +301,11 @@ public class BarChartFrag extends SimpleFragment implements SeekBar.OnSeekBarCha
                 }
             }
 
+            // set Data
             cStart.setTimeInMillis(timeStart);
             cEnde.setTimeInMillis(timeEnde);
 
+            // set Progress
             seekBarX.setMax(cEnde.get(Calendar.YEAR) - cStart.get(Calendar.YEAR));
             seekBarX.setProgress(cEnde.get(Calendar.YEAR) - cStart.get(Calendar.YEAR));
 

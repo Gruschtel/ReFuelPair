@@ -17,6 +17,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstBundle;
 
 /**
  * Create by Eric Werner
+ * ItemListDialog for Activities
  */
 public class ItemListDialog extends DialogFragment {
     // ===========================================================

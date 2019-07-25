@@ -16,7 +16,6 @@ public interface ConstPreferences extends BaseColumns {
     String PREF_CURRENT_CAR = "PREF_CURRENT_CARs";
 
 
-
     // Fuel Comparison
     String PREF_COMPARISON_DISTANC = "PREF_COMPARISON_DISTANC";
     String PREF_COMPARISON_SORT = "PREF_COMPARISON_SORT";

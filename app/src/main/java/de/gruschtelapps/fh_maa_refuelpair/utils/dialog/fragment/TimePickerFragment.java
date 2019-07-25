@@ -2,7 +2,6 @@ package de.gruschtelapps.fh_maa_refuelpair.utils.dialog.fragment;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
@@ -12,6 +11,7 @@ import java.util.Objects;
 
 /**
  * Create by Eric Werner
+ * TimePicker for Fragments
  */
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {

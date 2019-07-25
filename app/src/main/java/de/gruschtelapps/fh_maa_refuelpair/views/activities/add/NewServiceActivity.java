@@ -89,6 +89,7 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
         mTestService = findViewById(R.id.text_newService_service);
         mButtonDelete = findViewById(R.id.text_newService_delete);
 
+        // set onClickListener
         mTextDate.setOnClickListener(this);
         mTextTime.setOnClickListener(this);
         mButtonDelete.setOnClickListener(this);
@@ -105,20 +106,23 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
             finish();
         }
 
-
+        //
         c = Calendar.getInstance();
         // Load Data or New Instance
         if (getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT) != null) {
-            // LOAD
+
             isEdit = true;
+
             // mButtonDelete.setVisibility(View.VISIBLE);
             mServiceModel = getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT);
 
+            // Get Time
             c.setTimeInMillis(mServiceModel.getDate());
 
             Timber.d(String.valueOf(mServiceModel.getDate()));
             Timber.d(String.valueOf(c.getTimeInMillis()));
 
+            // set loaded data
             mTextOdometer.setText(mServiceModel.getOdometer() != ConstError.ERROR_LONG ? String.valueOf(mServiceModel.getOdometer()) : "");
             mTextLocal.setText(mServiceModel.getLocal());
 
@@ -163,6 +167,8 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
+        // if edit than delete icon
+        // if new than finish icon
         if (isEdit) {
             getMenuInflater().inflate(R.menu.menue_add_delete, menu);
         } else {
@@ -174,6 +180,7 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
 
     @Override
     public void onBackPressed() {
+        // Show dialog when press back
         FragmentManager fm = getSupportFragmentManager();
         MessageDialog messageDialog;
         if (isEdit) {
@@ -208,18 +215,21 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
 
     @Override
     public void onClick(View v) {
-        Timber.d("asdgasdgasdgasdgasdgasdgasdg");
         switch (v.getId()) {
+
+            // show date picker
             case R.id.text_newService_Date:
                 DialogFragment datePicker = new DatePicker();
                 datePicker.show(getSupportFragmentManager(), "datePicker");
                 break;
 
+            // show time picker
             case R.id.text_newService_Date2:
                 DialogFragment timePicker = new TimePicker();
                 timePicker.show(getSupportFragmentManager(), "timePicker");
                 break;
 
+            // delete service
             case R.id.text_newService_delete:
                 MessageDialog messageDialog = MessageDialog.newInstance(ConstRequest.REQUEST_DIALOG_DELETE, R.string.title_button_delete, R.string.msg_button_delete);
                 messageDialog.show(getSupportFragmentManager(), "messageDialog");
@@ -233,10 +243,13 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
         switch (item.getItemId()) {
             // Toolbar Button
             case android.R.id.home:
-                // Aktuller Service
+
+                // Aktueller Service
                 onBackPressed();
                 return true;
             case R.id.menue_add_finish:
+
+                // Check zunächst ob alle benötigten Felder ausgefüllt sind
                 if (checkUI()) {
                     double totalcost;
                     if (!String.valueOf(mTextTotalCost.getText()).equals("")) {
@@ -246,18 +259,22 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
                     }
                     String message = String.valueOf(mTestService.getText()).replaceAll("\\\\n", "\n");
 
+                    // get time
                     Calendar dateTime = Calendar.getInstance();
                     dateTime.set(mTimeYear, mTimeMonth, mTimeDay, mTimeHour, mTimeMinute);
 
+                    // get & set odometer
                     long mValueOdometer = 0;
                     if (String.valueOf(mTextOdometer.getText()).isEmpty()) {
                         mValueOdometer = ConstError.ERROR_LONG;
-                    }else {
+                    } else {
                         mValueOdometer = Long.parseLong(String.valueOf(mTextOdometer.getText()));
                     }
 
-
+                    // Get Database
                     final DBHelper mDbHelper = new DBHelper(getApplicationContext());
+
+                    // Wenn Edit Modus dann objekt updaten
                     if (isEdit) {
                         ServiceModel shareModel = new ServiceModel(
                                 mServiceModel.getId(),
@@ -269,9 +286,13 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
                                 dateTime.getTimeInMillis(),
                                 message
                         );
+
+                        // load data
                         mDbHelper.getUpdates().updateAdd(mServiceModel.getId(), shareModel.createJson(), shareModel.getDate());
                         Intent finishIntent = new Intent();
                         this.setResult(Activity.RESULT_OK, finishIntent);
+
+                        // Sonst Objekt neu erstellen
                     } else {
                         ServiceModel shareModel = new ServiceModel(
                                 JsonModel.ADD_TYPE_SERVICE,
@@ -290,11 +311,14 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
                     finish();
                 }
                 return true;
+
+            // delete Item
             case R.id.menue_add_delete:
                 MessageDialog messageDialog = MessageDialog.newInstance(ConstRequest.REQUEST_DIALOG_DELETE, R.string.title_button_delete, R.string.msg_button_delete);
                 messageDialog.show(getSupportFragmentManager(), "messageDialog");
                 break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -326,12 +350,17 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
 
     @Override
     public void onDialogButtonClick(int action, int flag) {
+
+        // handle back dialog
         if (action == ConstRequest.REQUEST_DIALOG_BACK) {
             if (flag == ConstRequest.REQUEST_DIALOG_POSITIV) {
                 Intent finishIntent = new Intent();
                 this.setResult(Activity.RESULT_CANCELED, finishIntent);
                 finish();
             }
+
+
+            // handle delete dialog
         } else if (action == ConstRequest.REQUEST_DIALOG_DELETE) {
             if (flag == ConstRequest.REQUEST_DIALOG_POSITIV) {
                 final DBHelper mDbHelper = new DBHelper(getApplicationContext());
@@ -346,6 +375,11 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * set actionbar title
+     * @param heading
+     */
     private void setActionBarTitle(String heading) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -354,6 +388,10 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
         }
     }
 
+    /**
+     * Check ob alle TextViews korrekt ausgefüllt wurden
+     * @return
+     */
     private boolean checkUI() {
         boolean allCorrekt = true;
         if (!String.valueOf(mTextOdometer.getText()).isEmpty()) {
@@ -366,6 +404,12 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
     }
 
 
+    /**
+     * Füllt einem Wert mit 0 der länge "leange" auf
+     * @param zahl
+     * @param laenge
+     * @return
+     */
     public static String setNullVorne(int zahl, int laenge) {
         StringBuilder tmp = new StringBuilder(Integer.toString(zahl));
         int leng = tmp.length();

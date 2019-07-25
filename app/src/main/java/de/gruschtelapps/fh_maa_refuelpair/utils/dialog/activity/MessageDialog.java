@@ -19,6 +19,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstRequest;
 
 /**
  * Create by Eric Werner
+ * MessageDialog for Activities
  */
 public class MessageDialog extends DialogFragment {
     // ===========================================================

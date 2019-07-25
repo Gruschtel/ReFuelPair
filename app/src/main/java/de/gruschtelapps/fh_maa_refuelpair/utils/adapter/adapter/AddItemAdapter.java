@@ -35,14 +35,15 @@ import timber.log.Timber;
 public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // https://guides.codepath.com/android/using-the-recyclerview
     // ===========================================================
-    // Constants
+    // Interfaces
     // ===========================================================
-
-
     public interface OnItemClickListener {
         void onItemClick(View view, Object object);
     }
 
+    // ===========================================================
+    // Constants
+    // ===========================================================
     private final int VIEWTYPE_ITEM_TEXT = 0;
     private final int VIEWTYPE_ITEM_IMAGE = 1;
     private final int VIEWTYPE_ITEM_MULTI = 2;
@@ -54,7 +55,6 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<JsonModel> mItemList;
     private Activity mContext;
     private OnItemClickListener mListener;
-
 
     // ===========================================================
     // Constructors
@@ -85,7 +85,6 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // Todo: später auf VIEWTYPE_ITEM_TEXT ändern
         return VIEWTYPE_ITEM_IMAGE;
     }
-
 
     @NotNull
     @Override
@@ -141,9 +140,12 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (vModel instanceof PetrolStationsModel) {
             SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(mContext));
             String mType = pref.getPrefString(ConstPreferences.PREF_COMPARISON_TYPE);
-            if (mType.equals(ConstError.ERROR_STRING)){
+            if (mType.equals(ConstError.ERROR_STRING)) {
                 mType = "e10";
             }
+            //
+            // Set Fuel Type Name
+            //
             String mPriceValue = "";
             if (pref.getPrefString(ConstPreferences.PREF_COMPARISON_SORT).equals("dist")) {
                 switch (mType) {
@@ -164,12 +166,12 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 mPriceValue = String.valueOf(((PetrolStationsModel) vModel).getPrice());
                 Timber.d("%s", ((PetrolStationsModel) vModel).getPrice());
             }
+            // Standard information
             ((PetrolStationViewHolder) viewHolder).textPrice.setText(mPriceValue);
-            ((PetrolStationViewHolder) viewHolder).textBrandname.setText(((PetrolStationsModel)vModel).getName());
-            ((PetrolStationViewHolder) viewHolder).textAddress.setText(((PetrolStationsModel)vModel).getStreet() + ", " + ((PetrolStationsModel)vModel).getHousenumber());
-            ((PetrolStationViewHolder) viewHolder).textPlace.setText(((PetrolStationsModel)vModel).getPostCode() + ", " +((PetrolStationsModel)vModel).getPlace());
-            ((PetrolStationViewHolder) viewHolder).textOdometer.setText(String.valueOf(((PetrolStationsModel)vModel).getDistance()));
-
+            ((PetrolStationViewHolder) viewHolder).textBrandname.setText(((PetrolStationsModel) vModel).getName());
+            ((PetrolStationViewHolder) viewHolder).textAddress.setText(((PetrolStationsModel) vModel).getStreet() + ", " + ((PetrolStationsModel) vModel).getHousenumber());
+            ((PetrolStationViewHolder) viewHolder).textPlace.setText(((PetrolStationsModel) vModel).getPostCode() + ", " + ((PetrolStationsModel) vModel).getPlace());
+            ((PetrolStationViewHolder) viewHolder).textOdometer.setText(String.valueOf(((PetrolStationsModel) vModel).getDistance()));
         }
     }
 
@@ -180,7 +182,6 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         return mItemList.size();
     }
-
 
     // ===========================================================
     // Methods
@@ -200,6 +201,9 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     // Inner and Anonymous Classes
     // ===========================================================
 
+    /**
+     * Erzeugt einen ImageViewHolder (Bild + Icon)
+     */
     public class ItemImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView imageIcon;
         private TextView textInformation;
@@ -227,10 +231,11 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * Erzeugt einen Tankstellen ViewHolder (Tanstelle + Preis + Fueltype + Entfernung)
+     */
     public class PetrolStationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView textPrice, textBrandname, textAddress, textPlace, textOdometer;
-
-
 
         // Init UI-Elemente des Cardviews
         PetrolStationViewHolder(final View itemView) {
@@ -248,20 +253,10 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void onClick(View v) {
             int position = getAdapterPosition(); // gets item position
             if (position != RecyclerView.NO_POSITION) { // Check if an item was deleted, but the user clicked it before the UI removed it
-                if(mListener != null){
+                if (mListener != null) {
                     mListener.onItemClick(v, mItemList.get(position));
                 }
             }
-        }
-    }
-
-
-    public class ItemMultiViewHolder extends RecyclerView.ViewHolder {
-
-        // Init UI-Elemente des Cardviews
-        public ItemMultiViewHolder(View itemView) {
-            super(itemView);
-
         }
     }
 }

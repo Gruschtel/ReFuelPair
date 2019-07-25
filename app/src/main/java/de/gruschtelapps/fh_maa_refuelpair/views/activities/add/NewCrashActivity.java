@@ -20,7 +20,6 @@ import android.widget.Toast;
 import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.R;
-
 import de.gruschtelapps.fh_maa_refuelpair.db.DBHelper;
 import de.gruschtelapps.fh_maa_refuelpair.utils.adapter.viewPager.DataPagerAdapter;
 import de.gruschtelapps.fh_maa_refuelpair.utils.adapter.viewPager.LockableViewPager;
@@ -90,16 +89,19 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
         TabLayout tabLayout = Objects.requireNonNull(this).findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
-
+        // load data
         mCurrentService = getIntent();
         if (getIntent().getExtras() != null) {
+
+            // start new crash modus
             if (getIntent().getExtras().getInt(ConstExtras.EXTRA_KEY_ADD) == ConstExtras.EXTRA_NEW_CRASH) {
                 isEdit = false;
                 newCrash();
+
+                // start edit crash modus
             } else if (getIntent().getExtras().getInt(ConstExtras.EXTRA_KEY_EDIT) == ConstExtras.EXTRA_EDIT_CRASH) {
                 if (getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT) != null) {
                     isEdit = true;
-                    // mButtonDelete.setVisibility(View.VISIBLE);
                     mCrashModel = getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT);
                     mViewPager.setPagingEnabled(true);
                     editCrash();
@@ -125,6 +127,7 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
         if (mReceiver == null) {
             mReceiver = new AddReceiver();
 
+            // Set Broadcast filter
             IntentFilter filterRefreshUpdate = new IntentFilter();
             filterRefreshUpdate.addAction(ConstAction.ACTION_ADD_NEXT_PAGE);
             filterRefreshUpdate.addAction(ConstAction.ACTION_ADD_UPDATE_CRASH_OTHER);
@@ -145,6 +148,8 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
 
     @Override
     protected void onDestroy() {
+
+        // unregister Broadcastreciver
         if (mReceiver != null)
             this.unregisterReceiver(mReceiver);
         super.onDestroy();
@@ -164,6 +169,7 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
             // Toolbar Button
@@ -192,6 +198,7 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
 
     @Override
     public void onDialogButtonClick(int action, int flag) {
+        // handle back dialog
         if (action == ConstRequest.REQUEST_DIALOG_BACK) {
             if (flag == ConstRequest.REQUEST_DIALOG_POSITIV) {
                 Intent finishIntent = new Intent();
@@ -204,12 +211,19 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * Init new crash fragments
+     */
     private void newCrash() {
         mSectionsPagerAdapter.addFragment(NewCrashOtherFragment.newInstance(), getResources().getString(R.string.title_crashOther));
         mSectionsPagerAdapter.addFragment(NewCrashDetailsFragment.newInstance(), getResources().getString(R.string.title_crashDetails));
         mSectionsPagerAdapter.addFragment(NewCrashPhotosFragment.newInstance(), getResources().getString(R.string.title_crashPhotos));
     }
 
+    /**
+     * load edit crash fragments
+     */
     private void editCrash() {
         mSectionsPagerAdapter.addFragment(NewCrashOtherFragment.newInstance(mCrashModel), getResources().getString(R.string.title_crashOther));
         mSectionsPagerAdapter.addFragment(NewCrashDetailsFragment.newInstance(mCrashModel), getResources().getString(R.string.title_crashDetails));
@@ -225,6 +239,10 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
         }
     }
 
+    /**
+     * Methode zum wechseln zur nächsten Fragment
+     * @param intent
+     */
     private void nextPage(Intent intent) {
         // Todo:
         //
@@ -243,6 +261,9 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
     }
 
 
+    /**
+     * Zum wechseln zur letzten angezeigten Fragment
+     */
     private void previousPage() {
         if (mViewPager.getCurrentItem() == 0) {
             FragmentManager fm = getSupportFragmentManager();
@@ -266,6 +287,9 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
     // Inner and Anonymous Classes
     // ===========================================================
 
+    /**
+     * BrodcastReciver: Wird benötigt um auf Events/Clicks der ChildFragmenten reagieren zu können
+     */
     public class AddReceiver extends BroadcastReceiver {
         // https://stackoverflow.com/questions/11770794/how-to-set-permissions-in-broadcast-sender-and-receiver-in-android
         // https://stackoverflow.com/questions/49197282/how-to-send-a-custom-broadcast-action-to-receivers-in-manifest

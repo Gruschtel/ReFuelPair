@@ -29,6 +29,7 @@ public class DbAdds {
     // ===========================================================
     private DBHelper dbHelper;
     private Context mContext;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -45,6 +46,14 @@ public class DbAdds {
     // Methods
     // ===========================================================
 
+    /**
+     * New Object for Car Table
+     * Car Information
+     *
+     * @param name
+     * @param vehicleModel
+     * @return
+     */
     public long insertCar(String name, VehicleModel vehicleModel) {
         synchronized (syncRoot) {
             long id;
@@ -70,6 +79,13 @@ public class DbAdds {
         }
     }
 
+    /**
+     * New Object for Add Table
+     * Safe ne Add*
+     *
+     * @param addModel
+     * @return
+     */
     public long insertAddModel(JsonModel addModel) {
         synchronized (syncRoot) {
             long id = 0;
@@ -77,37 +93,37 @@ public class DbAdds {
                 ContentValues content = new ContentValues();
                 if (addModel instanceof RefuelModel) {
                     content.put(ConstDatabase.COLUMN_ADD_TYPE, JsonModel.ADD_TYPE_REFUEL);
-                    content.put(ConstDatabase.COLUMN_ADD_DATE, ((RefuelModel)addModel).getDate());
-                    content.put(ConstDatabase.COLUMN_ADD_CAR_ID, ((RefuelModel)addModel).getCarId());
+                    content.put(ConstDatabase.COLUMN_ADD_DATE, ((RefuelModel) addModel).getDate());
+                    content.put(ConstDatabase.COLUMN_ADD_CAR_ID, ((RefuelModel) addModel).getCarId());
                     // erst wird ein dummy erzeugt um die Id zu erhalten
                     id = db.insert(ConstDatabase.TABLE_ADD, null, content);
                     // id wird dem modell hinzugefügt
-                    ((RefuelModel)addModel).setId(id);
+                    ((RefuelModel) addModel).setId(id);
                     // Model wird abgespeichert
-                    dbHelper.getUpdates().updateAdd(id, ((RefuelModel)addModel).createJson(), ((RefuelModel)addModel).getDate());
+                    dbHelper.getUpdates().updateAdd(id, ((RefuelModel) addModel).createJson(), ((RefuelModel) addModel).getDate());
                     // Update Car
-                    VehicleModel vehicleModel = dbHelper.getGet().selectCarById(((RefuelModel)addModel).getCarId());
+                    VehicleModel vehicleModel = dbHelper.getGet().selectCarById(((RefuelModel) addModel).getCarId());
                     if (vehicleModel.getOdometer() < ((RefuelModel) addModel).getOdometer())
                         vehicleModel.setOdometer(((RefuelModel) addModel).getOdometer());
-                    dbHelper.getUpdates().updateCarInformation(((RefuelModel)addModel).getCarId(), vehicleModel.createJson());
+                    dbHelper.getUpdates().updateCarInformation(((RefuelModel) addModel).getCarId(), vehicleModel.createJson());
                     return id;
                 }
                 if (addModel instanceof ServiceModel) {
                     content.put(ConstDatabase.COLUMN_ADD_TYPE, JsonModel.ADD_TYPE_SERVICE);
-                    content.put(ConstDatabase.COLUMN_ADD_DATE, ((ServiceModel)addModel).getDate());
-                    content.put(ConstDatabase.COLUMN_ADD_CAR_ID, ((ServiceModel)addModel).getCarId());
+                    content.put(ConstDatabase.COLUMN_ADD_DATE, ((ServiceModel) addModel).getDate());
+                    content.put(ConstDatabase.COLUMN_ADD_CAR_ID, ((ServiceModel) addModel).getCarId());
                     id = db.insert(ConstDatabase.TABLE_ADD, null, content);
-                    ((ServiceModel)addModel).setId(id);
-                    dbHelper.getUpdates().updateAdd(id, ((ServiceModel)addModel).createJson(), ((ServiceModel)addModel).getDate());
+                    ((ServiceModel) addModel).setId(id);
+                    dbHelper.getUpdates().updateAdd(id, ((ServiceModel) addModel).createJson(), ((ServiceModel) addModel).getDate());
                     return id;
                 }
                 if (addModel instanceof CrashModel) {
                     content.put(ConstDatabase.COLUMN_ADD_TYPE, JsonModel.ADD_TYPE_CRASH);
-                    content.put(ConstDatabase.COLUMN_ADD_DATE, ((CrashModel)addModel).getDate());
-                    content.put(ConstDatabase.COLUMN_ADD_CAR_ID, ((CrashModel)addModel).getCarID());
+                    content.put(ConstDatabase.COLUMN_ADD_DATE, ((CrashModel) addModel).getDate());
+                    content.put(ConstDatabase.COLUMN_ADD_CAR_ID, ((CrashModel) addModel).getCarID());
                     id = db.insert(ConstDatabase.TABLE_ADD, null, content);
-                    ((CrashModel)addModel).setId(id);
-                    dbHelper.getUpdates().updateAdd(id, ((CrashModel)addModel).createJson(), ((CrashModel)addModel).getDate());
+                    ((CrashModel) addModel).setId(id);
+                    dbHelper.getUpdates().updateAdd(id, ((CrashModel) addModel).createJson(), ((CrashModel) addModel).getDate());
                     return id;
                 }
                 Timber.d(mContext.getResources().getString(R.string.db_insert));

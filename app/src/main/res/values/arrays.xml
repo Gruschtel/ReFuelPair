@@ -2,18 +2,17 @@
  17.05.2019
  -->
 <resources>
-    <string-array name="takephoto" >
+    <string-array name="takephoto">
         <item>@string/action_takePhotoNew</item>
         <item>@string/action_choosePhotoNew</item>
     </string-array>
 
-    <string-array name="changephoto" >
+    <string-array name="changephoto">
         <item>@string/action_removePhoto</item>
         <item>@string/action_takePhoto</item>
         <item>@string/action_choosePhoto</item>
     </string-array>
     <string-array name="message_backDialog">Would you like to cancel the process?</string-array>
-
 
 
     <string-array name="fuel_array">

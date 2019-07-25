@@ -11,7 +11,7 @@ import de.gruschtelapps.fh_maa_refuelpair.R;
  */
 public class ShareHelper {
 
-    public static void shareText(Context context, String text){
+    public static void shareText(Context context, String text) {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, text);

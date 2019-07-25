@@ -88,10 +88,17 @@ public class DbGets {
     }
 
 
+    //
+    // **********************
+    // Add
+    // **********************
+    //
+
     /**
-     * **********************
-     * Add
-     * **********************
+     * Gibt alle Adds zu einem bestimmten Auto zurück
+     *
+     * @param id
+     * @return
      */
     public List<JsonModel> selectAllAdds(long id) {
         List<JsonModel> addModel = new ArrayList<>();
@@ -100,18 +107,18 @@ public class DbGets {
             Cursor c = db.rawQuery(
                     "SELECT * FROM " + ConstDatabase.TABLE_ADD
                             + " WHERE " + ConstDatabase.COLUMN_ADD_CAR_ID + "=?" +
-                    " ORDER BY "+ ConstDatabase.COLUMN_ADD_DATE + " DESC",
+                            " ORDER BY " + ConstDatabase.COLUMN_ADD_DATE + " DESC",
                     new String[]{Long.toString(id)});
             c.moveToFirst();
 
 
             while (!c.isAfterLast()) {
                 int addType = c.getInt(c.getColumnIndex(ConstDatabase.COLUMN_ADD_TYPE));
-                if(addType == JsonModel.ADD_TYPE_REFUEL)
+                if (addType == JsonModel.ADD_TYPE_REFUEL)
                     addModel.add(curserToRefuelModel(c));
-                if(addType == JsonModel.ADD_TYPE_SERVICE)
+                if (addType == JsonModel.ADD_TYPE_SERVICE)
                     addModel.add(curserToServiceModel(c));
-                if(addType == JsonModel.ADD_TYPE_CRASH)
+                if (addType == JsonModel.ADD_TYPE_CRASH)
                     addModel.add(curserToCrashModel(c));
                 c.moveToNext();
             }
@@ -127,8 +134,6 @@ public class DbGets {
     }
 
 
-
-
     // ===========================================================
     // Curser
     // ===========================================================
@@ -138,6 +143,7 @@ public class DbGets {
         String information = cursor.getString(cursor.getColumnIndex(ConstDatabase.COLUMN_CAR_INFORMATION));
         return (VehicleModel) new VehicleModel().loadModelByJson(mContext, information);
     }
+
     private ServiceModel curserToServiceModel(Cursor cursor) {
         String information = cursor.getString(cursor.getColumnIndex(ConstDatabase.COLUMN_ADD_INFORMATION));
         return (ServiceModel) new ServiceModel().loadModelByJson(mContext, information);

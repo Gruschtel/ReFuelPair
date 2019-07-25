@@ -10,13 +10,13 @@ import timber.log.Timber;
 
 /**
  * Create by Eric Werner
+ * Manager zum einfachen/schnellen abspeichern von Prefernzen
  */
 public class SharedPreferencesManager {
     // ===========================================================
     // Constants
     // ===========================================================
     private final String LOG_TAG = getClass().getSimpleName();
-
 
 
     // ===========================================================
@@ -81,31 +81,31 @@ public class SharedPreferencesManager {
     // ===========================================================
 
     public void setPrefInt(String st_search, int mValue) {
-        Timber.d("setPrefInt: st_search:\t%1$s mValue:\t%2$s", st_search ,mValue);
+        Timber.d("setPrefInt: st_search:\t%1$s mValue:\t%2$s", st_search, mValue);
         editor.putInt(st_search.replaceAll(" ", "").toLowerCase(), mValue);
         editor.commit();
     }
 
     public void setPreLong(String st_search, long mValue) {
-        Timber.d("setPreLong: st_search:\t%1$s mValue:\t%2$s",st_search ,mValue);
+        Timber.d("setPreLong: st_search:\t%1$s mValue:\t%2$s", st_search, mValue);
         editor.putLong(st_search.replaceAll(" ", "").toLowerCase(), mValue);
         editor.commit();
     }
 
     public void setPrefString(String st_search, String mValue) {
-        Timber.d("setPrefString: st_search:\t%1$s mValue:\t%2$s",st_search ,mValue);
+        Timber.d("setPrefString: st_search:\t%1$s mValue:\t%2$s", st_search, mValue);
         editor.putString(st_search.replaceAll(" ", "").toLowerCase(), mValue);
         editor.commit();
     }
 
     public void setPrefBool(String st_search, boolean mValue) {
-        Timber.d("setPrefBool: st_search:\t%1$s mValue:\t%2$s",st_search ,mValue);
+        Timber.d("setPrefBool: st_search:\t%1$s mValue:\t%2$s", st_search, mValue);
         editor.putBoolean(st_search.replaceAll(" ", "").toLowerCase(), mValue);
         editor.commit();
     }
 
     public void setPrefFloat(String st_search, float mValue) {
-        Timber.d("setPrefBool: st_search:\t%1$s mValue:\t%2$s",st_search ,mValue);
+        Timber.d("setPrefBool: st_search:\t%1$s mValue:\t%2$s", st_search, mValue);
         editor.putFloat(st_search.replaceAll(" ", "").toLowerCase(), mValue);
         editor.commit();
     }

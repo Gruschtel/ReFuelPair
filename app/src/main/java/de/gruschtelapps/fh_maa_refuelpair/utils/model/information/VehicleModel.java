@@ -105,9 +105,9 @@ public class VehicleModel extends JsonModel implements JsonModel.ListModelInterf
                 "\"" + MODEL_TANKS + "\":\"" + (mTwoTanks ? 1 : 0) + "\"," +
                 "\"" + MODEL_TANK_ONE + "\":" + mTankOne.createJson() + "," +
                 "\"" + MODEL_ODOMETER + "\":" + mOdometer + "";
-                if(mTwoTanks)
-                    jsonString += ",\"" + MODEL_TANK_TWO + "\":" + mTankTwo.createJson() + "";
-                jsonString +="}}";
+        if (mTwoTanks)
+            jsonString += ",\"" + MODEL_TANK_TWO + "\":" + mTankTwo.createJson() + "";
+        jsonString += "}}";
         return jsonString;
     }
 
@@ -283,11 +283,11 @@ public class VehicleModel extends JsonModel implements JsonModel.ListModelInterf
         this.mTankTwo.setCapacity(fuelCapacityTwo);
     }
 
-    public String getPhoto(){
+    public String getPhoto() {
         return mPhoto;
     }
 
-    public void setPhoto(String photo){
+    public void setPhoto(String photo) {
         this.mPhoto = photo;
     }
 

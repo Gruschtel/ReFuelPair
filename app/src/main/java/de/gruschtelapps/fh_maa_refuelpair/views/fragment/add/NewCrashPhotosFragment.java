@@ -23,7 +23,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -40,7 +39,6 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstRequest;
 import de.gruschtelapps.fh_maa_refuelpair.utils.dialog.activity.ItemListDialog;
 import de.gruschtelapps.fh_maa_refuelpair.utils.dialog.fragment.MessageFragmentDialog;
 import de.gruschtelapps.fh_maa_refuelpair.utils.helper.StorageImageManager;
-import de.gruschtelapps.fh_maa_refuelpair.utils.model.CrashPhotoModel;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.add.CrashModel;
 import timber.log.Timber;
 /*
@@ -130,22 +128,22 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         // Get UI
         getDisplayDimensions();
 
+        // set recyvlerView
         mRecyclerView = v.findViewById(R.id.recyclerview_addCrash_photos);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 3);
 
-        if (display_width < (500)) {
+        // Set span for grid layout
+        // standard 3 span
+        // if display_with between 500 and 300px then 2 span
+        // else 1 span
+        if (display_width < (500) && display_width >= (300)) {
             mGridLayoutManager.setSpanCount(2);
         } else if (display_width < (300)) {
             mGridLayoutManager.setSpanCount(1);
         }
 
-        mRecyclerView.setLayoutManager(mGridLayoutManager);
-
-        // Standard Objects
-
-        // Standard vehicle
-
         // set UI
+        mRecyclerView.setLayoutManager(mGridLayoutManager);
 
         // init variables
         crashPhotoModels = new ArrayList<>();
@@ -157,7 +155,7 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
             crashPhotoModels = mCrashModel.getPhotos();
         }
 
-
+        // set OnItemClickListener
         adapter = new CrashPhotoAdapter(getActivity(), crashPhotoModels, new CrashPhotoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, String photoPath, int position) {
@@ -184,6 +182,8 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
+        // if edit than delete icon
+        // if new than finish icon
         if (flag == 1) {
             inflater.inflate(R.menu.menue_add_delete, menu);
         } else {
@@ -210,9 +210,8 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
+            // nothing ...
         }
-
     }
 
     @Override
@@ -220,6 +219,8 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         switch (item.getItemId()) {
+
+            // if finish safe data and go back
             case R.id.menue_add_finish:
                 // First Crash
                 CrashModel mCrashShare = new CrashModel();
@@ -230,13 +231,18 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
                     // wenn new dann code here
                     intent.setAction(ConstAction.ACTION_ADD_FINISH);
                 }
+
+                // save data
                 mCrashShare.setPhotos(crashPhotoModels);
 
+                // send broadcast to parent activity with car data
                 bundle.putParcelable(ConstBundle.BUNDLE_CRASH_PHOTO_SHARE, mCrashShare);
                 intent.putExtras(bundle);
                 Objects.requireNonNull(getContext()).sendBroadcast(intent);
 
                 return true;
+
+            // if delete -> delete data and go back
             case R.id.menue_add_delete:
                 FragmentManager fm = getFragmentManager();
                 MessageFragmentDialog messageDialog = MessageFragmentDialog.newInstance(ConstRequest.REQUEST_DIALOG_DELETE, R.string.title_button_delete, R.string.msg_button_delete);
@@ -284,6 +290,8 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && null != data)
             switch (requestCode) {
+
+                // start device gallery
                 case ConstRequest.REQUEST_IMAGE_GALLERY:
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), data.getData());
@@ -293,16 +301,19 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
                     }
                     break;
 
+                // start device camera
                 case ConstRequest.REQUEST_IMAGE_CAMERA:
                     Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
                     getImage(bitmap);
                     break;
             }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onDialogButtonClick(int action, int flag) {
+        // If the user responds positively to the deletion request, the object is to be deleted.
         if (action == ConstRequest.REQUEST_DIALOG_DELETE)
             if (flag == ConstRequest.REQUEST_DIALOG_POSITIV) {
                 final DBHelper mDbHelper = new DBHelper(getContext());
@@ -343,6 +354,10 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
     // Methods
     // ===========================================================
 
+    /**
+     * Saves a captured bitmap and assigns it to an object
+     * @param bitmap
+     */
     private void getImage(Bitmap bitmap) {
         StorageImageManager storageImageManager = new StorageImageManager(Objects.requireNonNull(getContext()));
         String mSaveImage = storageImageManager.saveImage(bitmap);
@@ -351,6 +366,9 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         adapter.notifyItemChanged(adapter.getItemCount() - 1, null);
     }
 
+    /**
+     * start photo dialog
+     */
     public void confirmPhotoDialog() {
         // Open Camera
         FragmentManager fm = getFragmentManager();
@@ -359,6 +377,9 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         dialogFragment.show(Objects.requireNonNull(fm), "ItemListDialog");
     }
 
+    /**
+     * Start device camera
+     */
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(Objects.requireNonNull(getActivity()).getPackageManager()) != null) {
@@ -366,6 +387,9 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         }
     }
 
+    /**
+     * Permission checks to use camera
+     */
     private void openCamera() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
@@ -397,6 +421,9 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         }
     }
 
+    /**
+     * Permission checks to use gallery
+     */
     private void openGallery() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
@@ -436,6 +463,9 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
         }
     }
 
+    /**
+     * Calculates display sizes (height, width, density)
+     */
     private void getDisplayDimensions() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();

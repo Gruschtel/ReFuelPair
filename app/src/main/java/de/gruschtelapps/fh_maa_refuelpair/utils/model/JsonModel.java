@@ -17,6 +17,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Create by Eric Werner
+ * Standard Json Klasse
  */
 public class JsonModel implements Parcelable {
     // ===========================================================
@@ -40,7 +41,7 @@ public class JsonModel implements Parcelable {
     public static final Charset MODEL_CHARSET = UTF_8;
     protected final String MODEL_LANGUAGE = "language";
     protected final String MODEL_VEHICLE = "vehicle";
-    protected final String MODEL_SERVICE= "MODEL_SERVICE";
+    protected final String MODEL_SERVICE = "MODEL_SERVICE";
     protected final String MODEL_REFUEL = "MODEL_REFUEL";
     protected final String MODEL_CRASH = "MODEL_CRASH";
     protected final String MODEL_KONTAKTE_OWNER = "MODEL_KONTAKTE_OWNER";
@@ -109,6 +110,7 @@ public class JsonModel implements Parcelable {
     // ===========================================================
     protected long mId;
     protected String mName;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -125,7 +127,8 @@ public class JsonModel implements Parcelable {
     // https://stackoverflow.com/questions/5905105/how-to-serialize-null-value-when-using-parcelable-interface
 
 
-    protected JsonModel(Parcel in) {}
+    protected JsonModel(Parcel in) {
+    }
 
 
     @Override
@@ -137,6 +140,7 @@ public class JsonModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
 
     }
+
     // ===========================================================
     // Methods
     // ===========================================================
@@ -163,13 +167,14 @@ public class JsonModel implements Parcelable {
      * @return id einer Ressource der Klasse R
      */
     public int getReferenceId(Context context, String drawableName) {
-        try{
+        try {
             return context.getResources().getIdentifier(drawableName, "drawable", context.getPackageName());
-        } catch (Exception e){
+        } catch (Exception e) {
             Timber.d(e);
         }
         return 0;
     }
+
     /**
      * Gibt eine MODEL_ID einer Resource zurück, welche an einer bestimmten Position der eingelesenen Referenzen befindet
      *

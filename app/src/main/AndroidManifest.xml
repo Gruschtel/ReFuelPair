@@ -80,7 +80,7 @@
             android:name=".views.activities.add.NewKontaktActivity"
             android:label="@string/NewKontaktActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- SelectListActivity_old -->
         <activity

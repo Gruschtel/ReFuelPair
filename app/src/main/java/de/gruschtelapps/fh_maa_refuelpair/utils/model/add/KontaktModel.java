@@ -3,7 +3,6 @@ package de.gruschtelapps.fh_maa_refuelpair.utils.model.add;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.Nullable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +10,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.JsonModel;
 import timber.log.Timber;
@@ -19,7 +17,7 @@ import timber.log.Timber;
 /**
  * Create by Alea Sauer
  */
-public class KontaktModel extends JsonModel implements JsonModel.ListModelInterface, Parcelable{
+public class KontaktModel extends JsonModel implements JsonModel.ListModelInterface, Parcelable {
     // ===========================================================
     // Constants
     // ===========================================================
@@ -32,7 +30,7 @@ public class KontaktModel extends JsonModel implements JsonModel.ListModelInterf
     // ===========================================================
     // Constructors
     // ===========================================================
-    public KontaktModel(){
+    public KontaktModel() {
         mName = "";
         mSurename = "";
         mPhonenumber = "";
@@ -101,7 +99,6 @@ public class KontaktModel extends JsonModel implements JsonModel.ListModelInterf
         Timber.d(information);
         try {
             JSONObject jsonObjectType = new JSONObject(information);
-            //jsonObjectType = URLDecoder.decode(jsonObjectType.getString(MODEL_NAME), MODEL_CHARSET.name()));
             JSONObject jsonObject = jsonObjectType.getJSONObject(MODEL_KONTAKT);
 
             model.setName(URLDecoder.decode(jsonObject.getString(MODEL_NAME), MODEL_CHARSET.name()));

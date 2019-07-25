@@ -18,6 +18,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstRequest;
 
 /**
  * Create by Eric Werner
+ * MessageFragmentDialog for Fragments
  */
 public class MessageFragmentDialog extends DialogFragment {
     // ===========================================================
@@ -83,6 +84,7 @@ public class MessageFragmentDialog extends DialogFragment {
 
     public interface DialogListener {
         void onDialogItemClick(DialogInterface dialog, int pos, int item);
+
         void onDialogButtonClick(int action, int flag);
     }
     // ===========================================================

@@ -57,6 +57,7 @@ import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -72,6 +73,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
     // https://developer.android.com/training/camera/photobasics#java
     // Dialoge
     // https://developer.android.com/guide/topics/ui/dialogs
+
     // ===========================================================
     // Constants
     // ===========================================================
@@ -199,6 +201,8 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         // init variables
         isTakePhoto = false;
 
+
+        // load Data if necessary
         if (flag == 1) {
             Bitmap mIconPhot = null;
             Drawable mIconType = null;
@@ -206,14 +210,18 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
             Drawable mIconTankOne = null;
             Drawable mIconTankTwo = null;
 
+            // preparation preference manager
             SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getContext()));
             long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
 
+            // Check car id and load data
             if (id != ConstError.ERROR_LONG && pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
                 Timber.d("load Car Data from id: %s", id);
                 DBHelper dbHelper = new DBHelper(getContext());
                 mVehicleModel = dbHelper.getGet().selectCarById(id);
             }
+
+            // get photo
             try {
                 if (!mVehicleModel.getPhoto().equals("")) {
                     StorageImageManager storageImageManager = new StorageImageManager(Objects.requireNonNull(getContext()));
@@ -222,11 +230,15 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
             } catch (Exception e) {
                 Timber.e(e);
             }
+
+            //  get Vehicle icon
             try {
                 mIconType = new VehicleModel().getDrawable(getContext(), mVehicleModel.getType().getImageName());
             } catch (Exception e) {
                 Timber.e(e);
             }
+
+            //  get vehicle data
             mIconManufacture = new VehicleModel().getDrawable(getContext(), mVehicleModel.getManfacture().getImageName());
             mIconTankOne = new VehicleModel().getDrawable(getContext(), mVehicleModel.getTankOne().getImageName());
             if (mVehicleModel.isTanks()) {
@@ -246,6 +258,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
             mTextTankTypeOne.setText(mVehicleModel.getTankOne().getName());
             mTextTankCapacityOne.setText(String.valueOf(mVehicleModel.getTankCapacityOne()));
             mTextOdometer.setText(String.valueOf(mVehicleModel.getOdometer()));
+            // set second tank
             if (mVehicleModel.isTanks()) {
                 mImageTankTwo.setImageDrawable(mIconTankTwo);
                 mImageTankTwo.setVisibility(View.VISIBLE);
@@ -253,11 +266,14 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                 mTextTankCapacityTwo.setText(String.valueOf(mVehicleModel.getTankCapacityTwo()));
                 mLinearTankTwo.setVisibility(View.VISIBLE);
             }
+            // set photo
             if (!mVehicleModel.getPhoto().equals("") && mIconPhot != null) {
                 try {
                     mImagePhoto.setImageBitmap(mIconPhot);
                     mImagePhoto.setVisibility(View.VISIBLE);
-
+                    mButtonPhotoHaveImage.setVisibility(View.VISIBLE);
+                    mButtonPhoto.setVisibility(View.GONE);
+                    isTakePhoto = true;
                 } catch (Exception e) {
                     Timber.e(e);
                 }
@@ -266,16 +282,17 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         return v;
     }
 
-
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        if(flag == 1){
+        // if edit than delete icon
+        // if new than finish icon
+        if (flag == 1) {
             inflater.inflate(R.menu.menue_add, menu);
-        }else {
+        } else {
             inflater.inflate(R.menu.menue_add2, menu);
         }
 
@@ -302,30 +319,37 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         Intent intent = null;
         int flag = -1;
         switch (v.getId()) {
+
+            // start selectedList activity (car type)
             case R.id.text_addCar_type:
                 intent = new Intent(getActivity(), SelectListActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_SELECT, ConstExtras.EXTRA_SELECT_CAR);
                 flag = ConstRequest.REQUEST_SELECT_CAR_TYP;
                 break;
 
+            // start selectedList activity (car manufacture)
             case R.id.text_addCar_vehicleManufacture:
                 intent = new Intent(getActivity(), SelectListActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_SELECT, ConstExtras.EXTRA_SELECT_MANUFACTURE);
                 flag = ConstRequest.REQUEST_SELECT_MANUFACTURE;
                 break;
 
+            // start selectedList activity (tanke one type)
             case R.id.text_addCar_vehicleTankOne:
                 intent = new Intent(getActivity(), SelectListActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_SELECT, ConstExtras.EXTRA_SELECT_REFUEL);
                 flag = ConstRequest.REQUEST_SELECT_TANK_TYP_ONE;
                 break;
 
+            // start selectedList activity (tank two type)
             case R.id.text_addCar_vehicleTankTwo:
                 intent = new Intent(getActivity(), SelectListActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_SELECT, ConstExtras.EXTRA_SELECT_REFUEL);
                 flag = ConstRequest.REQUEST_SELECT_TANK_TYP_TWO;
                 break;
 
+            // toogle between one and two tanks
+            // show one tank
             case R.id.button_addCar_oneTank:
                 mLinearTankTwo.setVisibility(View.GONE);
                 mImageTankTwo.setVisibility(View.GONE);
@@ -333,6 +357,8 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                 mButtonTankTwo.setBackgroundTintList(ContextCompat.getColorStateList(Objects.requireNonNull(getActivity()), R.color.colorGrayE6));
                 break;
 
+            // toogle between one and two tanks
+            // show two tanks
             case R.id.button_addCar_twoTank:
                 mLinearTankTwo.setVisibility(View.VISIBLE);
                 mImageTankTwo.setVisibility(View.VISIBLE);
@@ -346,11 +372,14 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                 });
                 break;
 
+            // add car photo
             case R.id.image_addCar_addPhotoHaveImage:
             case R.id.button_addCar_addPhoto:
                 confirmPhotoDialog();
                 break;
         }
+
+        // if intent != null start new activity
         if (intent != null) {
             startActivityForResult(intent, flag);
         }
@@ -360,6 +389,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
     public boolean onOptionsItemSelected(MenuItem item) {
         //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
+            //
             case R.id.menue_add_finish:
                 if (checkUI()) {
                     // Car
@@ -367,7 +397,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                     if (flag == 1) {
                         mVehicleShare.setId(mVehicleModel.getId());
                     }
-                    //
+                    // safe data
                     String name = mTextName.getText() + "";
                     mVehicleShare.setName(name);
                     Timber.d("mVehicleShare.getName(): %s", mVehicleShare.getName());
@@ -394,6 +424,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                         mVehicleShare.setTanks(true);
                     }
 
+                    // send broadcast to parent activity with car data
                     Intent intent = new Intent();
                     Bundle bundle = new Bundle();
                     bundle.putParcelable(ConstBundle.BUNDLE_VEHICLE_SHARE, mVehicleShare);
@@ -409,11 +440,11 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK && null != data)
             switch (requestCode) {
 
+                // get car type data
                 case ConstRequest.REQUEST_SELECT_CAR_TYP:
                     CarTypeModel carTypeModel = Objects.requireNonNull(data.getExtras()).getParcelable(ConstExtras.EXTRA_OBJECT_ADD);
                     if (carTypeModel != null && !carTypeModel.equals(mCarTypeModel)) {
@@ -424,6 +455,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                     }
                     break;
 
+                // get manufacture data
                 case ConstRequest.REQUEST_SELECT_MANUFACTURE:
                     ManufactureModel manufactureModel = Objects.requireNonNull(data.getExtras()).getParcelable(ConstExtras.EXTRA_OBJECT_ADD);
                     if (manufactureModel != null && !manufactureModel.equals(mManufactureModel)) {
@@ -434,6 +466,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                     }
                     break;
 
+                // get tank one type
                 case ConstRequest.REQUEST_SELECT_TANK_TYP_ONE:
                     FuelTypeModel fuelTypeModelOne = Objects.requireNonNull(data.getExtras()).getParcelable(ConstExtras.EXTRA_OBJECT_ADD);
                     if (fuelTypeModelOne != null && !fuelTypeModelOne.equals(mFuelTypeModelOne)) {
@@ -444,15 +477,18 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                     }
                     break;
 
+                // get tank two type
                 case ConstRequest.REQUEST_SELECT_TANK_TYP_TWO:
                     FuelTypeModel fuelTypeModelTwo = Objects.requireNonNull(data.getExtras()).getParcelable(ConstExtras.EXTRA_OBJECT_ADD);
-                    if (fuelTypeModelTwo != null && !fuelTypeModelTwo.equals(mFuelTypeModelTwo)){
+                    if (fuelTypeModelTwo != null && !fuelTypeModelTwo.equals(mFuelTypeModelTwo)) {
                         mFuelTypeModelTwo = fuelTypeModelTwo;
                         mImageTankTwo.setImageDrawable(new FuelTypeModel().getDrawable(getContext(), fuelTypeModelTwo.getImageName()));
                         mTextTankTypeTwo.setText(fuelTypeModelTwo.getName());
                         Timber.d(fuelTypeModelTwo.getId() + " - " + fuelTypeModelTwo.getName() + " - " + fuelTypeModelTwo.getImageName());
                     }
                     break;
+
+                // get gallery photo
                 case ConstRequest.REQUEST_IMAGE_GALLERY:
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getActivity()).getContentResolver(), data.getData());
@@ -462,6 +498,7 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
                     }
                     break;
 
+                // get camera photo
                 case ConstRequest.REQUEST_IMAGE_CAMERA:
                     Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
                     getImage(bitmap);
@@ -528,27 +565,41 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
     // ===========================================================
     private boolean checkUI() {
         boolean allCorrekt = true;
-        //
+
+        // check if exist car name is correct
         if (String.valueOf(mTextName.getText()).equals("") || String.valueOf(mTextName.getText()).length() >= 40) {
             allCorrekt = false;
             mTextName.setError(getResources().getString(R.string.error_carName));
         }
+
+        // check if tank one capacity is correct
         if (String.valueOf(mTextTankCapacityOne.getText()).equals("") || !pattern(String.valueOf(mTextTankCapacityOne.getText()), pattern_TankCapacity)) {
             allCorrekt = false;
             mTextTankCapacityOne.setError(getResources().getString(R.string.error_carTankCapacity));
         }
+
+        // check if tank two capacity is correct
         if (String.valueOf(mTextTankCapacityOne.getText()).equals("") || !pattern(String.valueOf(mTextTankCapacityOne.getText()), pattern_TankCapacity)) {
             allCorrekt = false;
             mTextTankCapacityOne.setError(getResources().getString(R.string.error_carTankCapacity));
         }
+
+        // check if odometer is correct
         if (String.valueOf(mTextOdometer.getText()).equals("") || Integer.parseInt(String.valueOf(mTextOdometer.getText())) <= 0)
-            if(mLinearTankTwo.getVisibility() == View.VISIBLE){
+            if (mLinearTankTwo.getVisibility() == View.VISIBLE) {
                 allCorrekt = false;
                 mTextOdometer.setError(getResources().getString(R.string.error_carOdometer));
             }
         return allCorrekt;
     }
 
+    /**
+     * pattern to check if email is correct
+     *
+     * @param value
+     * @param expression
+     * @return
+     */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean pattern(String value, String expression) {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
@@ -556,13 +607,21 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         return matcher.matches();
     }
 
+    /**
+     * Saves a captured bitmap and assigns it to an object
+     *
+     * @param bitmap
+     */
     private void getImage(Bitmap bitmap) {
+        // safe image
         StorageImageManager storageImageManager = new StorageImageManager(Objects.requireNonNull(getContext()));
         mSaveImage = storageImageManager.saveImage(bitmap);
 
+        // set Image to vehicle
         VehicleModel mVehicleShare = new VehicleModel();
         mVehicleShare.setPhoto(mSaveImage);
 
+        // send brooadcast to parent activity
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putParcelable(ConstBundle.BUNDLE_VEHICLE_SHARE, mVehicleShare);
@@ -571,27 +630,39 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
 
         Objects.requireNonNull(getContext()).sendBroadcast(intent);
 
+        // set photo to imageView
         Timber.d("Objects.requireNonNull(getContext()).sendBroadcast(intent)");
         mImagePhoto.setImageBitmap(bitmap);
         changeImageVisibility();
         isTakePhoto = true;
     }
 
+    /**
+     * If no photo is available, only the photo shooting icon should be displayed.
+     * Toogble betewwen photo and photo shooting icon
+     */
     private void changeImageVisibility() {
-        if(isTakePhoto)
+        if (isTakePhoto)
             return;
         mImagePhoto.setVisibility(mImagePhoto.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         mButtonPhoto.setVisibility(mButtonPhoto.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
         mButtonPhotoHaveImage.setVisibility(mButtonPhotoHaveImage.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
     }
 
+    /**
+     * Start photo dialog
+     */
     public void confirmPhotoDialog() {
         if (!isTakePhoto) {
+
             // Open Camera
+            // take new photo
             FragmentManager fm = getFragmentManager();
             ItemListDialog dialogFragment = ItemListDialog.newInstance(R.string.action_choosePhotoNew, R.array.takephoto);
             dialogFragment.setTargetFragment(this, ConstRequest.REQUEST_DIALOG_PHOTO);
             dialogFragment.show(Objects.requireNonNull(fm), "ItemListDialog");
+
+            // change taken photo
         } else {
             FragmentManager fm = getFragmentManager();
             ItemListDialog dialogFragment = ItemListDialog.newInstance(R.string.action_choosePhotoNew, R.array.changephoto);
@@ -600,6 +671,9 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         }
     }
 
+    /**
+     * Start device camera
+     */
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(Objects.requireNonNull(getActivity()).getPackageManager()) != null) {
@@ -607,6 +681,9 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         }
     }
 
+    /**
+     * Permission checks to use camera
+     */
     private void openCamera() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&
@@ -638,6 +715,9 @@ public class NewCarFragment extends Fragment implements View.OnClickListener, It
         }
     }
 
+    /**
+     * Permission checks to use gallery
+     */
     private void openGallery() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             if (Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED &&

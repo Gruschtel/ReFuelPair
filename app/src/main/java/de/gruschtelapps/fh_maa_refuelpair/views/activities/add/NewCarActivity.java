@@ -82,17 +82,26 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setPagingEnabled(false);
 
+        // load data
         mCurrentService = getIntent();
         if (getIntent().getExtras() != null) {
+
+            // Start New Car (new Car Information and new Insurance)
             if (getIntent().getExtras().getInt(ConstExtras.EXTRA_KEY_ADD) == ConstExtras.EXTRA_NEW_CAR) {
                 isEdit = false;
                 newCar();
+
+                // Edit Car Information
             } else if (getIntent().getExtras().getInt(ConstExtras.EXTRA_KEY_EDIT) == ConstExtras.EXTRA_EDIT_CAR) {
                 isEdit = true;
                 editCar();
+
+                // Edit Insurance
             } else if (getIntent().getExtras().getInt(ConstExtras.EXTRA_KEY_EDIT) == ConstExtras.EXTRA_EDIT_INSURANCE) {
                 isEdit = true;
                 editInsuracne();
+
+                // error meldung
             } else {
                 Toast.makeText(this, getResources().getString(R.string.error_startActivit, getClass().getSimpleName()), Toast.LENGTH_SHORT).show();
                 finish();
@@ -114,7 +123,7 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
     protected void onResume() {
         if (mReceiver == null) {
             mReceiver = new AddReceiver();
-
+            // set Brodcast-Filter
             IntentFilter filterRefreshUpdate = new IntentFilter();
             filterRefreshUpdate.addAction(ConstAction.ACTION_ADD_NEXT_PAGE);
             filterRefreshUpdate.addAction(ConstAction.ACTION_ADD_UPDATE_VEHICLE);
@@ -133,11 +142,12 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
 
     @Override
     protected void onDestroy() {
+
+        // unregister Broadcastreceiver
         if (mReceiver != null)
             this.unregisterReceiver(mReceiver);
         super.onDestroy();
     }
-
 
 
     @Override
@@ -154,7 +164,7 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //noinspection SwitchStatementWithTooFewBranches
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             // Toolbar Button
             case android.R.id.home:
                 // Aktuller Service
@@ -182,14 +192,17 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
 
     @Override
     public void onDialogButtonClick(int action, int flag) {
+        // handle back dialog
         if (action == ConstRequest.REQUEST_DIALOG_BACK) {
             switch (flag) {
+                // if positiv save date
                 case ConstRequest.REQUEST_DIALOG_POSITIV:
                     Intent intent = new Intent();
                     SharedPreferencesManager pref = new SharedPreferencesManager(this);
                     if (!pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
                         setResult(ConstRequest.REQUEST_EXIT_APP, intent);
                     } else {
+
                         // CANCEL ADD NEW CAR
                         Timber.d(mVehicleModel.getPhoto());
                         // if(!mVehicleModel.getPhoto().equals(ConstError.ERROR_STRING) ){
@@ -210,19 +223,34 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * init new car fragments
+     */
     private void newCar() {
         mSectionsPagerAdapter.addFragment(NewCarFragment.newInstance(), getResources().getString(R.string.title_vehicle));
         mSectionsPagerAdapter.addFragment(NewInsurancePolicyFragment.newInstance(), getResources().getString(R.string.title_insurancePolicy));
     }
 
+    /**
+     * init edit insurance fragments
+     */
     private void editInsuracne() {
         mSectionsPagerAdapter.addFragment(NewInsurancePolicyFragment.newInstance(1), getResources().getString(R.string.title_insurancePolicy));
     }
 
+    /**
+     * init edit car fragment
+     */
     private void editCar() {
         mSectionsPagerAdapter.addFragment(NewCarFragment.newInstance(1), getResources().getString(R.string.title_vehicle));
     }
 
+    /**
+     * Set ActionBar Title
+     *
+     * @param heading
+     */
     private void setActionBarTitle(String heading) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -231,6 +259,10 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
         }
     }
 
+    /*
+     * Wenn New Car dann werden zwei fragmente angezeigt
+     * nextPage switch vom ersten Fragment zum zweiten
+     */
     private void nextPage(Intent intent) {
         if (isEdit) {
             mVehicleModel = new VehicleModel();
@@ -258,6 +290,10 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
         }
     }
 
+    /*
+     * Wenn New Car dann werden zwei fragmente angezeigt
+     * nextPage switch vom zweiten Fragment zurück zum ersten
+     */
     private void previousPage() {
         if (isEdit) {
             Intent intent = new Intent();
@@ -271,10 +307,18 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
 
     private void ClickHandler() {
         if (mCurrentService.getExtras() != null) {
+            // Wenn Edit dann müssen manche Buttons anderster verwaltet werden
+            // Wenn NICHT EDIT
             if (!isEdit)
+
+                // Nur wenn new car modus
                 if (Objects.requireNonNull(getIntent().getExtras()).getInt(ConstExtras.EXTRA_KEY_ADD) == ConstExtras.EXTRA_NEW_CAR) {
+
+                    // Wenn pager zeigt zweites fragment --> dann previousPage
                     if (mViewPager.getCurrentItem() > 0) {
                         previousPage();
+
+                        // sonst show back dialog
                     } else {
                         FragmentManager fm = getSupportFragmentManager();
                         SharedPreferencesManager pref = new SharedPreferencesManager(this);
@@ -287,6 +331,8 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
                         messageDialog.show(fm, "MessageDialog");
                     }
                 }
+
+            // Wenn Edit --> Dann gehe zur main activity zurück (abbruch)
             if (isEdit) {
                 Intent intent = new Intent();
                 setResult(Activity.RESULT_CANCELED, intent);
@@ -299,6 +345,9 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
     // Inner and Anonymous Classes
     // ===========================================================
 
+    /**
+     * BrodcastReciver: Wird benötigt um auf Events/Clicks der ChildFragmenten reagieren zu können
+     */
     public class AddReceiver extends BroadcastReceiver {
         // https://stackoverflow.com/questions/11770794/how-to-set-permissions-in-broadcast-sender-and-receiver-in-android
         // https://stackoverflow.com/questions/49197282/how-to-send-a-custom-broadcast-action-to-receivers-in-manifest
@@ -329,7 +378,10 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
                         Intent finishIntent = new Intent();
                         Bundle bundle = intent.getExtras();
                         SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getApplicationContext()));
+
                         long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
+
+                        // edit modus
                         if (isEdit) {
                             if (id != ConstError.ERROR_LONG && pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
                                 Timber.d("load Car Data from id: %s", id);
@@ -338,6 +390,7 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
                                 mVehicleModel.setInsurancePolicyModel((InsurancePolicyModel) Objects.requireNonNull(bundle).getParcelable(ConstBundle.BUNDLE_INSURANCE_SHARE));
                                 dbHelper.getUpdates().updateCarInformation(mVehicleModel.getId(), mVehicleModel.createJson());
                             }
+                            // no edit modus
                         } else {
                             mVehicleModel.setInsurancePolicyModel((InsurancePolicyModel) Objects.requireNonNull(bundle).getParcelable(ConstBundle.BUNDLE_INSURANCE_SHARE));
                             Timber.d("ACTION_ADD_FINISH");
@@ -346,6 +399,8 @@ public class NewCarActivity extends AppCompatActivity implements MessageDialog.D
                             id = mDbHelper.getAdd().insertCar(mVehicleModel.getName(), mVehicleModel);
                             mVehicleModel.setInsurancePolicyModel((InsurancePolicyModel) Objects.requireNonNull(bundle).getParcelable(ConstBundle.BUNDLE_INSURANCE_SHARE));
                         }
+
+                        // finish activity
                         finishIntent.putExtra(String.valueOf(ConstExtras.EXTRA_NEW_CAR), id);
                         NewCarActivity.this.setResult(Activity.RESULT_OK, finishIntent);
                         finish();

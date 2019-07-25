@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Create by Alea Sauer -->
+<?xml version="1.0" encoding="utf-8"?><!-- Create by Alea Sauer -->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -150,8 +149,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/text_newRefuel_fuel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/text_newRefuel_fuel"
-        tools:ignore="ContentDescription"
-        />
+        tools:ignore="ContentDescription" />
 
 
     <com.rengwuxian.materialedittext.MaterialEditText

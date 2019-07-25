@@ -13,9 +13,10 @@ import java.util.Objects;
 
 /**
  * Create by Eric Werner
+ * DatePicker for Activities
  */
 public class DatePicker extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener{
+        implements DatePickerDialog.OnDateSetListener {
     // ===========================================================
     // Constants
     // ===========================================================
@@ -61,7 +62,7 @@ public class DatePicker extends DialogFragment
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-        Objects.requireNonNull(listener).onDateDialogClick(view,year,month,dayOfMonth);
+        Objects.requireNonNull(listener).onDateDialogClick(view, year, month, dayOfMonth);
     }
 
 

@@ -14,6 +14,11 @@ package de.gruschtelapps.fh_maa_refuelpair.utils.helper;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ *
+ * https://developer.android.com/training/data-storage/files
+ * https://codelabs.developers.google.com/codelabs/android-storage-permissions/
+ *
  */
 
 import android.graphics.Bitmap;

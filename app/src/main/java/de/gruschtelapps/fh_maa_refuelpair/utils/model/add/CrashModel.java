@@ -15,7 +15,6 @@ import java.util.List;
 
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.JsonModel;
-import de.gruschtelapps.fh_maa_refuelpair.utils.model.httpModel.StationOpeningTimes;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.information.ManufactureModel;
 import timber.log.Timber;
 
@@ -116,24 +115,24 @@ public class CrashModel extends JsonModel implements JsonModel.ListModelInterfac
 
     @Override
     public String createJson() {
-         StringBuilder jsonString = new StringBuilder("{\"" + MODEL_CRASH + "\":{" +
-                 "\"" + MODEL_ID + "\":" + mId + "," +
-                 "\"" + MODEL_ID_TYPE + "\":" + mIdTyp + "," +
-                 "\"" + MODEL_ID_CAR + "\":" + mIdCar + "," +
-                 "\"" + MODEL_DATE + "\":" + mDate + "," +
+        StringBuilder jsonString = new StringBuilder("{\"" + MODEL_CRASH + "\":{" +
+                "\"" + MODEL_ID + "\":" + mId + "," +
+                "\"" + MODEL_ID_TYPE + "\":" + mIdTyp + "," +
+                "\"" + MODEL_ID_CAR + "\":" + mIdCar + "," +
+                "\"" + MODEL_DATE + "\":" + mDate + "," +
 
-                 "\"" + MODEL_INSURANCE_POLICY_NAME + "\":\"" + mInsurancePoliceName + "\"," +
-                 "\"" + MODEL_INSURANCE_POLICY_NUMBER + "\":\"" + mInsurancePoliceNumber + "\"," +
-                 "\"" + MODEL_MODEL + "\":\"" + mModel + "\"," +
-                 "\"" + MODEL_LOCAL + "\":\"" + mLocal + "\"," +
-                 "\"" + MODEL_CRASH_DESCRIPTION + "\":\"" + mDescription + "\"," +
-                 "\"" + MODEL_CRASH_OTHER_DAMAGE + "\":\"" + mOtherDamage + "\"," +
-                 "\"" + MODEL_CRASH_OWN_DAMAGE + "\":\"" + mOwnDamage + "\"," +
+                "\"" + MODEL_INSURANCE_POLICY_NAME + "\":\"" + mInsurancePoliceName + "\"," +
+                "\"" + MODEL_INSURANCE_POLICY_NUMBER + "\":\"" + mInsurancePoliceNumber + "\"," +
+                "\"" + MODEL_MODEL + "\":\"" + mModel + "\"," +
+                "\"" + MODEL_LOCAL + "\":\"" + mLocal + "\"," +
+                "\"" + MODEL_CRASH_DESCRIPTION + "\":\"" + mDescription + "\"," +
+                "\"" + MODEL_CRASH_OTHER_DAMAGE + "\":\"" + mOtherDamage + "\"," +
+                "\"" + MODEL_CRASH_OWN_DAMAGE + "\":\"" + mOwnDamage + "\"," +
 
-                 "\"" + MODEL_KONTAKTE_DRIVBER + "\":" + mDriver.createJson() + "," +
-                 "\"" + MODEL_KONTAKTE_OWNER + "\":" + mOwner.createJson() + "," +
-                 "\"" + MODEL_MANUFACTURE + "\":" + mManufacture.createJson() + "," +
-                 "\"" + MODEL_PHOTO + "\":[");
+                "\"" + MODEL_KONTAKTE_DRIVBER + "\":" + mDriver.createJson() + "," +
+                "\"" + MODEL_KONTAKTE_OWNER + "\":" + mOwner.createJson() + "," +
+                "\"" + MODEL_MANUFACTURE + "\":" + mManufacture.createJson() + "," +
+                "\"" + MODEL_PHOTO + "\":[");
         for (int i = 0; i < mPhotos.size(); i++) {
             if (i == mPhotos.size() - 1) {
                 jsonString.append("{\"").append(MODEL_PHOTO_ID).append("\":\"").append(mPhotos.get(i)).append("\"}");
@@ -169,15 +168,15 @@ public class CrashModel extends JsonModel implements JsonModel.ListModelInterfac
             model.setOtherDamage(URLDecoder.decode(jsonObject.getString(MODEL_CRASH_OTHER_DAMAGE), MODEL_CHARSET.name()));
             model.setOwnDamage(URLDecoder.decode(jsonObject.getString(MODEL_CRASH_OWN_DAMAGE), MODEL_CHARSET.name()));
 
-            model.setOwner((KontaktModel)new KontaktModel().loadModelByJson(context, URLDecoder.decode(jsonObject.getString(MODEL_KONTAKTE_OWNER), MODEL_CHARSET.name())));
-            model.setDriver((KontaktModel)new KontaktModel().loadModelByJson(context, URLDecoder.decode(jsonObject.getString(MODEL_KONTAKTE_DRIVBER), MODEL_CHARSET.name())));
+            model.setOwner((KontaktModel) new KontaktModel().loadModelByJson(context, URLDecoder.decode(jsonObject.getString(MODEL_KONTAKTE_OWNER), MODEL_CHARSET.name())));
+            model.setDriver((KontaktModel) new KontaktModel().loadModelByJson(context, URLDecoder.decode(jsonObject.getString(MODEL_KONTAKTE_DRIVBER), MODEL_CHARSET.name())));
             model.setManufacture((ManufactureModel) new ManufactureModel().loadModelByJson(context, URLDecoder.decode(jsonObject.getString(MODEL_MANUFACTURE), MODEL_CHARSET.name())));
 
             JSONArray jsonArrayPhoto = new JSONArray(URLDecoder.decode(jsonObject.getString(MODEL_PHOTO), MODEL_CHARSET.name()));
             ArrayList<String> photos = new ArrayList<>();
 
             for (int y = 0; y < jsonArrayPhoto.length(); y++) {
-                JSONObject jsonObjectPhoto= (JSONObject) jsonArrayPhoto.get(y);
+                JSONObject jsonObjectPhoto = (JSONObject) jsonArrayPhoto.get(y);
                 photos.add(URLDecoder.decode(jsonObjectPhoto.getString(MODEL_PHOTO_ID), MODEL_CHARSET.name()));
             }
             model.setPhotos(photos);

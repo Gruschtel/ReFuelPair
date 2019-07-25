@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 import timber.log.Timber;
+
 /*
  * Copyright 2017 Google Inc. All rights reserved.
  *
@@ -27,12 +28,17 @@ import timber.log.Timber;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
+ * https://developer.android.com/training/data-storage/files
+ * https://codelabs.developers.google.com/codelabs/android-storage-permissions/
  *
- *  Edit by Eric Werner
- *  Class adapted to the app (input variables changed), bugfixing (read and save images) switch from public to private context
  */
-public class StorageImageManager implements ImagesRepository{
-    // https://developer.android.com/training/data-storage/files
+
+/*
+ * Edit by Eric Werner
+ * Class adapted to the app (input variables changed), bugfixing (read and save images) switch from public to private context
+ */
+public class StorageImageManager implements ImagesRepository {
+
 
     private static final String TAG = "LocalImagesRepository";
     private static final String PATH = "secureimages/";
@@ -105,7 +111,7 @@ public class StorageImageManager implements ImagesRepository{
         File file = new File(mStorage, fileName);
         if (!file.delete()) {
             Timber.e("File could not be deleted: %s", fileName);
-        }else {
+        } else {
             Timber.d("File is deleted: %s", fileName);
         }
     }

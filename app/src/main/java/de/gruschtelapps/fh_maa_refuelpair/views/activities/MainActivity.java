@@ -2,7 +2,6 @@ package de.gruschtelapps.fh_maa_refuelpair.views.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -69,6 +68,7 @@ public class MainActivity extends AppCompatActivity
     private static TextView mHeaderCarName;
     private View header;
 
+    // Fragments
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
@@ -109,11 +109,12 @@ public class MainActivity extends AppCompatActivity
         Timber.tag(LOG_TAG);
         Timber.d("%s created", LOG_TAG);
 
-
+        // IF DEBUG MODUS - Accept Timber Logs
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
 
+        // SET FRAGMENT MANAGER
         fragmentTitle = new String[]{
                 getResources().getString(R.string.title_Information),
                 getResources().getString(R.string.title_history),
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity
         fragmentManager = getSupportFragmentManager();
         changeFragment(startID);
 
-
+        // GET & SET UI
         setActionBarTitle(Objects.requireNonNull(fragmentTitle[startID]));
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -135,12 +136,13 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         header = navigationView.getHeaderView(0);
         mHeaderCarName = header.findViewById(R.id.text_navHeaderMain_title);
 
+        // INIT SharedPreferencesManager
         SharedPreferencesManager pref = new SharedPreferencesManager(this);
         long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
         if (id != ConstError.ERROR_LONG && pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
@@ -173,13 +175,17 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("ConstantConditions")
     @Override
     public void onBackPressed() {
+        // App wird beendet wenn der nutzer innerhalb von 3 sekunden zweimal die backtaste gedrückt hat
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
+            // wenn noch nicht gedrückt, setzt timer
             if (!pressedOnce) {
                 pressedOnce = true;
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.pressedOnce), Toast.LENGTH_SHORT).show();
+
                 // Handler nach 3000ms ausführen!
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -187,6 +193,8 @@ public class MainActivity extends AppCompatActivity
                         pressedOnce = false;
                     }
                 }, TIME_INTERVAL);
+
+                // wenn back zweimal innerhalb von 3 sekunden gedrückt, dann soll die app beendet werden
             } else if (pressedOnce) {
                 pressedOnce = false;
                 finish();
@@ -197,10 +205,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
+            // @Deprecated
+            // edit aktuelles auto
             case R.id.image_navHeaderMain_editCar:
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 break;
+
+            // @Deprecated
+            // open second navigation drawer
             case R.id.image_navHeaderMain_dropDown:
                 if (addCarIsShow) {
                     v.animate().rotation(0f);
@@ -223,40 +237,56 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         TabLayout tabLayout = findViewById(R.id.tabs);
         int position;
+
         // NAVIGATION DRAWER
+        // vehicleData
         if (id == R.id.menue_navDrawerMain_vehicleData) {
             position = 0;
             changeFragment(position);
             setActionBarTitle(Objects.requireNonNull(fragmentTitle[position]));
             tabLayout.setVisibility(View.VISIBLE);
+
+            // history
         } else if (id == R.id.menue_navDrawerMain_history) {
             position = 1;
             changeFragment(position);
             setActionBarTitle(Objects.requireNonNull(fragmentTitle[position]));
             tabLayout.setVisibility(View.GONE);
+
+            // reports
         } else if (id == R.id.menue_navDrawerMain_reports) {
             position = 2;
             changeFragment(position);
             setActionBarTitle(Objects.requireNonNull(fragmentTitle[position]));
             tabLayout.setVisibility(View.VISIBLE);
+
+            // fuel comparison
         } else if (id == R.id.menue_navDrawerMain_fuelComparison) {
             position = 3;
             changeFragment(position);
             setActionBarTitle(Objects.requireNonNull(fragmentTitle[position]));
             tabLayout.setVisibility(View.GONE);
+
+            // first aid tips
         } else if (id == R.id.menue_navDrawerMain_firstAidTips) {
             position = 4;
             changeFragment(position);
             setActionBarTitle(Objects.requireNonNull(fragmentTitle[position]));
             tabLayout.setVisibility(View.GONE);
+
+            // legal details
         } else if (id == R.id.menue_navDrawerMain_legalDetails) {
             position = 5;
             changeFragment(position);
             setActionBarTitle(Objects.requireNonNull(fragmentTitle[position]));
             tabLayout.setVisibility(View.GONE);
+
+            // @Deprecated
         } else if (id == R.id.menue_navDrawerMain_addCar) {
             startNewActivity(ConstExtras.EXTRA_NEW_CAR);
         }
+
+        // close drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -265,8 +295,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null)
-            //noinspection SwitchStatementWithTooFewBranches
             switch (requestCode) {
+
+                // Wenn die App aus new oder edit car zu dieser activity zurückkehrt
                 case ConstRequest.REQUEST_MAIN_NEW_CAR:
                 case ConstRequest.REQUEST_MAIN_EDIT_CAR:
                     Timber.d("REQUEST_MAIN_NEW_CAR");
@@ -274,9 +305,11 @@ public class MainActivity extends AppCompatActivity
                         case Activity.RESULT_OK:
                             Timber.d("RESULT_OK");
 
+                            // Vorbereitung
                             SharedPreferencesManager pref = new SharedPreferencesManager(this);
                             long id = data.getLongExtra(String.valueOf(ConstExtras.EXTRA_NEW_CAR), ConstError.ERROR_LONG);
 
+                            //  check and load car id/infos
                             if (id != ConstError.ERROR_LONG) {
                                 pref.setPreLong(ConstPreferences.PREF_CURRENT_CAR, id);
                                 pref.setPrefBool(ConstPreferences.PREF_FIRST_START, true);
@@ -285,6 +318,7 @@ public class MainActivity extends AppCompatActivity
                                 Timber.d("load Car Data from id: %s", id);
                                 mVehicleModel = loadCarData(id);
 
+                                // reload fragment data
                                 Timber.d(String.valueOf(mVehicleModel.getId()));
                                 Timber.d(String.valueOf(mVehicleModel.getName()));
                                 Timber.d(mVehicleModel.createJson());
@@ -307,6 +341,8 @@ public class MainActivity extends AppCompatActivity
                                 Toast.makeText(this, getResources().getString(R.string.error_loadCarData), Toast.LENGTH_SHORT).show();
                             }
                             break;
+
+                        // exit app
                         case ConstRequest.REQUEST_EXIT_APP:
                             finish();
                             Timber.d("REQUEST_EXIT_APP");
@@ -327,6 +363,11 @@ public class MainActivity extends AppCompatActivity
         mHeaderCarName.setText(name);
     }
 
+    /**
+     * Set actionbar title
+     *
+     * @param heading
+     */
     private void setActionBarTitle(String heading) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -336,22 +377,37 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * load car data from database
+     *
+     * @param id
+     * @return
+     */
     private VehicleModel loadCarData(long id) {
         DBHelper dbHelper = new DBHelper(this);
         return dbHelper.getGet().selectCarById(id);
     }
 
+    /**
+     * start new activity
+     *
+     * @param id
+     */
     private void startNewActivity(@SuppressWarnings("SameParameterValue") int id) {
         Intent intent = null;
         int myflag = 0;
         //noinspection SwitchStatementWithTooFewBranches
         switch (id) {
+
+            // start new car activity
             case ConstExtras.EXTRA_NEW_CAR:
                 intent = new Intent(MainActivity.this, NewCarActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_CAR);
                 myflag = ConstRequest.REQUEST_MAIN_NEW_CAR;
                 break;
         }
+
+        // start activity
         if (intent != null) {
             startActivityForResult(intent, myflag);
         } else {
@@ -362,7 +418,7 @@ public class MainActivity extends AppCompatActivity
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
-//
+    //
     // fragmentTransaction.add = adds a fragment to the current fragmentManager --> it only has to be created once. This way you can save some time and resources
     // in which the already created fragment is called instead of creating a fragment each time with fragmentTransaction.replace.
     //
@@ -372,27 +428,32 @@ public class MainActivity extends AppCompatActivity
     //
     public void changeFragment(int position) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
         // Add the fragments only once if array haven't fragment
         if (fragmentManager.findFragmentByTag(fragmentTAGS[position]) == null) {
             fragmentTransaction.add(R.id.container_main_framelayout, fragments[position], fragmentTAGS[position]);
         }
+
         // Hiding & Showing fragments
         for (int catx = 0; catx < fragments.length; catx++) {
             if (catx == position) {
                 fragmentTransaction.show(fragments[catx]);
             } else {
+
                 // Check if the fragment is added and then hide it
                 if (fragmentManager.findFragmentByTag(fragmentTAGS[catx]) != null) {
                     fragmentTransaction.hide(fragments[catx]);
                 }
-
             }
         }
+
+        // wenn aktuelles fragment gleich dem ziel fragment dann soll nichts passieren
         if (!fragmentTAGS[latestFragmentTag].equals(fragmentTAGS[position])) {
             fragmentTransaction.replace(R.id.container_main_framelayout, fragments[position], fragmentTAGS[position]);
             latestFragmentTag = position;
         }
+
+        // commit fragmentTransaction
         fragmentTransaction.commitAllowingStateLoss();
     }
 }
-

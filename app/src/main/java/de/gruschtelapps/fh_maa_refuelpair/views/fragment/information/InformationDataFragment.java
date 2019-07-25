@@ -4,32 +4,25 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.R;
-import de.gruschtelapps.fh_maa_refuelpair.db.DBHelper;
 import de.gruschtelapps.fh_maa_refuelpair.utils.adapter.viewPager.DataPagerAdapter;
 import de.gruschtelapps.fh_maa_refuelpair.utils.adapter.viewPager.ZoomOutPageTransformer;
-import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
-import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstExtras;
-import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstRequest;
-import de.gruschtelapps.fh_maa_refuelpair.utils.helper.SharedPreferencesManager;
-import de.gruschtelapps.fh_maa_refuelpair.utils.model.information.VehicleModel;
 import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link InformationDataFragment#newInstance} factory method to
@@ -46,6 +39,7 @@ public class InformationDataFragment extends Fragment {
     // ===========================================================
     private ViewPager mViewPager;
     private DataPagerAdapter mSectionsPagerAdapter;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -57,7 +51,6 @@ public class InformationDataFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-
      * @return A new instance of fragment FuelSettingsFragment.
      */
     public static InformationDataFragment newInstance() {
@@ -79,18 +72,19 @@ public class InformationDataFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_information, container, false);
 
+        // Get UI
         mSectionsPagerAdapter = new DataPagerAdapter(getChildFragmentManager());
 
         mViewPager = view.findViewById(R.id.frame_vehicleData_viewPager);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
-        mSectionsPagerAdapter.addFragment(VehicleFragment.newInstance(), getResources().getString(R.string.title_vehicle));
-        mSectionsPagerAdapter.addFragment(InsurancePolicyFragment.newInstance(), getResources().getString(R.string.title_insurancePolicy));
+        TabLayout tabLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.tabs);
 
         // set UI
+        mSectionsPagerAdapter.addFragment(VehicleFragment.newInstance(), getResources().getString(R.string.title_vehicle));
+        mSectionsPagerAdapter.addFragment(InsurancePolicyFragment.newInstance(), getResources().getString(R.string.title_insurancePolicy));
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
         return view;

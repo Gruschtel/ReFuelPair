@@ -40,6 +40,7 @@ import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -71,6 +72,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     private FloatingActionButton mFab;
     //
     protected boolean isTakePhoto;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -79,10 +81,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
      *
-
      * @return A new instance of fragment FuelSettingsFragment.
      */
     public static VehicleFragment newInstance() {
@@ -101,8 +100,10 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       // View v = super.onCreateView(inflater,container,savedInstanceState, R.layout.fragment_vehicle);
+
+        // View v = super.onCreateView(inflater,container,savedInstanceState, R.layout.fragment_vehicle);
         View v = inflater.inflate(R.layout.fragment_vehicle, container, false);
+
         // set UI
         mTextType = v.findViewById(R.id.text_vehicleData_type);
         mImageType = v.findViewById(R.id.image_vehicleData_type);
@@ -126,8 +127,10 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
         mTextOdometer = v.findViewById(R.id.text_vehicleData_odometer);
         mFab = v.findViewById(R.id.fab);
 
+        // Set OnClickListener
         mFab.setOnClickListener(this);
 
+        // load Data
         loadDataAsyncTask = new LoadDataAsyncTask();
         loadDataAsyncTask.execute((Void) null);
         return v;
@@ -148,7 +151,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         loadDataAsyncTask.cancel(true);
     }
@@ -157,14 +160,18 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Intent intent = null;
         int myflag = ConstRequest.REQUEST_MAIN_EDIT_CAR;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.fab:
+
+                // start edit Car Information
                 intent = new Intent(getActivity(), NewCarActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_CAR);
                 myflag = ConstRequest.REQUEST_MAIN_EDIT_CAR;
                 break;
         }
         if (intent != null) {
+
+            // start activity
             startActivityForResult(intent, myflag);
         } else {
             Timber.e("onItemClick");
@@ -177,10 +184,12 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
         if (data != null)
             //noinspection SwitchStatementWithTooFewBranches
             switch (requestCode) {
+
+            // reload Data
                 case ConstRequest.REQUEST_MAIN_EDIT_CAR:
                     loadDataAsyncTask = new LoadDataAsyncTask();
                     loadDataAsyncTask.execute((Void) null);
-                    super.onActivityResult(requestCode,resultCode,data);
+                    super.onActivityResult(requestCode, resultCode, data);
                     break;
             }
 
@@ -193,6 +202,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
+
     /**
      * Starts a background task, which all needed Data for Fragment
      */
@@ -210,6 +220,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
             SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getContext()));
             long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
 
+            // Load Car Information
             if (id != ConstError.ERROR_LONG && pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
                 Timber.d("load Car Data from id: %s", id);
                 DBHelper dbHelper = new DBHelper(getContext());
@@ -217,6 +228,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
             } else {
                 return false;
             }
+            // Load Photo
             try {
                 if (!mVehicleModel.getPhoto().equals("")) {
                     StorageImageManager storageImageManager = new StorageImageManager(Objects.requireNonNull(getContext()));
@@ -225,14 +237,17 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
             } catch (Exception e) {
                 Timber.e(e);
             }
+            // Load vehicle type icon
             try {
                 mIconType = new VehicleModel().getDrawable(getContext(), mVehicleModel.getType().getImageName());
             } catch (Exception e) {
                 Timber.e(e);
             }
+
+            // load other data
             mIconManufacture = new VehicleModel().getDrawable(getContext(), mVehicleModel.getManfacture().getImageName());
             mIconTankOne = new VehicleModel().getDrawable(getContext(), mVehicleModel.getTankOne().getImageName());
-            if(mVehicleModel.isTanks()){
+            if (mVehicleModel.isTanks()) {
                 mIconTankTwo = new VehicleModel().getDrawable(getContext(), mVehicleModel.getTankTwo().getImageName());
             }
             return true;
@@ -240,7 +255,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(Boolean result) {
-            if(!result){
+            if (!result) {
                 //Todo: ERROR MESSAGE
                 return;
             }
@@ -257,19 +272,19 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
             mTextTankOne.setText(mVehicleModel.getTankOne().getName());
             mTextTankCapacityOne.setText(String.valueOf(mVehicleModel.getTankCapacityOne()));
             mTextOdometer.setText(String.valueOf(mVehicleModel.getOdometer()));
-            if(mVehicleModel.isTanks()){
+            if (mVehicleModel.isTanks()) {
                 mImageTankTwo.setImageDrawable(mIconTankTwo);
                 mImageTankTwo.setVisibility(View.VISIBLE);
                 mTextTankTwo.setText(mVehicleModel.getTankTwo().getName());
                 mTextTankCapacityTwo.setText(String.valueOf(mVehicleModel.getTankCapacityTwo()));
                 mLinearTankTwo.setVisibility(View.VISIBLE);
             }
-            if(!mVehicleModel.getPhoto().equals("") && mIconPhot != null){
-                try{
+            if (!mVehicleModel.getPhoto().equals("") && mIconPhot != null) {
+                try {
                     mImagePhoto.setImageBitmap(mIconPhot);
                     mImagePhoto.setVisibility(View.VISIBLE);
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     Timber.e(e);
                 }
             }

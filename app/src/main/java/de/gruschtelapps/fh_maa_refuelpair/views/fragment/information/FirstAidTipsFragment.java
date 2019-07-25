@@ -25,6 +25,7 @@ import timber.log.Timber;
 /*
  * Create by Alea Sauer
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FirstAidTipsFragment#newInstance} factory method to
@@ -83,22 +84,25 @@ public class FirstAidTipsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_first_aid_tips, container, false);
-
+        // get UI
         colorsActive = getResources().getColor(R.color.colorSecondary);
         colorsInactive = getResources().getColor(R.color.colorGrayC);
-
         vProgressContainer = view.findViewById(R.id.ll_dialog_ProgressContainer);
         vDotContainer = view.findViewById(R.id.ll_dialog_DotContainer);
+        mViewPager = view.findViewById(R.id.frame_firstAidTips_viewPager);
+
+        // set UI
         vMaxProgress = 7;
         initBottomDots();
 
         mSectionsPagerAdapter = new DataPagerAdapter(getChildFragmentManager());
 
-        mViewPager = view.findViewById(R.id.frame_firstAidTips_viewPager);
         mViewPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mViewPager.setOffscreenPageLimit(0);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            public void onPageScrollStateChanged(int state) {}
+            public void onPageScrollStateChanged(int state) {
+            }
+
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 changeBottomDots(position);
             }
@@ -108,9 +112,9 @@ public class FirstAidTipsFragment extends Fragment {
             }
         });
 
+        // load data
         loadDataAsyncTask = new LoadDataAsyncTask();
         loadDataAsyncTask.execute((Void) null);
-
 
 
         return view;
@@ -138,8 +142,9 @@ public class FirstAidTipsFragment extends Fragment {
     // ===========================================================
     // Methods
     // ===========================================================
+
     /**
-     * Zeigt Dots als Progress eines Dialogs an
+     * Displays the current progress or changes the points according to the progress.
      *
      * @param currentPage
      */
@@ -147,7 +152,7 @@ public class FirstAidTipsFragment extends Fragment {
         if (vDotContainer == null || vProgressContainer == null) {
             return;
         }
-        Timber.d(String.valueOf(currentPage));
+
         for (int i = 0; i < dots.length; i++) {
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setPaddingRelative(0, 0, 0, 0);
@@ -160,12 +165,15 @@ public class FirstAidTipsFragment extends Fragment {
         }
     }
 
+    /**
+     * init Bottom Dots
+     */
     private void initBottomDots() {
         if (vDotContainer == null || vProgressContainer == null) {
             return;
         }
         dots = new TextView[vMaxProgress];
-        //vDotContainer.removeAllViews();
+
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(getContext());
             dots[i].setText(Html.fromHtml("&#8226;"));
@@ -188,7 +196,7 @@ public class FirstAidTipsFragment extends Fragment {
     public class LoadDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... voids) {
-            // Load Data
+            // Load and set Data
             mSectionsPagerAdapter.addFragment(TipsFragment.newInstance(R.string.msg_firstAidTips_stayCalm, R.drawable.aid_tips_clear_road), "aid_tips_clear_road");
             mSectionsPagerAdapter.addFragment(TipsFragment.newInstance(R.string.msg_firstAidTips_warning, R.drawable.aid_tips_warning), "aid_tips_warning");
             mSectionsPagerAdapter.addFragment(TipsFragment.newInstance(R.string.msg_firstAidTips_help, R.drawable.aid_tips_help, true), "aid_tips_help");
@@ -205,7 +213,6 @@ public class FirstAidTipsFragment extends Fragment {
         protected void onPostExecute(Boolean result) {
             // set UI
             mViewPager.setAdapter(mSectionsPagerAdapter);
-
         }
 
         @Override

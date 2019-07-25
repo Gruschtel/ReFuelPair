@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+<?xml version="1.0" encoding="utf-8"?><!-- Create by Eric Werner, Edit by Alea Sauer  -->
 <resources>
     <!-- Navigation Drawer -->
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>

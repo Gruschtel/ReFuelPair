@@ -37,7 +37,7 @@ public class BaseFragment extends Fragment {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState, int layout) {
         // Inflate the layout for this fragment
-        super.onCreateView(inflater, container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(layout, container, false);
 
         // Load Data
@@ -60,6 +60,13 @@ public class BaseFragment extends Fragment {
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * Load Car Data from DB
+     *
+     * @param id Car id
+     * @return Car Information
+     */
     protected VehicleModel loadCarData(long id) {
         DBHelper dbHelper = new DBHelper(getContext());
         return dbHelper.getGet().selectCarById(id);

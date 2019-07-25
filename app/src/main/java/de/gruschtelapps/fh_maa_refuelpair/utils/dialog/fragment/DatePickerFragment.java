@@ -2,7 +2,6 @@ package de.gruschtelapps.fh_maa_refuelpair.utils.dialog.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
@@ -11,13 +10,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Calendar;
 import java.util.Objects;
 
-import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstRequest;
-
 /**
  * Create by Eric Werner
+ *  DatePickerFragment  for Fragments
  */
 public class DatePickerFragment extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener{
+        implements DatePickerDialog.OnDateSetListener {
     // ===========================================================
     // Constants
     // ===========================================================
@@ -26,6 +24,7 @@ public class DatePickerFragment extends DialogFragment
     // Fields
     // ===========================================================
     private DatePickerFragment.DateListener listener;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -52,7 +51,7 @@ public class DatePickerFragment extends DialogFragment
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-        Objects.requireNonNull(listener).onDateDialogClick(view,year,month,dayOfMonth);
+        Objects.requireNonNull(listener).onDateDialogClick(view, year, month, dayOfMonth);
     }
 
 

@@ -51,7 +51,6 @@ public class StationModel extends JsonModel implements JsonModel.ListModelInterf
     private final String JSON_TIMES_END = "end";
 
 
-
     // ===========================================================
     // Fields
     // ===========================================================
@@ -71,9 +70,9 @@ public class StationModel extends JsonModel implements JsonModel.ListModelInterf
 
     @SuppressWarnings("WeakerAccess")
     public StationModel(String mOk, String mLicence, String mData, String mStatus) {
-        try{
+        try {
             this.mOk = Boolean.parseBoolean(mOk);
-        }catch (Exception e){
+        } catch (Exception e) {
             Timber.e(e);
             this.mOk = false;
         }
@@ -106,7 +105,7 @@ public class StationModel extends JsonModel implements JsonModel.ListModelInterf
         return null;
     }
 
-    public static boolean compare(double a, double b, double epsilon){
+    public static boolean compare(double a, double b, double epsilon) {
         return Math.abs(a - b) < epsilon;
     }
 
@@ -163,7 +162,7 @@ public class StationModel extends JsonModel implements JsonModel.ListModelInterf
                         URLDecoder.decode(jsonObjectStationTime.getString(JSON_TIMES_END), MODEL_CHARSET.name())
                 ));
             }
-            ((PetrolStationsModel)model.getStations().get(0)).setStationOpeningTimes(openingTimes);
+            ((PetrolStationsModel) model.getStations().get(0)).setStationOpeningTimes(openingTimes);
             Timber.tag("adsgfadsgasdg").d(model.getStations().get(0).toString());
 
 
@@ -242,21 +241,21 @@ public class StationModel extends JsonModel implements JsonModel.ListModelInterf
             Timber.d(model.toString());
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObjectStation = (JSONObject) jsonArray.get(i);
-                   if(!URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_PRICE), MODEL_CHARSET.name()).equals("null"))
-                        model.getStations().add(new PetrolStationsModel(
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_ID), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_NAME), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_BRAND), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_STREET), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_PLACE), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_LAT), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_LNG), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_DIST), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_PRICE), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_OPEN), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_HOUSENUMBER), MODEL_CHARSET.name()),
-                                URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_POSTCODE), MODEL_CHARSET.name())));
-                    Timber.d(model.getStations().get(i).toString());
+                if (!URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_PRICE), MODEL_CHARSET.name()).equals("null"))
+                    model.getStations().add(new PetrolStationsModel(
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_ID), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_NAME), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_BRAND), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_STREET), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_PLACE), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_LAT), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_LNG), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_DIST), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_PRICE), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_OPEN), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_HOUSENUMBER), MODEL_CHARSET.name()),
+                            URLDecoder.decode(jsonObjectStation.getString(JSON_STATION_POSTCODE), MODEL_CHARSET.name())));
+                Timber.d(model.getStations().get(i).toString());
             }
         } catch (Exception e) {
             e.printStackTrace();

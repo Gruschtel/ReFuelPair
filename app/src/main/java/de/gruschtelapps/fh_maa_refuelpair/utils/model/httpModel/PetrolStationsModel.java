@@ -48,53 +48,53 @@ public class PetrolStationsModel extends JsonModel {
         mBrand = brand;
         mStreet = street;
         mPlace = place;
-        try{
+        try {
             this.mLat = Float.parseFloat(lat);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mLat = 0.0f;
         }
-        try{
+        try {
             this.mLng = Float.parseFloat(lng);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mLng = 0.0f;
         }
-        try{
+        try {
             this.mDistance = Float.parseFloat(dist);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mDistance = 0.0f;
         }
-        try{
+        try {
             this.mDiesel = Float.parseFloat(diesel);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mDiesel = 0.0f;
         }
-        try{
+        try {
             this.mE5 = Float.parseFloat(e5);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mE5 = 0.0f;
         }
-        try{
+        try {
             this.mE10 = Float.parseFloat(e10);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mE10 = 0.0f;
         }
-        try{
+        try {
             this.mOpen = Boolean.parseBoolean(e5);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mOpen = false;
         }
         this.mHousenumber = housenumber;
-        try{
+        try {
             this.mPostCode = Integer.parseInt(postCoade);
-        }catch (Exception e){
-            Timber.e(e);
+        } catch (Exception e) {
+            //Timber.e(e);
             this.mPostCode = 0;
         }
 

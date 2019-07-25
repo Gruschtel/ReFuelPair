@@ -13,10 +13,10 @@ public interface ConstRequest extends BaseColumns {
     //
 
     // SelectActivity
-    int REQUEST_SELECT_CAR_TYP =       0x0100;
-    int REQUEST_SELECT_MANUFACTURE =   0x0101;
-    int REQUEST_SELECT_TANK_TYP_ONE =  0x0102;
-    int REQUEST_SELECT_TANK_TYP_TWO =  0x0103;
+    int REQUEST_SELECT_CAR_TYP = 0x0100;
+    int REQUEST_SELECT_MANUFACTURE = 0x0101;
+    int REQUEST_SELECT_TANK_TYP_ONE = 0x0102;
+    int REQUEST_SELECT_TANK_TYP_TWO = 0x0103;
     int REQUEST_SELECT_OTHER_OWNER = 0x0104;
     int REQUEST_SELECT_OTHER_DRIVER = 0x0105;
 
@@ -56,10 +56,8 @@ public interface ConstRequest extends BaseColumns {
     int REQUEST_FUEL_COMPARISON_PERMISSION_GPS = 0x0152;
 
 
-
     //
     int REQUEST_EXIT_APP = 0x0150;
-
 
 
 }

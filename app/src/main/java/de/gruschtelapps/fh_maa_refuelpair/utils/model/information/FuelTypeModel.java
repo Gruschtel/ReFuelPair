@@ -59,6 +59,7 @@ public class FuelTypeModel extends JsonModel implements JsonModel.ListModelInter
         this.mImageName = imageName;
         this.mCapacity = Double.parseDouble(capacity);
     }
+
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================

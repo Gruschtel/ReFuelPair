@@ -28,8 +28,8 @@ import java.util.List;
 import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.R;
+import de.gruschtelapps.fh_maa_refuelpair.base.BaseChartFragment;
 import de.gruschtelapps.fh_maa_refuelpair.db.DBHelper;
-import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstPreferences;
 import de.gruschtelapps.fh_maa_refuelpair.utils.helper.SharedPreferencesManager;
 import de.gruschtelapps.fh_maa_refuelpair.utils.model.JsonModel;
@@ -41,24 +41,25 @@ import timber.log.Timber;
  * Create by Alea Sauer
  * Edit by Eric Werner: color adapted
  */
-public class PieChartFrag extends SimpleFragment {
+public class PieChartFrag extends BaseChartFragment {
 
     @NonNull
     public static Fragment newInstance() {
         return new PieChartFrag();
     }
 
-
     private PieChart chart;
-    private  LoadDataAsyncTask loadDataAsyncTask;
+    private LoadDataAsyncTask loadDataAsyncTask;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.frag_simple_pie, container, false);
 
+        // get UI
         chart = v.findViewById(R.id.pieChart1);
         chart.getDescription().setEnabled(false);
 
+        // set UI
         chart.setCenterText(generateCenterText());
         chart.setCenterTextSize(10f);
 
@@ -66,12 +67,14 @@ public class PieChartFrag extends SimpleFragment {
         chart.setHoleRadius(45f);
         chart.setTransparentCircleRadius(50f);
 
+        // set legend
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
 
+        // load data
         loadDataAsyncTask = new LoadDataAsyncTask();
         loadDataAsyncTask.execute((Void) null);
 
@@ -109,6 +112,7 @@ public class PieChartFrag extends SimpleFragment {
             int startYear = 0;
             int endYear = 0;
 
+            // Set/Get Date
             Calendar cStart = Calendar.getInstance();
             Calendar cEnde = Calendar.getInstance();
             Calendar testTime = Calendar.getInstance();
@@ -116,6 +120,7 @@ public class PieChartFrag extends SimpleFragment {
             long timeStart = cStart.getTimeInMillis();
             long timeEnde = cStart.getTimeInMillis();
 
+            // get first year and latest year
             for (int i = 0; i < addModels.size(); i++) {
                 if (addModels.get(i) instanceof RefuelModel) {
                     testTime.setTimeInMillis(((RefuelModel) addModels.get(i)).getDate());
@@ -156,11 +161,12 @@ public class PieChartFrag extends SimpleFragment {
             startYear = cStart.get(Calendar.YEAR);
             endYear = cEnde.get(Calendar.YEAR);
 
+            // Get car cost for each year
             entries1 = new ArrayList<>();
             Calendar cDate = Calendar.getInstance();
             Timber.d(startYear + " - " + endYear);
             for (int a = startYear; a <= endYear; a++) {
-                Timber.d("Durchlauf Jahr: %s", a);
+
                 float cost1 = 0f;
 
                 for (int i = 0; i < addModels.size(); i++) {
@@ -168,6 +174,7 @@ public class PieChartFrag extends SimpleFragment {
                         cDate.setTimeInMillis(((RefuelModel) addModels.get(i)).getDate());
                         if (cDate.get(Calendar.YEAR) == a)
                             cost1 += Float.valueOf(String.valueOf(((RefuelModel) addModels.get(i)).getTotalCost()));
+
                     } else if (addModels.get(i) instanceof ServiceModel) {
                         cDate.setTimeInMillis(((ServiceModel) addModels.get(i)).getDate());
                         if (cDate.get(Calendar.YEAR) == a)
@@ -175,7 +182,7 @@ public class PieChartFrag extends SimpleFragment {
                     }
                 }
                 if (cost1 > 0) {
-                    entries1.add(new PieEntry(cost1, "Jahr:  " + a));
+                    entries1.add(new PieEntry(cost1, "Year:  " + a));
                     onProgressUpdate(entries1);
                 }
 
@@ -185,6 +192,7 @@ public class PieChartFrag extends SimpleFragment {
         }
 
         private void onProgressUpdate(ArrayList<PieEntry> i) {
+            // set Data
             PieDataSet ds1 = new PieDataSet(i, getContext().getResources().getString(R.string.msg_charts_piiTotal));
             ds1.setColors(ColorTemplate.JOYFUL_COLORS);
             ds1.setSliceSpace(2f);
@@ -198,6 +206,7 @@ public class PieChartFrag extends SimpleFragment {
 
         @Override
         protected void onPostExecute(Boolean result) {
+            // set Data
             if (!result) {
                 Toast.makeText(getContext(), getContext().getResources().getString(R.string.error_BarChart), Toast.LENGTH_SHORT).show();
                 return;

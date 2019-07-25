@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Create by Alea Sauer -->
+<?xml version="1.0" encoding="utf-8"?><!-- Create by Alea Sauer -->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -491,7 +490,8 @@
                     app:layout_constraintTop_toTopOf="@+id/text_vehicleData_vehicleNotification" />
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         style="@style/FloatingActionButton.White"

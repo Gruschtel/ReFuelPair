@@ -85,7 +85,6 @@ public class ServiceModel extends JsonModel implements JsonModel.ListModelInterf
     }
 
 
-
     // ===========================================================
     // Methods for/from SuperClass/Interfaces
     // ===========================================================

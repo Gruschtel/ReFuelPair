@@ -23,6 +23,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstPreferences;
 import de.gruschtelapps.fh_maa_refuelpair.utils.helper.SharedPreferencesManager;
 import timber.log.Timber;
+
 /*
  * Create by Alea Sauer
  */
@@ -30,7 +31,6 @@ public class FuelSettingActivity extends AppCompatActivity {
     // ===========================================================
     // Constants
     // ===========================================================
-
 
     // ===========================================================
     // Fields
@@ -58,9 +58,10 @@ public class FuelSettingActivity extends AppCompatActivity {
             actionBar.setTitle(getResources().getString(R.string.title_fuel_setting));
             actionBar.show();
         }
+
+        // ActionBar settings
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         // Load Prefs
         final SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getApplicationContext()));
@@ -81,6 +82,8 @@ public class FuelSettingActivity extends AppCompatActivity {
         // Set UI
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.fuel_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Set Adapter OnItemSelectedListener
         mSpinnerSprit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,7 +99,6 @@ public class FuelSettingActivity extends AppCompatActivity {
                         pref.setPrefString(ConstPreferences.PREF_COMPARISON_TYPE, "e10");
                         break;
                 }
-                // Toast.makeText(getApplicationContext(), mSortierung[position], Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -104,8 +106,11 @@ public class FuelSettingActivity extends AppCompatActivity {
 
             }
         });
+
+        // Set Adapter
         mSpinnerSprit.setAdapter(adapter);
 
+        // Set Adapter OnItemSelected
         ArrayAdapter<CharSequence> adapter_sort = ArrayAdapter.createFromResource(this, R.array.sort_array, android.R.layout.simple_spinner_item);
         adapter_sort.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerSort.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -121,7 +126,6 @@ public class FuelSettingActivity extends AppCompatActivity {
 
                         break;
                 }
-                //Toast.makeText(getApplicationContext(), mSortierung[position], Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -131,18 +135,18 @@ public class FuelSettingActivity extends AppCompatActivity {
         });
         mSpinnerSort.setAdapter(adapter_sort);
 
-
-        mTextSeekBarValue.setText(String.valueOf((int)mDistance));
+        // Set SeekBar - distance
+        mTextSeekBarValue.setText(String.valueOf((int) mDistance));
         mSeekBar.setMax(24);
 
-        mSeekBar.setProgress((int)mDistance);
+        mSeekBar.setProgress((int) mDistance);
 
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progress = 0;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
-                progress = progressValue+1;
+                progress = progressValue + 1;
                 mTextSeekBarValue.setText(String.valueOf(progress));
             }
 
@@ -158,6 +162,7 @@ public class FuelSettingActivity extends AppCompatActivity {
             }
         });
 
+        // Spinner - Fuel Type
         mSpinnerSprit.post(new Runnable() {
             @Override
             public void run() {
@@ -175,6 +180,7 @@ public class FuelSettingActivity extends AppCompatActivity {
             }
         });
 
+        // Spinner - Ordering
         mSpinnerSort.post(new Runnable() {
             @Override
             public void run() {
@@ -188,8 +194,6 @@ public class FuelSettingActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     // ===========================================================
@@ -203,14 +207,15 @@ public class FuelSettingActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
+
             // Toolbar Button
+            // Go back to main activity
             case android.R.id.home:
                 Intent finishIntent = new Intent();
                 setResult(Activity.RESULT_OK, finishIntent);
@@ -230,10 +235,17 @@ public class FuelSettingActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
     // ===========================================================
     // Methods
     // ===========================================================
-    public float getConvertedValue(int intVal){
+
+    /**
+     * Convert Integer to Float
+     * @param intVal
+     * @return
+     */
+    public float getConvertedValue(int intVal) {
         float floatVal = 0.0f;
         floatVal = 1f * intVal;
         return floatVal;

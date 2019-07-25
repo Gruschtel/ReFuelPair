@@ -51,6 +51,7 @@ public class NewKontaktActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // get UI
         mTextName = findViewById(R.id.text_addKontakt_name);
         mTextSurename = findViewById(R.id.text_addKontakt_surename);
         mTextPhone = findViewById(R.id.text_addKontakt_phone);
@@ -60,6 +61,8 @@ public class NewKontaktActivity extends AppCompatActivity {
 
         // Load Data or New Instance
         if (getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT) != null) {
+
+            // set UI
             KontaktModel kontaktModel = getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT);
             mTextName.setText(kontaktModel.getName());
             mTextSurename.setText(kontaktModel.getSurename());
@@ -93,8 +96,11 @@ public class NewKontaktActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
 
+            // save and go back
             case R.id.menue_add_finish:
                 if (Objects.equals(String.valueOf(mTextEmail.getText()), "") || pattern(String.valueOf(mTextEmail.getText()), pattern_email)) {
+
+                    // save data
                     mKontaktModel = new KontaktModel(String.valueOf(mTextName.getText()),
                             String.valueOf(mTextSurename.getText()),
                             String.valueOf(mTextPhone.getText()),
@@ -145,12 +151,23 @@ public class NewKontaktActivity extends AppCompatActivity {
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * Check if emal is correct
+     * @param value
+     * @param expression
+     * @return
+     */
     public static boolean pattern(String value, String expression) {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(value);
         return matcher.matches();
     }
 
+    /**
+     * Setzt ActionBar Title
+     * @param heading
+     */
     private void setActionBarTitle(String heading) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

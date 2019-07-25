@@ -36,7 +36,14 @@ public class HttpHelper {
     // ===========================================================
     // Methods
     // ===========================================================
-    public String httpGet(String url, String token){
+
+    /**
+     * Standard Http Get Anfrage
+     * @param url
+     * @param token
+     * @return
+     */
+    public String httpGet(String url, String token) {
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
         urlBuilder.addQueryParameter(TOKEN, token);

@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialEditText;
 
@@ -32,6 +31,7 @@ import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewInsurancePolicyFragment#newInstance} factory method to
@@ -75,7 +75,7 @@ public class NewInsurancePolicyFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt("flag", i);
         fragment.setArguments(args);
-        return  fragment;
+        return fragment;
     }
 
     @Override
@@ -86,15 +86,6 @@ public class NewInsurancePolicyFragment extends Fragment {
         }
         Timber.d("%s created", getClass().getSimpleName());
         setHasOptionsMenu(true);
-    }
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
-    public static boolean pattern(String value, String expression) {
-        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(value);
-        return matcher.matches();
     }
 
     // ===========================================================
@@ -111,6 +102,7 @@ public class NewInsurancePolicyFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_new_insurance_policy, container, false);
 
@@ -132,13 +124,13 @@ public class NewInsurancePolicyFragment extends Fragment {
             mVehicleModel = dbHelper.getGet().selectCarById(id);
             insurancePolicyModel = mVehicleModel.getInsurancePolicyModel();
 
-            mTextName.setText(insurancePolicyModel.getName().equals("")?"":insurancePolicyModel.getName());
-            mTextSurename.setText(insurancePolicyModel.getSureName().equals("")?"":insurancePolicyModel.getSureName());
-            mTextPhone.setText(insurancePolicyModel.getTelephone().equals("")?"":insurancePolicyModel.getTelephone());
-            mTextEmail.setText(insurancePolicyModel.getEmail().equals("")?"":insurancePolicyModel.getEmail());
-            mTextAdress.setText(insurancePolicyModel.getAdress().equals("")?"":insurancePolicyModel.getAdress());
-            mTextPolicyName.setText(insurancePolicyModel.getInsurancePolicyName().equals("")?"":insurancePolicyModel.getInsurancePolicyName());
-            mTextPolicyNumber.setText(insurancePolicyModel.getInsurancePolicyNumber().equals("")?"":insurancePolicyModel.getInsurancePolicyNumber());
+            mTextName.setText(insurancePolicyModel.getName().equals("") ? "" : insurancePolicyModel.getName());
+            mTextSurename.setText(insurancePolicyModel.getSureName().equals("") ? "" : insurancePolicyModel.getSureName());
+            mTextPhone.setText(insurancePolicyModel.getTelephone().equals("") ? "" : insurancePolicyModel.getTelephone());
+            mTextEmail.setText(insurancePolicyModel.getEmail().equals("") ? "" : insurancePolicyModel.getEmail());
+            mTextAdress.setText(insurancePolicyModel.getAdress().equals("") ? "" : insurancePolicyModel.getAdress());
+            mTextPolicyName.setText(insurancePolicyModel.getInsurancePolicyName().equals("") ? "" : insurancePolicyModel.getInsurancePolicyName());
+            mTextPolicyNumber.setText(insurancePolicyModel.getInsurancePolicyNumber().equals("") ? "" : insurancePolicyModel.getInsurancePolicyNumber());
         }
         return v;
     }
@@ -196,6 +188,25 @@ public class NewInsurancePolicyFragment extends Fragment {
         setHasOptionsMenu(true);
         super.onAttach(context);
     }
+
+
+    // ===========================================================
+    // Methods
+    // ===========================================================
+
+    /**
+     * Pattern to check if E-Mail is correct
+     * @param value
+     * @param expression
+     * @return
+     */
+    public static boolean pattern(String value, String expression) {
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(value);
+        return matcher.matches();
+    }
+
+
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================

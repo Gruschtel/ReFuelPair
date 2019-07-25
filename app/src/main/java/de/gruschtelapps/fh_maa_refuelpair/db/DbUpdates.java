@@ -42,6 +42,13 @@ public class DbUpdates {
     // Methods
     // ===========================================================
     // Update New Car
+
+    /**
+     * Update Table Car - Car Information
+     *
+     * @param mId
+     * @param json
+     */
     public void updateCarInformation(long mId, String json) {
         synchronized (syncRoot) {
             try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {
@@ -59,7 +66,13 @@ public class DbUpdates {
         }
     }
 
-
+    /**
+     * Update Table Car - Add Information
+     *
+     * @param id
+     * @param json
+     * @param date
+     */
     public void updateAdd(long id, String json, long date) {
         synchronized (syncRoot) {
             try (SQLiteDatabase db = dbHelper.getWritableDatabase()) {

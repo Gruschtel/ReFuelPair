@@ -87,7 +87,7 @@ public class NewRefuelActivity extends AppCompatActivity implements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
-        setActionBarTitle(getResources().getString(R.string.title_new_vehicle));
+        setActionBarTitle(getResources().getString(R.string.title_new_refuel));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         if ((getIntent().getExtras() == null)) {
@@ -107,6 +107,7 @@ public class NewRefuelActivity extends AppCompatActivity implements
         mTextTotalCost = findViewById(R.id.text_newRefuel_costTotalCost);
         mButtonDelete = findViewById(R.id.text_newRefuel_delete);
 
+        // set Listener
         mTextDate.setOnClickListener(this);
         mTextTime.setOnClickListener(this);
         mTextFuel.setOnClickListener(this);
@@ -116,6 +117,8 @@ public class NewRefuelActivity extends AppCompatActivity implements
         SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getApplication()));
         long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
         if (id != ConstError.ERROR_LONG && pref.getPrefBool(ConstPreferences.PREF_FIRST_START)) {
+
+            // get db and load data
             DBHelper dbHelper = new DBHelper(getApplication());
             mVehicleModel = dbHelper.getGet().selectCarById(id);
         } else {
@@ -124,16 +127,16 @@ public class NewRefuelActivity extends AppCompatActivity implements
             finish();
         }
 
-
+        // get time
         c = Calendar.getInstance();
+
         // Load Data or New Instance
         if (getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT) != null) {
-            // LOAD
             isEdit = true;
-            //  mButtonDelete.setVisibility(View.VISIBLE);
             mRefuelModel = getIntent().getParcelableExtra(ConstExtras.EXTRA_OBJECT_EDIT);
             oldOdometer = mRefuelModel.getOdometer();
 
+            // set Time
             c.setTimeInMillis(mRefuelModel.getDate());
 
             Timber.d(String.valueOf(mRefuelModel.getDate()));
@@ -142,12 +145,11 @@ public class NewRefuelActivity extends AppCompatActivity implements
             // fuelType
             mFuelType = mRefuelModel.getFuelTypeModel();
 
-
+            // set data
             mTextOdometer.setText(String.valueOf(mRefuelModel.getOdometer()));
             mTextLocal.setText(mRefuelModel.getLocal());
             mTextFuel.setText(String.valueOf(mFuelType.getName()));
             mImageTankOne.setImageDrawable(new JsonModel().getDrawable(getApplication(), mFuelType.getImageName()));
-
 
             mTextLiter.setText(String.valueOf((mRefuelModel.getLiter())));
             mTextLiterCost.setText(String.valueOf((mRefuelModel.getLiterCost())));
@@ -156,12 +158,9 @@ public class NewRefuelActivity extends AppCompatActivity implements
             mValueLiter = mRefuelModel.getLiter();
             mValueLiterCost = mRefuelModel.getLiterCost();
             mValueTotalCost = mRefuelModel.getTotalCost();
-
-
         } else {
 
-            // Toast.makeText(this, "!11111111111111", Toast.LENGTH_SHORT).show();
-            // NEW
+            // NEW car
             // set Data
             mTextOdometer.setHelperText(getResources().getString(R.string.edit_helper_required) +
                     "\t\t\t\t: " +
@@ -173,7 +172,6 @@ public class NewRefuelActivity extends AppCompatActivity implements
 
             // fuelType
             mFuelType = mVehicleModel.getTankOne();
-
         }
 
         // date
@@ -182,7 +180,6 @@ public class NewRefuelActivity extends AppCompatActivity implements
         String day = setNullVorne(c.get(Calendar.DAY_OF_MONTH), 2);
 
         // time
-
         String hour = setNullVorne(c.get(Calendar.HOUR), 2);
         String minute = setNullVorne(c.get(Calendar.MINUTE), 2);
 
@@ -262,6 +259,8 @@ public class NewRefuelActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
+
+        // Show dialog when press back
         FragmentManager fm = getSupportFragmentManager();
         MessageDialog messageDialog;
         if (isEdit) {
@@ -299,22 +298,28 @@ public class NewRefuelActivity extends AppCompatActivity implements
         Intent intent = null;
         int flag = -1;
         switch (v.getId()) {
+
+            // start selected List (refuel type)
             case R.id.text_newRefuel_fuel:
                 intent = new Intent(getApplication(), SelectListActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_SELECT, ConstExtras.EXTRA_SELECT_REFUEL);
                 flag = ConstRequest.REQUEST_SELECT_TANK_TYP_ONE;
                 break;
 
+            // show date picker
             case R.id.text_newRefuel_Date:
                 DialogFragment datePicker = new DatePicker();
                 datePicker.show(getSupportFragmentManager(), "datePicker");
                 break;
 
+            // show time picker
             case R.id.text_newRefuel_Date2:
                 DialogFragment timePicker = new TimePicker();
                 timePicker.show(getSupportFragmentManager(), "timePicker");
                 break;
         }
+
+        // start acitiviy
         if (intent != null) {
             startActivityForResult(intent, flag);
         }
@@ -351,6 +356,7 @@ public class NewRefuelActivity extends AppCompatActivity implements
                     dateTime.set(mTimeYear, mTimeMonth, mTimeDay, mTimeHour, mTimeMinute);
 
                     final DBHelper mDbHelper = new DBHelper(getApplicationContext());
+                    // If Edit Mode - Objekt muss geupdatet werden
                     if (isEdit) {
                         RefuelModel shareModel = new RefuelModel(
                                 mRefuelModel.getId(),
@@ -365,11 +371,12 @@ public class NewRefuelActivity extends AppCompatActivity implements
                                 dateTime.getTimeInMillis()
                         );
                         mDbHelper.getUpdates().updateAdd(mRefuelModel.getId(), shareModel.createJson(), shareModel.getDate());
-
-
+                        // db update
                         long newOdometer = Long.parseLong(String.valueOf(mTextOdometer.getText())) - mRefuelModel.getOdometer();
                         mVehicleModel.setOdometer(mVehicleModel.getOdometer() + newOdometer);
                         mDbHelper.getUpdates().updateCarInformation(mVehicleModel.getId(), mVehicleModel.createJson());
+
+                        // Objekt muss neu erzeugt werden
                     } else {
                         RefuelModel shareModel = new RefuelModel(
                                 JsonModel.ADD_TYPE_REFUEL,
@@ -382,7 +389,7 @@ public class NewRefuelActivity extends AppCompatActivity implements
                                 mValueTotalCost,
                                 dateTime.getTimeInMillis()
                         );
-
+                        // insert into db
                         mDbHelper.getAdd().insertAddModel(shareModel);
                         mVehicleModel.setOdometer(mVehicleModel.getOdometer() + shareModel.getOdometer());
                         mDbHelper.getUpdates().updateCarInformation(mVehicleModel.getId(), mVehicleModel.createJson());
@@ -394,6 +401,8 @@ public class NewRefuelActivity extends AppCompatActivity implements
                     finish();
                 }
                 return true;
+
+            // Delete item
             case R.id.menue_add_delete:
                 MessageDialog messageDialog = MessageDialog.newInstance(ConstRequest.REQUEST_DIALOG_DELETE, R.string.title_button_delete, R.string.msg_button_delete);
                 messageDialog.show(getSupportFragmentManager(), "messageDialog");

@@ -15,21 +15,21 @@ public interface ConstExtras extends BaseColumns {
     // CarInformation or AddCar
     String EXTRA_KEY_ADD = "EXTRA_KEY_ADD";
     String EXTRA_OBJECT_ADD = "EXTRA_OBJECT_ADD";
-    int EXTRA_NEW_CAR =         0x0000;
-    int EXTRA_NEW_REFUEL =      0x0001;
-    int EXTRA_NEW_SERVICE =     0x0002;
-    int EXTRA_NEW_REMINDER =    0x0003;
-    int EXTRA_NEW_CRASH =       0x0004;
+    int EXTRA_NEW_CAR = 0x0000;
+    int EXTRA_NEW_REFUEL = 0x0001;
+    int EXTRA_NEW_SERVICE = 0x0002;
+    int EXTRA_NEW_REMINDER = 0x0003;
+    int EXTRA_NEW_CRASH = 0x0004;
 
     // SelectList
     String EXTRA_KEY_SELECT = "EXTRA_KEY_SELECT_LIST";
-    int EXTRA_SELECT_CAR =          0x0010;
-    int EXTRA_SELECT_SERVICE =      0x0011;
-    int EXTRA_SELECT_MODEL =        0x0012;
-    int EXTRA_SELECT_REFUEL =       0x0013;
-    int EXTRA_SELECT_MANUFACTURE =  0x0014;
-    int EXTRA_SELECT_OTHER_OWNER =  0x0015;
-    int EXTRA_SELECT_OTHER_DRIVER =  0x0016;
+    int EXTRA_SELECT_CAR = 0x0010;
+    int EXTRA_SELECT_SERVICE = 0x0011;
+    int EXTRA_SELECT_MODEL = 0x0012;
+    int EXTRA_SELECT_REFUEL = 0x0013;
+    int EXTRA_SELECT_MANUFACTURE = 0x0014;
+    int EXTRA_SELECT_OTHER_OWNER = 0x0015;
+    int EXTRA_SELECT_OTHER_DRIVER = 0x0016;
 
 
     // CarInformation or AddCar

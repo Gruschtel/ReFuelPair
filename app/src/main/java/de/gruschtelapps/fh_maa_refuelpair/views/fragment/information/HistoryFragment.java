@@ -47,6 +47,7 @@ import timber.log.Timber;
  * Chance AsyncronTask to Loader
  * BugFix Loader for Historyadapter --> Possibility to display different elements
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HistoryFragment#newInstance} factory method to
@@ -62,7 +63,6 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, L
     // ===========================================================
     // Fields
     // ===========================================================
-    // Model
     protected VehicleModel mVehicleModel;
 
     private FloatingActionMenu mFabMenue;
@@ -82,9 +82,6 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, L
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
      * @return A new instance of fragment HistoryFragment.
      */
     public static HistoryFragment newInstance() {
@@ -118,6 +115,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, L
         mFabService = v.findViewById(R.id.fab_service);
         mFabCrash = v.findViewById(R.id.fab_crash);
 
+        // set Listener
         mFabMenue.setOnMenuToggleListener(new FloatingActionMenu.OnMenuToggleListener() {
             @Override
             public void onMenuToggle(boolean opened) {
@@ -133,6 +131,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, L
         mFabService.setOnClickListener(this);
         mFabCrash.setOnClickListener(this);
 
+        // load data
         loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null, this);
         loaderManager.restartLoader(0, null, this);
@@ -157,108 +156,16 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, L
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null)
-            if(resultCode == Activity.RESULT_CANCELED)
+            if (resultCode == Activity.RESULT_CANCELED)
                 return;
-            //noinspection SwitchStatementWithTooFewBranches
-            switch (requestCode) {
-                case ConstRequest.REQUEST_MAIN_NEW_HISTORY:
-                    loaderManager.restartLoader(0, null, this);
-                    break;
-                case ConstRequest.REQUEST_MAIN_EDIT_HISTORY:
-                    loaderManager.restartLoader(0, null, this);
-                    break;
-            }
-    }
-
-    // ===========================================================
-    // Methods
-    // ===========================================================
-    @Override
-    public void onClick(View v) {
-        Intent intent = null;
-        int myflag = ConstRequest.REQUEST_MAIN_NEW_HISTORY;
-        switch (v.getId()) {
-            case R.id.fab_refuel:
-                intent = new Intent(getActivity(), NewRefuelActivity.class);
-                intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_REFUEL);
+        // reload Data when return
+        switch (requestCode) {
+            case ConstRequest.REQUEST_MAIN_NEW_HISTORY:
+                loaderManager.restartLoader(0, null, this);
                 break;
-
-            case R.id.fab_service:
-                intent = new Intent(getActivity(), NewServiceActivity.class);
-                intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_SERVICE);
+            case ConstRequest.REQUEST_MAIN_EDIT_HISTORY:
+                loaderManager.restartLoader(0, null, this);
                 break;
-
-            case R.id.fab_crash:
-                intent = new Intent(getActivity(), NewCrashActivity.class);
-                intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_CRASH);
-                break;
-
-            case R.id.container_history_background:
-                mContainerBackground.setVisibility(View.GONE);
-                mFabMenue.close(true);
-                break;
-        }
-
-        if (intent != null) {
-            startActivityForResult(intent, myflag);
-        } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.error_startActivit, getClass().getSimpleName()), Toast.LENGTH_SHORT).show();
-        }
-        mFabMenue.close(true);
-        mContainerBackground.setVisibility(View.GONE);
-    }
-
-    /**
-     * Loads items into a ListView and then displays them
-     *
-     * @param mItems
-     */
-    @SuppressWarnings("JavaDoc")
-    private void updateListView(List<JsonModel> mItems) {
-        //Collections.reverse(mItems);
-        if (mItems.size() == 0) {
-            mTextEmpty.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.GONE);
-            mProgressBar.setVisibility(View.GONE);
-        } else {
-            HistoryAdapter adapter = new HistoryAdapter(getActivity(), mItems, new HistoryAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View view, JsonModel object) {
-                    Intent intent = null;
-                    int myflag = ConstRequest.REQUEST_MAIN_EDIT_HISTORY;
-                    if (object instanceof RefuelModel) {
-                        RefuelModel shared = (RefuelModel) object;
-                        intent = new Intent(getActivity(), NewRefuelActivity.class);
-                        intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_REFUEL);
-                        intent.putExtra(ConstExtras.EXTRA_OBJECT_EDIT, shared);
-                    }
-                    if (object instanceof ServiceModel) {
-                        ServiceModel shared = (ServiceModel) object;
-                        intent = new Intent(getActivity(), NewServiceActivity.class);
-                        intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_SERVICE);
-                        intent.putExtra(ConstExtras.EXTRA_OBJECT_EDIT, shared);
-                    }
-                    if (object instanceof CrashModel) {
-                        CrashModel shared = (CrashModel) object;
-                        intent = new Intent(getActivity(), NewCrashActivity.class);
-                        intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_CRASH);
-                        intent.putExtra(ConstExtras.EXTRA_OBJECT_EDIT, shared);
-                    }
-                    if (intent != null) {
-                        startActivityForResult(intent, myflag);
-                    } else {
-                        Timber.e("onItemClick");
-                        Toast.makeText(getActivity(), getResources().getString(R.string.error_startActivit, getClass().getSimpleName()), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-            // Set layout manager to position the items
-            mRecyclerView.setAdapter(adapter);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-            mTextEmpty.setVisibility(View.GONE);
-            mRecyclerView.setVisibility(View.VISIBLE);
-            mProgressBar.setVisibility(View.GONE);
         }
     }
 
@@ -277,6 +184,123 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, L
     @Override
     public void onLoaderReset(@NonNull Loader<List<JsonModel>> loader) {
         mRecyclerView.setAdapter(null);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = null;
+        int myflag = ConstRequest.REQUEST_MAIN_NEW_HISTORY;
+        switch (v.getId()) {
+
+            // start add new refuel
+            case R.id.fab_refuel:
+                intent = new Intent(getActivity(), NewRefuelActivity.class);
+                intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_REFUEL);
+                break;
+
+            // start add new service
+            case R.id.fab_service:
+                intent = new Intent(getActivity(), NewServiceActivity.class);
+                intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_SERVICE);
+                break;
+
+            // start add new crash
+            case R.id.fab_crash:
+                intent = new Intent(getActivity(), NewCrashActivity.class);
+                intent.putExtra(ConstExtras.EXTRA_KEY_ADD, ConstExtras.EXTRA_NEW_CRASH);
+                break;
+
+            // close FloatingActionButton menü
+            case R.id.container_history_background:
+                mContainerBackground.setVisibility(View.GONE);
+                mFabMenue.close(true);
+                break;
+        }
+
+        // start activity or show error
+        if (intent != null) {
+            startActivityForResult(intent, myflag);
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.error_startActivit, getClass().getSimpleName()), Toast.LENGTH_SHORT).show();
+        }
+
+        // close FloatingActionButton menü
+        mFabMenue.close(true);
+        mContainerBackground.setVisibility(View.GONE);
+    }
+
+    // ===========================================================
+    // Methods
+    // ===========================================================
+
+    /**
+     * Loads items into a ListView and then displays them
+     *
+     * @param mItems
+     */
+    @SuppressWarnings("JavaDoc")
+    private void updateListView(List<JsonModel> mItems) {
+        // Wenn Liste == 0 show hint
+        if (mItems.size() == 0) {
+            mTextEmpty.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+            mProgressBar.setVisibility(View.GONE);
+
+            // Wenn Liste > 0 show items
+        } else {
+            // Set adapter + OnItemClickListener for the individual elements
+            HistoryAdapter adapter = new HistoryAdapter(getActivity(), mItems, new HistoryAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, JsonModel object) {
+                    Intent intent = null;
+                    int myflag = ConstRequest.REQUEST_MAIN_EDIT_HISTORY;
+                    //
+                    // RefuelModel
+                    //
+                    if (object instanceof RefuelModel) {
+                        RefuelModel shared = (RefuelModel) object;
+                        intent = new Intent(getActivity(), NewRefuelActivity.class);
+                        intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_REFUEL);
+                        intent.putExtra(ConstExtras.EXTRA_OBJECT_EDIT, shared);
+                    }
+                    //
+                    // ServiceModel
+                    //
+                    if (object instanceof ServiceModel) {
+                        ServiceModel shared = (ServiceModel) object;
+                        intent = new Intent(getActivity(), NewServiceActivity.class);
+                        intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_SERVICE);
+                        intent.putExtra(ConstExtras.EXTRA_OBJECT_EDIT, shared);
+                    }
+                    //
+                    // CrashModel
+                    //
+                    if (object instanceof CrashModel) {
+                        CrashModel shared = (CrashModel) object;
+                        intent = new Intent(getActivity(), NewCrashActivity.class);
+                        intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_CRASH);
+                        intent.putExtra(ConstExtras.EXTRA_OBJECT_EDIT, shared);
+                    }
+
+                    // start activity
+                    if (intent != null) {
+                        startActivityForResult(intent, myflag);
+                    } else {
+                        Timber.e("onItemClick");
+                        Toast.makeText(getActivity(), getResources().getString(R.string.error_startActivit, getClass().getSimpleName()), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+            // Set layout manager to position the items
+            mRecyclerView.setAdapter(adapter);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            // set UI --> show list, enable hint
+            mTextEmpty.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     // ===========================================================

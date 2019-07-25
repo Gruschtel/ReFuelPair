@@ -23,6 +23,7 @@ import timber.log.Timber;
 /*
  * Create by Alea Sauer
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ImprintFragment#newInstance} factory method to
@@ -42,6 +43,7 @@ public class ImprintFragment extends Fragment {
     // UI
     private TextView mImprintTextView;
     Spanned hmtlText;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -72,16 +74,15 @@ public class ImprintFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_imprint, container, false);
-        // set Title Actionbar
 
-
+        // Get UI
         mImprintTextView = v.findViewById(R.id.tv_imprint_text);
 
+        // Load Data
         loadDataAsyncTask = new LoadDataAsyncTask();
         loadDataAsyncTask.execute((Void) null);
 
         return v;
-
     }
 
     // ===========================================================
@@ -103,7 +104,6 @@ public class ImprintFragment extends Fragment {
         loadDataAsyncTask.cancel(true);
     }
 
-
     // ===========================================================
     // Methods
     // ===========================================================
@@ -121,11 +121,11 @@ public class ImprintFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-
+                // set HTML Text
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     hmtlText = Html.fromHtml(Objects.requireNonNull(getActivity()).getResources().getString(R.string.msg_leaglDisclosure), Html.FROM_HTML_MODE_COMPACT);
                 } else {
-                    hmtlText =Html.fromHtml(Objects.requireNonNull(getActivity()).getResources().getString(R.string.msg_leaglDisclosure));
+                    hmtlText = Html.fromHtml(Objects.requireNonNull(getActivity()).getResources().getString(R.string.msg_leaglDisclosure));
                 }
                 return true;
             } catch (Exception e) {

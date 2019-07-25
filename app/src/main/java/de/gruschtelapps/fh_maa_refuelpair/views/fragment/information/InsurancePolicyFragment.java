@@ -32,6 +32,7 @@ import timber.log.Timber;
 /*
  * Create by Eric Werner
  */
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -48,13 +49,14 @@ public class InsurancePolicyFragment extends Fragment implements View.OnClickLis
     // ===========================================================
     // Fields
     // ===========================================================
-    // Model
     protected VehicleModel mVehicleModel;
     protected LoadDataAsyncTask loadDataAsyncTask;
     protected InsurancePolicyModel insurancePolicyModel;
+
     // UI
     protected MaterialEditText mTextName, mTextSurename, mTextPhone, mTextEmail, mTextAdress, mTextPolicyName, mTextPolicyNumber;
     private FloatingActionButton mFab;
+
     // ===========================================================
     // Constructors
     // ===========================================================
@@ -63,10 +65,6 @@ public class InsurancePolicyFragment extends Fragment implements View.OnClickLis
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-
      * @return A new instance of fragment FuelSettingsFragment.
      */
     public static InsurancePolicyFragment newInstance() {
@@ -97,8 +95,11 @@ public class InsurancePolicyFragment extends Fragment implements View.OnClickLis
         mTextPolicyNumber = v.findViewById(R.id.text_insuranceData_policyNumber);
 
         mFab = v.findViewById(R.id.fab);
+
+        // set OnClickListener
         mFab.setOnClickListener(this);
 
+        // load Data
         loadDataAsyncTask = new LoadDataAsyncTask();
         loadDataAsyncTask.execute((Void) null);
 
@@ -126,7 +127,7 @@ public class InsurancePolicyFragment extends Fragment implements View.OnClickLis
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         loadDataAsyncTask.cancel(true);
     }
@@ -135,15 +136,21 @@ public class InsurancePolicyFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         Intent intent = null;
         int myflag = ConstRequest.REQUEST_MAIN_EDIT_CAR;
-        switch (v.getId()){
+
+        //noinspection SwitchStatementWithTooFewBranches
+        switch (v.getId()) {
+            // edit insurance policy
             case R.id.fab:
                 intent = new Intent(getActivity(), NewCarActivity.class);
                 intent.putExtra(ConstExtras.EXTRA_KEY_EDIT, ConstExtras.EXTRA_EDIT_INSURANCE);
                 myflag = ConstRequest.REQUEST_MAIN_NEW_CAR;
                 break;
         }
+
+        // start activity
         if (intent != null) {
             startActivityForResult(intent, myflag);
+
         } else {
             Timber.e("onItemClick");
             Toast.makeText(getActivity(), getResources().getString(R.string.error_startActivit, getClass().getSimpleName()), Toast.LENGTH_SHORT).show();
@@ -159,14 +166,15 @@ public class InsurancePolicyFragment extends Fragment implements View.OnClickLis
     // ===========================================================
 
     /**
-     * Starts a background task, which all needed Data for Fragment
+     * Starts a background task, which load Data
      */
     @SuppressLint("StaticFieldLeak")
     public class LoadDataAsyncTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... voids) {
             try {
-                // Load Data
+
+                // Preparation
                 SharedPreferencesManager pref = new SharedPreferencesManager(Objects.requireNonNull(getContext()));
                 long id = pref.getPrefLong(ConstPreferences.PREF_CURRENT_CAR);
 

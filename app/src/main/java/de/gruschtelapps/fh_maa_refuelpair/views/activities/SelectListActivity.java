@@ -43,21 +43,22 @@ public class SelectListActivity extends AppCompatActivity implements LoaderManag
     // Model
     private RecyclerView recyclerView;
     private Activity mContext;
+
     // ===========================================================
     // Constructors
     // ===========================================================
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // ActionBar
         setContentView(R.layout.activity_select_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // ActionBar
+
+        // ActionBar settings
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         // Floating action bar
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -76,16 +77,19 @@ public class SelectListActivity extends AppCompatActivity implements LoaderManag
         if (getIntent().getExtras() != null) {
             switch (getIntent().getExtras().getInt(ConstExtras.EXTRA_KEY_SELECT)) {
                 case ConstExtras.EXTRA_SELECT_CAR:
+
                     // adapter = new AddItemAdapter(new CarTypeModel().loadModels(this), this);
                     // recyclerView.setHasFixedSize(true);
                     break;
                 case ConstExtras.EXTRA_SELECT_REFUEL:
+
                     // adapter = new AddItemAdapter(new FuelTypeModel().loadModels(this), this);
                     // recyclerView.setHasFixedSize(true);
                     break;
                 case ConstExtras.EXTRA_SELECT_SERVICE:
                     break;
                 case ConstExtras.EXTRA_SELECT_MANUFACTURE:
+
                     // adapter = new AddItemAdapter(new ManufactureModel().loadModels(this), this);
                     // recyclerView.setHasFixedSize(true);
                     break;
@@ -113,6 +117,7 @@ public class SelectListActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         //noinspection SwitchStatementWithTooFewBranches
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -145,7 +150,6 @@ public class SelectListActivity extends AppCompatActivity implements LoaderManag
 
         findViewById(R.id.ll_RecyclerViewContainer).setVisibility(View.VISIBLE);
         findViewById(R.id.progress_selectItem_list).setVisibility(View.GONE);
-
     }
     // ===========================================================
     // Inner and Anonymous Classes
@@ -174,13 +178,23 @@ public class SelectListActivity extends AppCompatActivity implements LoaderManag
 
             @Override
             public List<JsonModel> loadInBackground() {
+
+                // load needed data from json file
                 switch (Objects.requireNonNull(getIntent().getExtras()).getInt(ConstExtras.EXTRA_KEY_SELECT)) {
+
+                    // load car type
                     case ConstExtras.EXTRA_SELECT_CAR:
                         return new CarTypeModel().loadModels(mContext);
+
+                    // load refuel type
                     case ConstExtras.EXTRA_SELECT_REFUEL:
                         return new FuelTypeModel().loadModels(mContext);
-                    case ConstExtras.EXTRA_SELECT_SERVICE:
+
+                    // load manufacture data
                     case ConstExtras.EXTRA_SELECT_MANUFACTURE:
+                        return new ManufactureModel().loadModels(mContext);
+
+                    case ConstExtras.EXTRA_SELECT_SERVICE:
                         return new ManufactureModel().loadModels(mContext);
                 }
                 return null;

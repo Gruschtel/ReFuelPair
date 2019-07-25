@@ -42,6 +42,12 @@ public class DbDelete {
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * Delete an Item from Table Add
+     *
+     * @param mID
+     */
     public void deleteItem(long mID) {
         synchronized (syncRoot) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();

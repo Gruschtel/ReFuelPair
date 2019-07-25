@@ -69,7 +69,7 @@ public class LocationPermissionHelper {
 
     public boolean checkLocationPermission_onStart() {
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, ConstRequest.REQUEST_PERMISSIN_FINE_LOCATION);
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, ConstRequest.REQUEST_PERMISSIN_FINE_LOCATION);
             return false;
         } else {
             return true;

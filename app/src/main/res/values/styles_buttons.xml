@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Create by Eric Werner, Edit by Alea Sauer  -->
+<?xml version="1.0" encoding="utf-8"?><!-- Create by Eric Werner, Edit by Alea Sauer  -->
 <resources>
     <!-- Button Dismiss -->
     <style name="Dismiss">
@@ -28,8 +27,6 @@
     </style>
 
 
-
-
     <!-- Button Suppose -->
     <style name="Suppose">
         <item name="android:backgroundTint">@color/colorSecondary</item>
@@ -55,8 +52,6 @@
     <style name="Suppose.Halfround.Right">
         <item name="android:background">@drawable/shape_half_round_right</item>
     </style>
-
-
 
 
     <!-- FloatingActionButton -->
