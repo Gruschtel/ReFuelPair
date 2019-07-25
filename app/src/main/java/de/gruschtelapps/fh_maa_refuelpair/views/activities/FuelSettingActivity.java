@@ -242,6 +242,7 @@ public class FuelSettingActivity extends AppCompatActivity {
 
     /**
      * Convert Integer to Float
+     *
      * @param intVal
      * @return
      */

@@ -378,6 +378,7 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
 
     /**
      * set actionbar title
+     *
      * @param heading
      */
     private void setActionBarTitle(String heading) {
@@ -390,6 +391,7 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
 
     /**
      * Check ob alle TextViews korrekt ausgefüllt wurden
+     *
      * @return
      */
     private boolean checkUI() {
@@ -406,6 +408,7 @@ public class NewServiceActivity extends AppCompatActivity implements DatePicker.
 
     /**
      * Füllt einem Wert mit 0 der länge "leange" auf
+     *
      * @param zahl
      * @param laenge
      * @return

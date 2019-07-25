@@ -65,6 +65,11 @@ public class DbDelete {
         }
     }
 
+    /**
+     * Delete an Item from Table Add
+     *
+     * @param mID
+     */
     public void deleteItem(long mID, long vehicleID, String json) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         try {

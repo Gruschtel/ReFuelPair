@@ -31,6 +31,7 @@ import timber.log.Timber;
 
 /**
  * Create by Eric Werner
+ * Verwaltet Items für die SelectedListActivity
  */
 public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // https://guides.codepath.com/android/using-the-recyclerview
@@ -110,6 +111,7 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         final JsonModel vModel = mItemList.get(position);
         if (vModel == null) return;
+
         //
         // CarTypeModel
         //
@@ -143,9 +145,8 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             if (mType.equals(ConstError.ERROR_STRING)) {
                 mType = "e10";
             }
-            //
+
             // Set Fuel Type Name
-            //
             String mPriceValue = "";
             if (pref.getPrefString(ConstPreferences.PREF_COMPARISON_SORT).equals("dist")) {
                 switch (mType) {
@@ -166,6 +167,7 @@ public class AddItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 mPriceValue = String.valueOf(((PetrolStationsModel) vModel).getPrice());
                 Timber.d("%s", ((PetrolStationsModel) vModel).getPrice());
             }
+
             // Standard information
             ((PetrolStationViewHolder) viewHolder).textPrice.setText(mPriceValue);
             ((PetrolStationViewHolder) viewHolder).textBrandname.setText(((PetrolStationsModel) vModel).getName());

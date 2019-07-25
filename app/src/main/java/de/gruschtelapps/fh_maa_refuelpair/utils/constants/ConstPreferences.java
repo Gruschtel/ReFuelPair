@@ -4,6 +4,8 @@ import android.provider.BaseColumns;
 
 /**
  * Create by Eric Werner
+ * <p>
+ * Klasse zum verwalten von Preferences Keys
  */
 public interface ConstPreferences extends BaseColumns {
     //

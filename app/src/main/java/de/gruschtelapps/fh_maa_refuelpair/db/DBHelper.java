@@ -69,18 +69,39 @@ public class DBHelper extends SQLiteOpenHelper {
     // ===========================================================
     // Methods
     // ===========================================================
+
+    /**
+     * Get DbAdd
+     *
+     * @return
+     */
     public DbAdds getAdd() {
         return mDBAdds;
     }
 
+    /**
+     * Get DbUpdate
+     *
+     * @return
+     */
     public DbUpdates getUpdates() {
         return mDBUpdates;
     }
 
+    /**
+     * Get DbGet
+     *
+     * @return
+     */
     public DbGets getGet() {
         return mDBGets;
     }
 
+    /**
+     * Get DbDelete
+     *
+     * @return
+     */
     public DbDelete getDelete() {
         return mDBDelete;
     }

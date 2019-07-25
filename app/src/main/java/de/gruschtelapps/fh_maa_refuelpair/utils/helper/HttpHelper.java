@@ -10,6 +10,8 @@ import okhttp3.Response;
 
 /**
  * Create by Eric Werner
+ *
+ * HTTP Helper
  */
 public class HttpHelper {
     // ===========================================================
@@ -39,6 +41,7 @@ public class HttpHelper {
 
     /**
      * Standard Http Get Anfrage
+     *
      * @param url
      * @param token
      * @return

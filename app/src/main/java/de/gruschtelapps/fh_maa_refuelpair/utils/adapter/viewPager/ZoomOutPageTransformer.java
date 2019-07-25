@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Create by Alea Sauer
  * Edit by Eric Werner: Values adjusted, code optimized
+ * <p>
+ * Zoom effekt beim verschieben eines Fragments nach rechts oder links in einem ViewPager
  */
 
 public class ZoomOutPageTransformer implements ViewPager.PageTransformer {

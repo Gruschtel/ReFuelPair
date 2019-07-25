@@ -196,6 +196,7 @@ public class NewInsurancePolicyFragment extends Fragment {
 
     /**
      * Pattern to check if E-Mail is correct
+     *
      * @param value
      * @param expression
      * @return

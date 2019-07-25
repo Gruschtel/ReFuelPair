@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * Create by Eric Werner
- *  DatePickerFragment  for Fragments
+ * DatePickerFragment  for Fragments
  */
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {

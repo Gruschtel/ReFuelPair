@@ -81,7 +81,6 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
-     *
      * @return A new instance of fragment FuelSettingsFragment.
      */
     public static VehicleFragment newInstance() {
@@ -185,7 +184,7 @@ public class VehicleFragment extends Fragment implements View.OnClickListener {
             //noinspection SwitchStatementWithTooFewBranches
             switch (requestCode) {
 
-            // reload Data
+                // reload Data
                 case ConstRequest.REQUEST_MAIN_EDIT_CAR:
                     loadDataAsyncTask = new LoadDataAsyncTask();
                     loadDataAsyncTask.execute((Void) null);

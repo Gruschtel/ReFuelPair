@@ -3,6 +3,8 @@ package de.gruschtelapps.fh_maa_refuelpair.utils.constants;
 /**
  * Create by Eric Werner
  * Edit by Alea Sauer: Values added and adjusted
+ * <p>
+ * Klasse zum verwalten von Url Keys
  */
 public interface ConstUrl {
     // Tankerkönig

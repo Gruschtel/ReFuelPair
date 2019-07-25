@@ -356,6 +356,7 @@ public class NewCrashPhotosFragment extends Fragment implements View.OnClickList
 
     /**
      * Saves a captured bitmap and assigns it to an object
+     *
      * @param bitmap
      */
     private void getImage(Bitmap bitmap) {

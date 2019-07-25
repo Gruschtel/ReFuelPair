@@ -14,6 +14,8 @@ import timber.log.Timber;
 
 /**
  * Create by Eric Werner
+ *
+ * Helper for GPS Permissions
  */
 
 public class LocationPermissionHelper {

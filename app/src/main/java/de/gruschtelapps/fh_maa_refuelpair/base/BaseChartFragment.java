@@ -56,6 +56,7 @@ public abstract class BaseChartFragment extends Fragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+
     protected BarData generateBarData(int dataSets, float range, int count) {
 
         ArrayList<IBarDataSet> sets = new ArrayList<>();

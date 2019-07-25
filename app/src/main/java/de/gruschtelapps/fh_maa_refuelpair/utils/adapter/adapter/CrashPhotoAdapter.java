@@ -20,6 +20,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.helper.StorageImageManager;
 
 /**
  * Create by Eric Werner
+ * Verwaltet die Photos für Crash (CrashPhotos)
  */
 public class CrashPhotoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public interface OnItemClickListener {

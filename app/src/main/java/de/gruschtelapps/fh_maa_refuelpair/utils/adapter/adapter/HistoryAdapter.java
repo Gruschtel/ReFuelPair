@@ -25,6 +25,7 @@ import de.gruschtelapps.fh_maa_refuelpair.utils.model.add.ServiceModel;
 
 /**
  * Create by Eric Werner
+ * Verwaltet Items für das History Fragment
  */
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // ===========================================================
@@ -110,17 +111,22 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Calendar c = Calendar.getInstance();
 
         if (vModel == null) return;
+
         //
         // RefuelModel
         //
         if (vModel instanceof RefuelModel) {
             ((HistoryRefuelItemViewHolder) viewHolder).textPlace.setText(((RefuelModel) vModel).getLocal());
+
+            // Sollten gewissen Informationen nicht durch den Nutzer angegeben worden sein, sollen diese Elemente nicht angezeigt werden
             if (((RefuelModel) vModel).getOdometer() == ConstError.ERROR_LONG) {
                 ((HistoryRefuelItemViewHolder) viewHolder).textOdometer.setText("");
                 ((HistoryRefuelItemViewHolder) viewHolder).text_customInformation_odometerValue.setVisibility(View.GONE);
             } else {
                 ((HistoryRefuelItemViewHolder) viewHolder).textOdometer.setText(String.valueOf(((RefuelModel) vModel).getOdometer()));
             }
+
+            // set information
             ((HistoryRefuelItemViewHolder) viewHolder).textLiter.setText(String.valueOf(((RefuelModel) vModel).getLiter()));
 
             totalCost = String.valueOf(((RefuelModel) vModel).getTotalCost());
@@ -150,12 +156,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (vModel instanceof ServiceModel) {
             ((HistoryServiceItemViewHolder) viewHolder).textPlace.setText(((ServiceModel) vModel).getLocal());
 
+            // Sollten gewissen Informationen nicht durch den Nutzer angegeben worden sein, sollen diese Elemente nicht angezeigt werden
             if (((ServiceModel) vModel).getOdometer() == ConstError.ERROR_LONG) {
                 ((HistoryServiceItemViewHolder) viewHolder).textOdometer.setText("");
                 ((HistoryServiceItemViewHolder) viewHolder).text_customInformation_odometerValue.setVisibility(View.GONE);
             } else {
                 ((HistoryServiceItemViewHolder) viewHolder).textOdometer.setText(String.valueOf(((ServiceModel) vModel).getOdometer()));
             }
+
+            // set Information
             ((HistoryServiceItemViewHolder) viewHolder).textService.setText(((ServiceModel) vModel).getService());
 
             totalCost = String.valueOf(((ServiceModel) vModel).getTotalCost());
@@ -230,6 +239,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     // ===========================================================
     // Inner and Anonymous Classes
     // ===========================================================
+
+    /**
+     * Verwaltet das Refuel item
+     */
     public class HistoryRefuelItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView textPlace, textOdometer, textLiter, textCost, textDate, text_customInformation_odometerValue;
         private ImageView imageStreet;
@@ -258,6 +271,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * Verwaltet das Service item
+     */
     public class HistoryServiceItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView textPlace, textOdometer, textService, textCost, textDate, text_customInformation_odometerValue;
         private ImageView imageStreet;
@@ -286,6 +302,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * Verwaltet das Crash item
+     */
     public class HistoryCrashItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView textLocal, textDate;
         private ImageView imageStreet;

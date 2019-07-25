@@ -77,6 +77,7 @@ public class ItemListDialog extends DialogFragment {
 
     public interface DialogListener {
         void onItemDialogClick(DialogInterface dialog, int pos, int item);
+
         void onButtonClick(int action, int flag);
     }
     // ===========================================================

@@ -241,6 +241,7 @@ public class NewCrashActivity extends AppCompatActivity implements MessageDialog
 
     /**
      * Methode zum wechseln zur nächsten Fragment
+     *
      * @param intent
      */
     private void nextPage(Intent intent) {

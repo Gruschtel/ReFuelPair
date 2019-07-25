@@ -15,7 +15,6 @@ import java.util.Objects;
 
 import de.gruschtelapps.fh_maa_refuelpair.R;
 import de.gruschtelapps.fh_maa_refuelpair.utils.constants.ConstError;
-import de.gruschtelapps.fh_maa_refuelpair.utils.model.information.VehicleModel;
 import timber.log.Timber;
 
 /*

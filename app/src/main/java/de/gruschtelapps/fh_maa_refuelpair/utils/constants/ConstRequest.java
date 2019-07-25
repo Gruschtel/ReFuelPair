@@ -5,6 +5,8 @@ import android.provider.BaseColumns;
 /**
  * Create by Eric Werner
  * Edit by Alea Sauer: Values added and adjusted
+ * <p>
+ * Klasse zum verwalten von Request Keys
  */
 public interface ConstRequest extends BaseColumns {
     //

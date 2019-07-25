@@ -137,6 +137,13 @@ public class DbGets {
     // ===========================================================
     // Curser
     // ===========================================================
+
+    /**
+     * Wandelt einen Curser in ein Vehicle Modell um
+     *
+     * @param cursor
+     * @return
+     */
     private VehicleModel curserToVehicleModel(Cursor cursor) {
         int id = cursor.getInt(cursor.getColumnIndex(_id));
         String name = cursor.getString(cursor.getColumnIndex(ConstDatabase.COLUMN_CAR_NAME));
@@ -144,16 +151,34 @@ public class DbGets {
         return (VehicleModel) new VehicleModel().loadModelByJson(mContext, information);
     }
 
+    /**
+     * Wandelt einen Curser in ein Service Modell um
+     *
+     * @param cursor
+     * @return
+     */
     private ServiceModel curserToServiceModel(Cursor cursor) {
         String information = cursor.getString(cursor.getColumnIndex(ConstDatabase.COLUMN_ADD_INFORMATION));
         return (ServiceModel) new ServiceModel().loadModelByJson(mContext, information);
     }
 
+    /**
+     * Wandelt einen Curser in ein Refuel Modell um
+     *
+     * @param cursor
+     * @return
+     */
     private RefuelModel curserToRefuelModel(Cursor cursor) {
         String information = cursor.getString(cursor.getColumnIndex(ConstDatabase.COLUMN_ADD_INFORMATION));
         return (RefuelModel) new RefuelModel().loadModelByJson(mContext, information);
     }
 
+    /**
+     * Wandelt einen Curser in ein Crash Modell um
+     *
+     * @param cursor
+     * @return
+     */
     private CrashModel curserToCrashModel(Cursor cursor) {
         String information = cursor.getString(cursor.getColumnIndex(ConstDatabase.COLUMN_ADD_INFORMATION));
         return (CrashModel) new CrashModel().loadModelByJson(mContext, information);

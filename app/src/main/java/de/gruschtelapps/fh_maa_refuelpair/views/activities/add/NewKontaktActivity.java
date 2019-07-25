@@ -154,6 +154,7 @@ public class NewKontaktActivity extends AppCompatActivity {
 
     /**
      * Check if emal is correct
+     *
      * @param value
      * @param expression
      * @return
@@ -166,6 +167,7 @@ public class NewKontaktActivity extends AppCompatActivity {
 
     /**
      * Setzt ActionBar Title
+     *
      * @param heading
      */
     private void setActionBarTitle(String heading) {

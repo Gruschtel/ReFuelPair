@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Create by Eric Werner
+ * Eigener PageAdapter zum anzeigen von mehrere Fragmenten
  */
 public class DataPagerAdapter extends FragmentPagerAdapter {
     // ===========================================================

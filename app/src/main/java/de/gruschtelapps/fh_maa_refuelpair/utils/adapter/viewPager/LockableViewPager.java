@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 
 /**
  * Create by Eric Werner
+ * Eigener ViewPager, verbesserte Verwaltung im vergleich zum standard ViewPager
  */
 public class LockableViewPager extends ViewPager {
     // ===========================================================
